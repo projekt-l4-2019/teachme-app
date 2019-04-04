@@ -13,11 +13,19 @@
 /*    !*height: 20px;*!*/
 /*}*/
 
+.navbar .btn-success{
+    border-radius: 2rem;
+    padding: 0.25rem;
+    text-align: center;
+    line-height: 10px;
+}
+
 #sidebar .btn {
     background: #00bc8c;
     border-color: #00bc8c;
     padding: 0.25rem;
     border-radius: 2rem;
+    font-size: 10px;
 }
 
 #sidebar {
@@ -101,13 +109,13 @@
 
 #sidebar ul li a:hover {
     /*color: #7386D5;*/
-    background: #cfcfcf;
+    background: #414141;
 }
 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     /*color: #fff;*/
-    background: #aeaeae;
+    background: #595959;
 }
 
 a[data-toggle="collapse"] {

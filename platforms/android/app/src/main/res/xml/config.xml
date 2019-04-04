@@ -10,10 +10,10 @@
     </feature>
     <name>TeachMe</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        TeachMe - find your coach!
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="pgp2019l4@gmail.com" href="http://projekt-l4-2019.github.io">
+        Polska Grupa Programistyczna L4
     </author>
     <content src="index.html" />
     <access origin="*" />
