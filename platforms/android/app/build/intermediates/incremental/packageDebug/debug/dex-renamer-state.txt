@@ -1,4 +1,4 @@
-#Fri Apr 05 00:07:05 CEST 2019
+#Fri Apr 05 00:50:21 CEST 2019
 base.0=D\:\\TeachMe\\teachme-app\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex
