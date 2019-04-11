@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Thu Apr 11 22:46:59 CEST 2019
+#Thu Apr 11 23:15:38 CEST 2019
 17.baseType=DIRECTORY
 4.path=www/css/iconfont/README.md
 25.base=D\:\\TeachMe\\teachme-app\\platforms\\android\\app\\build\\intermediates\\assets\\debug

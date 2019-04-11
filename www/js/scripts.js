@@ -7,14 +7,15 @@ let request = new XMLHttpRequest();
 request.open('GET', url, true);
 request.onload = function() {
     // Begin accessing JSON data here
-    let data = JSON.parse(this.response);
+    var data = JSON.parse(this.response);
     let persons=data._embedded.persons;
 
-    let html = '<table class="table table-striped"><tr><td>Imie:</td><td>Nazwisko:</td></tr>';
+    let html = '<table class="table table-striped"><tr><td>Id:</td><td>Imie:</td><td>Nazwisko:</td></tr>';
 
     if (request.status >= 200 && request.status < 400) {
         persons.forEach(info => {
             html+='<tr>';
+            html+='<td>'+info.id+'</td>';
             html+='<td>'+info.name+'</td>';
             html+='<td>'+info.surname+'</td>';
             html+='</tr>';
@@ -49,6 +50,8 @@ function sendData() {
             }
         };
         xhr.send(json);
+        //TODO: Nie nie chce sie dodać przy odświeżeniu zaraz po xhr.send. Trzeba skombinować jakieś obejście
+        alert('Dodano pomyslnie!');
         location.reload();
     }
 }
