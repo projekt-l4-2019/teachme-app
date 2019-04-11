@@ -1,9 +1,3 @@
-.lorem{
-    font-family: Helvetica, Arial, Roboto, serif;
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-}
 
 /*.navbar {*/
 /*    background: #00bc8c;*/
@@ -176,5 +170,12 @@ a.article:hover {
 
 /*temporary class*/
 .formPerson {
-    width: 100%;
+    width: 90%;
+    padding: 10px;
+}
+
+.lorem{
+    font-family: Helvetica, Arial, Roboto, serif;
+    width: 90%;
+    padding: 10px;
 }

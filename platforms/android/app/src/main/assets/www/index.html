@@ -129,25 +129,26 @@
             </div>
         </div>
 
-        <div class="lorem" id="root">
+            <h3>Lista osób: </h3>
+            <div class="lorem" id="root"></div>
 
-        </div>
-
-        <div class = "formPerson">
             <h3>Dodaj osobę: </h3>
-            <div class="form-group">
+            <div class = "formPerson">
+                <div class="form-group">
                     <label class="col-form-label" for="inputDefault">Imię:</label>
-                    <input type="text" class="form-control" placeholder="Default input" id="inputDefault">
-            </div>
-            <div class="form-group">
+                    <input type="text" class="form-control" placeholder="" id="inputName">
+                </div>
+                <div class="form-group">
                     <label class="col-form-label" for="inputDefault">Nazwisko:</label>
-                    <input type="text" class="form-control" placeholder="Default input" id="inputDefault">
-            </div>
-            <div class="form-group">
+                    <input type="text" class="form-control" placeholder="" id="inputSurname">
+                </div>
+                <div class="form-group">
                     <label class="col-form-label" for="inputDefault">Rola:</label>
-                    <input type="text" class="form-control" placeholder="Default input" id="inputDefault">
+                    <input type="text" class="form-control" placeholder="" id="inputRole">
+                </div>
+                <button type="button" class="btn btn-primary" onclick="sendData()">Dodaj!</button>
             </div>
-       </div>
+
 
               
         <script type="text/javascript" src="cordova.js"></script>
@@ -155,6 +156,7 @@
         <script type="text/javascript" src="js/popper.min.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script type="text/javascript" src="js/pulltorefresh.min.js"></script>
         <script type="text/javascript" src="js/scripts.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
     </body>
