@@ -20,6 +20,10 @@
     line-height: 10px;
 }
 
+/*.navbar .btn-success:hover{*/
+/*    border: 8px solid #009670;*/
+/*}*/
+
 #sidebar .btn {
     background: #00bc8c;
     border-color: #00bc8c;
