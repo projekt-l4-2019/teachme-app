@@ -8,6 +8,7 @@
         Polska Grupa Programistyczna L4
     </author>
     <content src="index.html" />
+    <icon src="res/logo.png" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

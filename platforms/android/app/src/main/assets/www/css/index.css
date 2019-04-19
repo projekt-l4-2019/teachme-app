@@ -9,9 +9,13 @@
 
 .navbar .btn-success{
     border-radius: 2rem;
-    padding: 0.25rem;
+    padding: 0.4rem;
     text-align: center;
     line-height: 10px;
+}
+
+.navbar {
+    padding: 0.5rem 0.5rem;
 }
 
 /*.navbar .btn-success:hover{*/
@@ -170,12 +174,19 @@ a.article:hover {
 
 /*temporary class*/
 .formPerson {
-    width: 90%;
-    padding: 10px;
+    padding-right: 2%;
+    padding-left: 2%;
+}
+
+#banner{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /*width: 50%;*/
 }
 
 .lorem{
     font-family: Helvetica, Arial, Roboto, serif;
-    width: 90%;
-    padding: 10px;
+    padding-right: 2%;
+    padding-left: 2%;
 }

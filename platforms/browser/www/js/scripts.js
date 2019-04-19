@@ -43,7 +43,7 @@ function sendData() {
         xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
         xhr.onload = function () {
             let users = JSON.parse(xhr.responseText);
-            if (xhr.readyState === 4 && xhr.status === "201") {
+            if (xhr.readyState === 4 && xhr.status === 201) {
                 console.table(users);
             } else {
                 console.error(users);
@@ -60,11 +60,26 @@ function deleteAllUsers(){
     let last_id=persons[persons.length-1].id;
     let first_id=persons[0].id;
 
-    for(last_id;last_id>=first_id;last_id--){
-        let del = new XMLHttpRequest();
-
-        del.open("DELETE",url + "/" + last_id.toString(), true);
-        del.setRequestHeader('Content-type','application/json; charset=utf-8');
-        del.send();
-    }
+    // for(last_id;last_id>=first_id;last_id--){
+    //     let del = new XMLHttpRequest();
+    //
+    //     del.open("DELETE",url + "/" + last_id.toString(), true);
+    //     del.setRequestHeader('Content-type','application/json; charset=utf-8');
+    //     del.send();
+    // }
+    var data = {};
+    let json = JSON.stringify(data);
+    console.log(data);
+    let xhr = new XMLHttpRequest();
+    xhr.open("DELETE",url + "/" + last_id.toString(), true);
+    xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+    xhr.onload = function () {
+        let users = JSON.parse(xhr.responseText);
+        if (xhr.readyState === 4 && xhr.status === 201) {
+            console.table(users);
+        } else {
+            console.error(users);
+        }
+    };
+    xhr.send(json);
 }

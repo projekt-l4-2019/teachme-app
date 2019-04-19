@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/iconfont/material-icons.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.min.css">
+    <title>TeachMe</title>
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+        <div id="dismiss" class="btn btn-success">
+            <i class="material-icons align-content-center">arrow_back</i>
+        </div>
+
+        <div class="sidebar-header">
+            <h4>$USER$</h4>
+            <h4>$EMAIL$</h4>
+        </div>
+
+        <ul class="list-unstyled components">
+            <!--                    <li class="active">-->
+            <!--                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>-->
+            <!--                        <ul class="collapse list-unstyled" id="homeSubmenu">-->
+            <!--                            <li>-->
+            <!--                                <a href="#">Home 1</a>-->
+            <!--                            </li>-->
+            <!--                            <li>-->
+            <!--                                <a href="#">Home 2</a>-->
+            <!--                            </li>-->
+            <!--                            <li>-->
+            <!--                                <a href="#">Home 3</a>-->
+            <!--                            </li>-->
+            <!--                        </ul>-->
+            <!--                    </li>-->
+            <li>
+                <a href="#">Szukaj Korepetycji</a>
+                <!--                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>-->
+                <!--                        <ul class="collapse list-unstyled" id="pageSubmenu">-->
+                <!--                            <li>-->
+                <!--                                <a href="#">Page 1</a>-->
+                <!--                            </li>-->
+                <!--                            <li>-->
+                <!--                                <a href="#">Page 2</a>-->
+                <!--                            </li>-->
+                <!--                            <li>-->
+                <!--                                <a href="#">Page 3</a>-->
+                <!--                            </li>-->
+                <!--                        </ul>-->
+            </li>
+            <li>
+                <a href="#">Ustawienia</a>
+            </li>
+            <li>
+                <a href="#">O Aplikacji</a>
+            </li>
+        </ul>
+
+        <ul class="list-unstyled CTAs">
+            <li>
+                <a href="#" class="download">Zaloguj Się</a>
+            </li>
+            <li>
+                <a href="#" class="article">Rejestracja</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="overlay"></div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <button type="button" id="sidebarCollapse" class="btn btn-success">
+                <!--                            <i class="fas fa-align-left"></i>-->
+                <i class="material-icons">menu</i>
+                <!--                            <span>Toggle Sidebar</span>-->
+            </button>
+            <!--                        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+            <!--                            <i class="fas fa-align-justify"></i>-->
+            <!--                        </button>-->
+
+            <!--                        <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+            <!--                            <ul class="nav navbar-nav ml-auto">-->
+            <!--                                <li class="nav-item active">-->
+            <!--                                    <a class="nav-link" href="#">Page</a>-->
+            <!--                                </li>-->
+            <!--                                <li class="nav-item">-->
+            <!--                                    <a class="nav-link" href="#">Page</a>-->
+            <!--                                </li>-->
+            <!--                                <li class="nav-item">-->
+            <!--                                    <a class="nav-link" href="#">Page</a>-->
+            <!--                                </li>-->
+            <!--                                <li class="nav-item">-->
+            <!--                                    <a class="nav-link" href="#">Page</a>-->
+            <!--                                </li>-->
+            <!--                            </ul>-->
+            <!--                        </div>-->
+        </div>
+    </nav>
+</div>
+
+<h3>Lista osób: </h3>
+<div class="lorem" id="root"></div>
+
+<h3>Dodaj osobę: </h3>
+<div class = "formPerson">
+    <div class="form-group">
+        <label class="col-form-label" for="inputDefault">Imię:</label>
+        <input type="text" class="form-control" placeholder="" id="inputName">
+    </div>
+    <div class="form-group">
+        <label class="col-form-label" for="inputDefault">Nazwisko:</label>
+        <input type="text" class="form-control" placeholder="" id="inputSurname">
+    </div>
+    <button type="button" class="btn btn-primary" onclick="sendData()">Dodaj!</button>
+    <button type="button" class="btn btn-primary" onclick="deleteAllUsers()">Usuń wszystkich!</button>
+</div>
+
+
+
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="js/popper.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="js/pulltorefresh.min.js"></script>
+<script type="text/javascript" src="js/scripts.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>
