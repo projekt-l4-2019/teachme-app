@@ -7,8 +7,16 @@
 /*    !*height: 20px;*!*/
 /*}*/
 
-.pull-to-refresh{
-    color: #fff;
+.ptr--text, .ptr--icon{
+    color: #fff !important;
+}
+
+.ptr--ptr {
+    box-shadow: none !important;
+}
+
+html {
+    height: 100%;
 }
 
 .navbar .btn-success{
