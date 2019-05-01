@@ -29,7 +29,7 @@ request.onload = function() {
                 month = '0' + month;
             }
 
-            html+='dodano: '  + dt + '.' + month + '.' + year;
+            html+='<small>dodano: '  + dt + '.' + month + '.' + year + '</small>';
             html+='</div>';
 
             date = new Date(notice.meeting_date);
@@ -50,7 +50,9 @@ request.onload = function() {
             else{
                 html+='<p class="mb-1">' + notice.note + '</p>';
             }
-            html+='<small> Data spotkania: ' + dt + '.' + month + '.' + year + ' #' + notice.id + '</small>';
+            html+='<div class="d-flex w-100 justify-content-between">';
+            html+='<h6>Data spotkania: ' + dt + '.' + month + '.' + year + '</h6>' + '<h6>' + notice.meeting_place + '</h6>' + '<small>#' + notice.id + '</small>';
+            html+='</div>';
             html+='</a>';
         });
 
