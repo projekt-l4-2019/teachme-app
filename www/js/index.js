@@ -29,15 +29,15 @@ function onDeviceReady(){
     });
 }
 
-
 PullToRefresh.init({
-    mainElement: 'body',
+    mainElement: '.mainWindow',
     onRefresh: function(){
         // What do you want to do when the user does the pull-to-refresh gesture
         window.location.reload();
     },
-    distThreshold : 50, // Minimum distance required to trigger the refresh.
-    iconArrow: '<span class="fa fa-arrow-down"></span>', // The icon for both instructionsPullToRefresh and instructionsReleaseToRefresh
-    instructionsPullToRefresh: "Pull down to DESTROY THE WORLD",
-    instructionsReleaseToRefresh: "Release to ENABLE BOMB"
+    distThreshold : 60, // Minimum distance required to trigger the refresh.
+    iconArrow: '<i class="material-icons align-content-center">arrow_downward</i>', // The icon for both instructionsPullToRefresh and instructionsReleaseToRefresh
+    instructionsPullToRefresh: "Pociągnij",
+    instructionsReleaseToRefresh: "Puść aby odświeżyć",
+    instructionsRefreshing: "Odświeżam"
 });

@@ -7,6 +7,10 @@
 /*    !*height: 20px;*!*/
 /*}*/
 
+.ptr--text, .ptr--icon{
+    color: #fff !important;
+}
+
 .navbar .btn-success{
     border-radius: 2rem;
     padding: 0.4rem;
@@ -156,7 +160,7 @@ a.download {
 
 a.article,
 a.article:hover {
-    background: #008a67; !important;
+    background: #008a67 !important;
     color: #fff !important;
 }
 
