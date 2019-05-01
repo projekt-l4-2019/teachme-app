@@ -19,6 +19,15 @@ html {
     height: 100%;
 }
 
+.wrapper {
+    height: 55px;
+}
+
+.navbar {
+    position: fixed;
+    width: 100%;
+}
+
 .navbar .btn-success{
     border-radius: 2rem;
     padding: 0.4rem;
