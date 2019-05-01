@@ -9,17 +9,15 @@ request.onload = function() {
     // Begin accessing JSON data here
     var data = JSON.parse(this.response);
     notices=data._embedded.noticeFulls;
-
-    let html = '<table class="table table-striped"><tr><td>Id:</td><td>Miejsce spotkania:</td><td>Przedmiot:</td><td>Data spotkania:</td></tr>';
-
+    let html='';
     if (request.status >= 200 && request.status < 400) {
         notices.forEach(notice => {
-            html+='<tr>';
-            html+='<td>'+notice.id+'</td>';
-            html+='<td>'+notice.meeting_place+'</td>';
-            html+='<td>'+notice.subject+'</td>';
 
-            let date = new Date(notice.meeting_date);
+            html+='<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">';
+            html+='<div class="d-flex w-100 justify-content-between">';
+            html+='<h5 class="mb-1">' + notice.subject + '</h5>';
+
+            let date = new Date(notice.timestamp);
 
             let year = date.getFullYear();
             let month = date.getMonth()+1;
@@ -31,8 +29,29 @@ request.onload = function() {
                 month = '0' + month;
             }
 
-            html+='<td>'+ dt + '.' + month + '.' + year +'</td>';
-            html+='</tr>';
+            html+='dodano: '  + dt + '.' + month + '.' + year;
+            html+='</div>';
+
+            date = new Date(notice.meeting_date);
+
+            year = date.getFullYear();
+            month = date.getMonth()+1;
+            dt = date.getDate();
+            if (dt < 10) {
+                dt = '0' + dt;
+            }
+            if (month < 10) {
+                month = '0' + month;
+            }
+            
+            if(notice.note.length > 250){
+                html+='<p class="mb-1">' + notice.note.substring(0,250) + "..." + '</p>';
+            }
+            else{
+                html+='<p class="mb-1">' + notice.note + '</p>';
+            }
+            html+='<small> Data spotkania: ' + dt + '.' + month + '.' + year + ' #' + notice.id + '</small>';
+            html+='</a>';
         });
 
     } else {
