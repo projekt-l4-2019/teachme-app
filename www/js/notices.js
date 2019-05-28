@@ -76,6 +76,18 @@ request.onload = function () {
         html += '<li class="list-group-item">Miejsce spotkania: ' + notice.meeting_place + '</li>';
         html += '<li class="list-group-item">Cena za godzinę: ' + notice.price + ' zł </li>';
         html += '<li class="list-group-item">Godzina: ' + notice.time_from+ ' - ' + notice.time_to + '</li>';
+        date = new Date(notice.meeting_date);
+
+                year = date.getFullYear();
+                month = date.getMonth() + 1;
+                dt = date.getDate();
+                if (dt < 10) {
+                    dt = '0' + dt;
+                }
+                if (month < 10) {
+                    month = '0' + month;
+                }
+        html += '<li class="list-group-item">Data spotkania: ' + dt + '.' + month + '.' + year +'</li>';
         notice_extended.innerHTML = html;
     }
 };
@@ -84,4 +96,8 @@ request.send();
 function getNoticeId(id_notice) {
     var noticeID = id_notice;
     localStorage.setItem('noticeID', noticeID);
+}
+
+if (window.location.pathname.substr(-14) === 'addnotice.html'){
+    
 }
