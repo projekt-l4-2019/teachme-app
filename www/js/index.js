@@ -1,5 +1,15 @@
 document.addEventListener('deviceready', onDeviceReady, false);
 
+//Menu options
+const menu = document.getElementById('menuList');
+let html = '<li class="active"><a href="index.html">Lista ogłoszeń</a></li>';
+html += '<li><a href="addnotice.html">Dodaj ogłoszenie</a></li>';
+html += '<li><a href="#">Ustawienia</a></li>';
+html += '<li><a href="about.html">O Aplikacji</a></li>';
+menu.innerHTML=html;
+
+
+
 function onDeviceReady(){
     console.log('ready');
     if (cordova.platformId === 'android') {

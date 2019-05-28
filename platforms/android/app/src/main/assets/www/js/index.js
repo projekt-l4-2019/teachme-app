@@ -1,4 +1,6 @@
 document.addEventListener('deviceready', onDeviceReady, false);
+// let html = sidebarMenu.html
+// document.getElementById('sidebarMenu').innerHTML=html;
 
 function onDeviceReady(){
     console.log('ready');
@@ -53,3 +55,14 @@ PullToRefresh.init({
     instructionsReleaseToRefresh: "Puść aby odświeżyć",
     instructionsRefreshing: "Odświeżam"
 });
+
+
+
+
+// function navigate(page){
+//     switch(page){
+//         case 'index':
+//             window.location.pathname = '/index.html';
+//             break;
+//     }
+// }

@@ -23,9 +23,7 @@
     padding: 1.2rem;
     text-align: center;
     line-height: 10px;
-}
-
-#submitNoticeBtn{
+    outline: none;
 }
 
 .ptr--text, .ptr--icon{
