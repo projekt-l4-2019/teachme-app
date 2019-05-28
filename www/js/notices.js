@@ -75,7 +75,7 @@ request.onload = function () {
                 if (month < 10) {
                     month = '0' + month;
                 }
-        html += '<li class="list-group-item">Data spotkania: ' + dt + '.' + month + '.' + year +'</li>';
+        html += '<li class="list-group-item">Termin spotkania: ' + dt + '.' + month + '.' + year +'</li>';
         notice_extended.innerHTML = html;
     }
 };
