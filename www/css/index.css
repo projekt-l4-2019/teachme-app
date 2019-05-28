@@ -7,6 +7,10 @@
 /*    !*height: 20px;*!*/
 /*}*/
 
+a.list-group-item.list-group-item-action.flex-column.align-items-start {
+    margin-bottom: 10px;
+}
+
 #addNoticeButton{
     background: #00bc8c;
     border-color: #00bc8c;
