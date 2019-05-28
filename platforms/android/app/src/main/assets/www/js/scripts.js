@@ -1,12 +1,12 @@
-const url = "https://rhubarb-cobbler-84890.herokuapp.com/persons";
+// const url = "https://rhubarb-cobbler-84890.herokuapp.com/persons";
 
-function navigate(page){
-    switch(page){
-        case 'index':
-            window.location = index.html;
-            break;
-    }
-}
+// function navigate(page){
+//     switch(page){
+//         case 'index':
+//             window.location = index.html;
+//             break;
+//     }
+// }
 
 // //Get user list from server
 // const app = document.getElementById('root');

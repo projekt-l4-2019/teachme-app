@@ -1,6 +1,12 @@
 document.addEventListener('deviceready', onDeviceReady, false);
-// let html = sidebarMenu.html
-// document.getElementById('sidebarMenu').innerHTML=html;
+
+//Menu options
+const menu = document.getElementById('menuList');
+let html = '<li class="active"><a href="index.html">Lista ogłoszeń</a></li>';
+html += '<li><a href="addnotice.html">Dodaj ogłoszenie</a></li>';
+html += '<li><a href="#">Ustawienia</a></li>';
+html += '<li><a href="about.html">O Aplikacji</a></li>';
+menu.innerHTML=html;
 
 function onDeviceReady(){
     console.log('ready');
@@ -42,7 +48,7 @@ PullToRefresh.init({
     mainElement: '.mainWindow',
 
     shouldPullToRefresh: function(){
-        if(!document.getElementsByClassName('overlay active')[0]) return true;
+        if(!document.getElementsByClassName('overlay active')[0] && !document.body.scrollTop) return true;
         else return false;
     },
 
@@ -55,14 +61,3 @@ PullToRefresh.init({
     instructionsReleaseToRefresh: "Puść aby odświeżyć",
     instructionsRefreshing: "Odświeżam"
 });
-
-
-
-
-// function navigate(page){
-//     switch(page){
-//         case 'index':
-//             window.location.pathname = '/index.html';
-//             break;
-//     }
-// }
