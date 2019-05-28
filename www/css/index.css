@@ -178,7 +178,7 @@ ul.CTAs a {
 a.download {
     background: #00bc8c;
     /*color: #7386D5;*/
-}
+}       
 
 a.article,
 a.article:hover {
@@ -215,4 +215,9 @@ a.article:hover {
     font-family: Helvetica, Arial, Roboto, serif;
     padding-right: 2%;
     padding-left: 2%;
+}
+
+
+.loginPage{
+    text-align: center;
 }
