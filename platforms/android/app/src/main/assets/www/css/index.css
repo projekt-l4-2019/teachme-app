@@ -7,6 +7,25 @@
 /*    !*height: 20px;*!*/
 /*}*/
 
+#addNoticeButton{
+    background: #00bc8c;
+    border-color: #00bc8c;
+    border: none;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 2rem;
+    position: absolute;
+    right: 5vw;
+    top: 80vh;
+    padding: 1.2rem;
+    text-align: center;
+    line-height: 10px;
+    outline: none;
+}
+
 .ptr--text, .ptr--icon{
     color: #fff !important;
 }

@@ -20,14 +20,8 @@ request.onload = function () {
                 let date = new Date(notice.timestamp);
 
                 let year = date.getFullYear();
-                let month = date.getMonth() + 1;
-                let dt = date.getDate();
-                if (dt < 10) {
-                    dt = '0' + dt;
-                }
-                if (month < 10) {
-                    month = '0' + month;
-                }
+                let month = addZero(date.getMonth() + 1);
+                let dt = addZero(date.getDate());
 
                 html += '<small>dodano: ' + dt + '.' + month + '.' + year + '</small>';
                 html += '</div>';
@@ -35,14 +29,8 @@ request.onload = function () {
                 date = new Date(notice.meeting_date);
 
                 year = date.getFullYear();
-                month = date.getMonth() + 1;
-                dt = date.getDate();
-                if (dt < 10) {
-                    dt = '0' + dt;
-                }
-                if (month < 10) {
-                    month = '0' + month;
-                }
+                month = addZero(date.getMonth() + 1);
+                dt = addZero(date.getDate());
 
                 if (notice.note.length > 250) {
                     html += '<p class="mb-1">' + notice.note.substring(0, 250) + "..." + '</p>';
@@ -76,6 +64,18 @@ request.onload = function () {
         html += '<li class="list-group-item">Miejsce spotkania: ' + notice.meeting_place + '</li>';
         html += '<li class="list-group-item">Cena za godzinę: ' + notice.price + ' zł </li>';
         html += '<li class="list-group-item">Godzina: ' + notice.time_from+ ' - ' + notice.time_to + '</li>';
+        date = new Date(notice.meeting_date);
+
+                year = date.getFullYear();
+                month = date.getMonth() + 1;
+                dt = date.getDate();
+                if (dt < 10) {
+                    dt = '0' + dt;
+                }
+                if (month < 10) {
+                    month = '0' + month;
+                }
+        html += '<li class="list-group-item">Termin spotkania: ' + dt + '.' + month + '.' + year +'</li>';
         notice_extended.innerHTML = html;
     }
 };
@@ -84,4 +84,15 @@ request.send();
 function getNoticeId(id_notice) {
     var noticeID = id_notice;
     localStorage.setItem('noticeID', noticeID);
+}
+
+function addZero(int){
+    if(int < 10){
+        int = '0' + int;
+    }
+    return int;
+}
+
+if (window.location.pathname.substr(-14) === 'addnotice.html'){
+    
 }

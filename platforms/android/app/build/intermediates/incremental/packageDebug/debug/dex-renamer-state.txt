@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 #Tue May 28 13:45:40 CEST 2019
 base.0=C\:\\Users\\Fryderyk\\Projects\\touchme\\teachme-app\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+=======
+#Tue May 28 23:13:54 CEST 2019
+base.0=D\:\\TeachMe\\teachme-app\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+>>>>>>> 411cd1883a0a2fa752cafca7928835c5fa994373
 path.0=classes.dex
 renamed.0=classes.dex

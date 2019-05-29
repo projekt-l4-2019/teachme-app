@@ -28,17 +28,7 @@
                     <h5>$EMAIL$</h5>
                 </div>
 
-                <ul class="list-unstyled components">
-                    <li class="active">
-                        <a href="#">Lista ogłoszeń</a>
-                    </li>
-                    <li>
-                        <a href="#">Ustawienia</a>
-                    </li>
-                    <li>
-                        <a href="#">O Aplikacji</a>
-                    </li>
-                </ul>
+                <ul class="list-unstyled components" id="menuList"></ul>
 
                 <ul class="list-unstyled CTAs">
                     <li>
@@ -65,10 +55,11 @@
         </div>
 
          <div class="mainWindow jumbotron">
-            <div class="title"><h5>Lista Ogłoszeń:</h5></div>
+            <!-- <div class="title"><h5>Lista Ogłoszeń:</h5></div> -->
             <!-- <div class="list-group" id="notices"></div> -->
             <div class="list-group" id="notices"></div>
         </div>
+        <button id="addNoticeButton"><i class="material-icons">add</i></button>
 
 <!--            <h4>Dodaj osobę: </h4>-->
 <!--            <div class = "formPerson">-->
