@@ -28,11 +28,21 @@
                     <h5>$EMAIL$</h5>
                 </div>
 
-                <ul class="list-unstyled components" id="menuList"></ul>
+                <ul class="list-unstyled components">
+                    <li class="active">
+                        <a href="#">Lista ogłoszeń</a>
+                    </li>
+                    <li>
+                        <a href="#">Ustawienia</a>
+                    </li>
+                    <li>
+                        <a href="#">O Aplikacji</a>
+                    </li>
+                </ul>
 
                 <ul class="list-unstyled CTAs">
                     <li>
-                        <a href="login.html" class="download">Zaloguj Się</a>
+                        <a href="#" class="download">Zaloguj Się</a>
                     </li>
                     <li>
                         <a href="#" class="article">Rejestracja</a>
@@ -53,28 +63,9 @@
                     </div>
                 </nav>
         </div>
-
-        <div class="mainWindow jumbotron">
-            <!-- <div class="title"><h5>Lista Ogłoszeń:</h5></div> -->
-            <!-- <div class="list-group" id="notices"></div> -->
-            <div class="list-group" id="notices"></div>
+        <div class="loginPage">
+            <div class="title"><h3>Zaloguj się</h3></div>
         </div>
-        <button id="addNoticeButton"><i class="material-icons">add</i></button>
-
-<!--            <h4>Dodaj osobę: </h4>-->
-<!--            <div class = "formPerson">-->
-<!--                <div class="form-group">-->
-<!--                    <label class="col-form-label" for="inputDefault">Imię:</label>-->
-<!--                    <input type="text" class="form-control" placeholder="" id="inputName">-->
-<!--                </div>-->
-<!--                <div class="form-group">-->
-<!--                    <label class="col-form-label" for="inputDefault">Nazwisko:</label>-->
-<!--                    <input type="text" class="form-control" placeholder="" id="inputSurname">-->
-<!--                </div>-->
-<!--                <button type="button" class="btn btn-primary" onclick="sendData()">Dodaj!</button>-->
-<!--                <button type="button" class="btn btn-primary" onclick="deleteAllUsers()">Usuń wszystkich!</button>-->
-<!--            </div>-->
-
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/popper.min.js"></script>
         <script type="text/javascript" src="js/pulltorefresh.min.js"></script>
