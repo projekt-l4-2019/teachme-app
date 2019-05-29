@@ -6,8 +6,13 @@ let html = '<li class="active"><a href="index.html">Lista ogłoszeń</a></li>';
 html += '<li><a href="addnotice.html">Dodaj ogłoszenie</a></li>';
 html += '<li><a href="#">Ustawienia</a></li>';
 html += '<li><a href="about.html">O Aplikacji</a></li>';
-menu.innerHTML=html;
+//menu.innerHTML=html;
 
+let bimg = document.createElement("img");
+bimg.setAttribute('src', 'img/book.png');
+bimg.setAttribute('id', 'bgimg');
+document.body.appendChild(bimg);
+console.log('qyewnncyrcyjc8trdjyrjcjyirrjm');
 function onDeviceReady(){
     console.log('ready');
     if (cordova.platformId === 'android') {

@@ -11,6 +11,10 @@ a.list-group-item.list-group-item-action.flex-column.align-items-start {
     margin-bottom: 10px;
 }
 
+body {
+    background: linear-gradient(135deg, rgba(34,34,34,1) 0%, rgba(36,36,36,1) 50%, rgba(38,38,38,1) 100%);
+}
+
 button#submitNoticeBtn {
     width: 100%;
 }
@@ -34,6 +38,14 @@ button#submitNoticeBtn {
     outline: none;
 }
 
+#bgimg {
+    position: fixed;
+    width: 70%;
+    bottom: 0;
+    right: 0px;
+    transform: rotate(-20deg);
+    z-index: -1;
+}
 .ptr--text, .ptr--icon{
     color: #fff !important;
 }
@@ -48,6 +60,7 @@ html {
 
 .jumbotron {
     padding: 0.75rem 1rem !important;
+    background: transparent;
 }
 
 .wrapper {
