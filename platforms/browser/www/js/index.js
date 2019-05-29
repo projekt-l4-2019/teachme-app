@@ -54,7 +54,7 @@ PullToRefresh.init({
     mainElement: '.mainWindow',
 
     shouldPullToRefresh: function(){
-        if(!document.getElementsByClassName('overlay active')[0] && !document.body.scrollTop) return true;
+        if(!document.getElementsByClassName('overlay active')[0] && !document.body.scrollTop && window.location.pathname.substr(-10) === 'index.html') return true;
         else return false;
     },
 

@@ -62,15 +62,15 @@
                 <legend>Dodaj ogłoszenie:</legend>
                 <fieldset class="form-group">
                     <div class="form-group">
-                        <label for="lookOrOffer">Szukasz czy oferujesz korepetycje?</label>
+                        <label for="lookOrOffer">Oferujesz czy szukasz korepetycji?</label>
                         <select class="form-control" id="lookOrOffer">
-                            <option>Szukam korepetycji</option>
                             <option>Oferuję korepetycje</option>
+                            <option>Szukam korepetycji</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="subjectSelect">Wybierz przedmiot:</label>
-                        <select class="form-control" id="subjectSelect">
+                        <label for="selectSubject">Wybierz przedmiot:</label>
+                        <select class="form-control" id="selectSubject">
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -96,13 +96,10 @@
                             <label class="col-form-label" for="price">Cena za godzinę [PLN]:</label>
                             <input type="text" class="form-control"  id="price">
                     </div>
-                    <div class="form-group time">
-                            <label class="col-form-label" for="timeFrom">Godzina rozpoczęcia:</label>
-                            <input type="time" class="form-control"  id="timeFrom">
-                    </div>
-                    <div class="form-group time">
-                            <label class="col-form-label" for="timeFrom">Godzina zakończenia:</label>
-                            <input type="time" class="form-control"  id="timeTo">
+                    <div class="form-inline">
+                            <label class="col-form-label" for="timeFrom">Godziny (pomiędzy):<br></label>
+                            <input type="time" class="form-control time"  id="timeFrom">
+                            <input type="time" class="form-control time"  id="timeTo">
                     </div>
                     <div class="form-group">
                         <label for="noticeDescription">Wprowadź opis:</label>
