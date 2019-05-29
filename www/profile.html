@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+        <link rel="stylesheet" type="text/css" href="css/iconfont/material-icons.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.min.css">
+        
+
+        <title>TeachMe</title>
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <!-- Sidebar  -->
+            <nav id="sidebar">
+                <div id="dismiss" class="btn btn-success">
+                    <i class="material-icons align-content-center">arrow_back</i>
+                </div>
+
+                <div class="sidebar-header">
+                    <h5>$USER$</h5>
+                    <h5>$EMAIL$</h5>
+                </div>
+
+                <ul class="list-unstyled components">
+                    <li class="active">
+                        <a href="#">Lista ogłoszeń</a>
+                    </li>
+                    <li>
+                        <a href="#">Ustawienia</a>
+                    </li>
+                    <li>
+                        <a href="#">O Aplikacji</a>
+                    </li>
+                </ul>
+
+                <ul class="list-unstyled CTAs">
+                    <li>
+                        <a href="#" class="download">Zaloguj Się</a>
+                    </li>
+                    <li>
+                        <a href="#" class="article">Rejestracja</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="overlay"></div>
+                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <div class="container-fluid">
+                        <button type="button" id="sidebarCollapse" class="btn btn-success">
+                            <i class="material-icons">menu</i>
+                        </button>
+                        <img src=img/banner.png id="banner" alt="TeachMe" width="120">
+                        <button type="button" id="search" class="btn btn-success">
+                           <i class="material-icons">search</i>
+                         </button>
+                    </div>
+                </nav>
+        </div>
+        <div class="profilePage">
+                <div class="card mb-3">
+                        <div class="card-body">
+                                <h3 class="card-title profile-name">Michał Białek</h3>
+                        </div>
+                        <img class="avatar" src="img/avatars/default.PNG" alt="Card image">
+                        <div class="card-body">
+                                <h4 class="card-title">O mnie</h4>
+                                <h6 class="card-subtitle mb-2 text-muted">Doświadczony korepetytor</h6>
+                                <p class="card-text">Od 5 lat udzielam korepetycji z matematyki.</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">&#9742; +48 123732217</li>
+                          <li class="list-group-item">&#9993; roga@le.com</li>
+                          <li class="list-group-item">Adres</li>
+                        </ul>
+                        <button type="button" class="btn btn-success show-ann">Zobacz ogłoszenia!</button>
+                        <button type="button" class="btn btn-info">Edytuj profil!</button>
+                      </div>
+
+                </div>
+        </div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/popper.min.js"></script>
+        <script type="text/javascript" src="js/pulltorefresh.min.js"></script>
+        <script type="text/javascript" src="js/jquery-3.4.0.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mobile.custom.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/notices.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>
