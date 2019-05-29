@@ -8,6 +8,11 @@ html += '<li><a href="#">Ustawienia</a></li>';
 html += '<li><a href="about.html">O Aplikacji</a></li>';
 menu.innerHTML=html;
 
+let bimg = document.createElement("img");
+bimg.setAttribute('src', 'img/book.png');
+bimg.setAttribute('id', 'bgimg');
+document.body.appendChild(bimg);
+console.log('qyewnncyrcyjc8trdjyrjcjyirrjm');
 function onDeviceReady(){
     console.log('ready');
     if (cordova.platformId === 'android') {
@@ -61,3 +66,21 @@ PullToRefresh.init({
     instructionsReleaseToRefresh: "Puść aby odświeżyć",
     instructionsRefreshing: "Odświeżam"
 });
+
+setInputFilter(document.getElementById("price"), function(value) {
+    return /^-?\d*[.,]?\d{0,2}$/.test(value); });
+
+function setInputFilter(textbox, inputFilter) {
+    ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
+      textbox.addEventListener(event, function() {
+        if (inputFilter(this.value)) {
+          this.oldValue = this.value;
+          this.oldSelectionStart = this.selectionStart;
+          this.oldSelectionEnd = this.selectionEnd;
+        } else if (this.hasOwnProperty("oldValue")) {
+          this.value = this.oldValue;
+          this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+        }
+      });
+    });
+  }

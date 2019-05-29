@@ -6,6 +6,10 @@
 /*    margin-top: -2%;*/
 /*    !*height: 20px;*!*/
 /*}*/
+input#timeFrom, input#timeTo {
+    width: 25%;
+    margin: unset;
+}
 
 a.list-group-item.list-group-item-action.flex-column.align-items-start {
     margin-bottom: 10px;
