@@ -38,7 +38,7 @@ request.onload = function () {
                     html += '<p class="mb-1">' + notice.note + '</p>';
                 }
                 html += '<div class="d-flex w-100 justify-content-between">';
-                html += '<h6>Data spotkania: ' + dt + '.' + month + '.' + year + '</h6>' + '<h6>' + notice.meeting_place + '</h6>' + '<small>#' + notice.id + '</small>';
+                html += '<h6>Termin spotkania: ' + dt + '.' + month + '.' + year + '</h6>' + '<h6>' + notice.meeting_place + '</h6>' + '<small>#' + notice.id + '</small>';
                 html += '</div>';
                 html += '</a>';
             });
