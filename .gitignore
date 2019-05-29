@@ -4,5 +4,5 @@
 Thumbs.db
 Desktop.ini
 .idea
-platforms/
+platforms/*
 .vscode
