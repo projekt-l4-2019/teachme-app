@@ -1,11 +1,11 @@
 [
     {
-        "merged": "C:\\Users\\kondz\\TeachMe\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_icon.png.flat",
-        "source": "C:\\Users\\kondz\\TeachMe\\platforms\\android\\app\\src\\main\\res\\mipmap-xhdpi\\icon.png"
-    },
-    {
         "merged": "C:\\Users\\Fryderyk\\Projects\\touchme\\teachme-app\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-port-hdpi_screen.png.flat",
         "source": "C:\\Users\\Fryderyk\\Projects\\touchme\\teachme-app\\platforms\\android\\app\\src\\main\\res\\drawable-port-hdpi\\screen.png"
+    },
+    {
+        "merged": "C:\\Users\\kondz\\TeachMe\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_icon.png.flat",
+        "source": "C:\\Users\\kondz\\TeachMe\\platforms\\android\\app\\src\\main\\res\\mipmap-xhdpi\\icon.png"
     },
     {
         "merged": "D:\\TeachMe\\teachme-app\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-land-ldpi_screen.png.flat",

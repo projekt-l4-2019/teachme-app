@@ -4,6 +4,7 @@ document.addEventListener('deviceready', onDeviceReady, false);
 const menu = document.getElementById('menuList');
 let html = '<li class="active"><a href="index.html">Lista ogłoszeń</a></li>';
 html += '<li><a href="noticeadd.html">Dodaj ogłoszenie</a></li>';
+html += '<li><a href="profile.html">Profil</a></li>';
 html += '<li><a href="#">Ustawienia</a></li>';
 html += '<li><a href="about.html">O Aplikacji</a></li>';
 menu.innerHTML=html;
@@ -54,7 +55,7 @@ PullToRefresh.init({
     mainElement: '.mainWindow',
 
     shouldPullToRefresh: function(){
-        if(!document.getElementsByClassName('overlay active')[0] && !document.body.scrollTop) return true;
+        if(!document.getElementsByClassName('overlay active')[0] && !document.body.scrollTop && window.location.pathname.substr(-10) === 'index.html') return true;
         else return false;
     },
 
