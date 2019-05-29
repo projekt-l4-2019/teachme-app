@@ -33,13 +33,14 @@ button#submitNoticeBtn {
     font-size: 16px;
     margin: 4px 2px;
     border-radius: 2rem;
-    position: absolute;
+    position: fixed;
     right: 8vw;
     top: 80vh;
     padding: 1.2rem;
     text-align: center;
     line-height: 10px;
     outline: none;
+    z-index: 1;
 }
 
 #bgimg {
