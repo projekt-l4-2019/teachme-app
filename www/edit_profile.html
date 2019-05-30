@@ -54,26 +54,49 @@
                 </nav>
         </div>
         <div class="profilePage jumbotron">
-                <div class="card mb-3">
-                        <div class="card-body">
-                                <h3 class="card-title profile-name">Michał Białek</h3>
-                        </div>
-                        <img class="avatar" src="img/avatars/default.PNG" alt="Card image">
-                        <div class="card-body">
-                                <h4 class="card-title">O mnie</h4>
-                                <h6 class="card-subtitle mb-2 text-muted">Doświadczony korepetytor</h6>
-                                <p class="card-text">Od 5 lat udzielam korepetycji z matematyki.</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                          <li class="list-group-item">&#9742; +48 123732217</li>
-                          <li class="list-group-item">&#9993; roga@le.com</li>
-                          <li class="list-group-item">Miasto</li>
-                          <li class="list-group-item">Wiek</li>
+            <div class="card mb-3">
+                    <div class="card-body">
+                            <h4 class="card-title profile-name">Michał Białek</h4>
+                    </div>
+                    <img class="avatar" src="img/avatars/default.PNG" alt="Card image">
+                    <div class="card-body">
+                        <h5 class="card-title">O mnie</h5>
+                            <input type="text" class="form-control" placeholder="Napisz swój opis..." id="userAbout"/>
+                        <ul class="list-group list-group-flush" style="font-size: 20px;">
+                            <li class="list-group-item"><i class="material-icons">phone</i>Telefon</li>
+                            <input type="text" class="form-control" placeholder="Podaj numer telefonu..." id="userAbout"/>
+                            <li class="list-group-item"><i class="material-icons">email</i>E-mail</li>
+                            <input type="text" class="form-control" placeholder="Podaj e-mail..." id="userAbout"/>
+                            <li class="list-group-item"><i class="material-icons">location_city</i>Miasto:</li>
+                            <input type="text" class="form-control" placeholder="Podaj miasto..." id="userAbout"/>
+                            <li class="list-group-item"><i class="material-icons">account_box</i>Wiek:</li>
+                            <select class="custom-select">
+                                <option selected="">Wybierz wiek...</option>
+                                <option value="1">15</option>
+                                <option value="2">16</option>
+                                <option value="3">17</option>
+                                <option value="4">18</option>
+                                <option value="5">19</option>
+                                <option value="6">20</option>
+                                <option value="7">21</option>
+                                <option value="8">22</option>
+                                <option value="9">23</option>
+                                <option value="10">24</option>
+                                <option value="11">25</option>
+                                <option value="12">26</option>
+                                <option value="13">27</option>
+                                <option value="14">28</option>
+                                <option value="15">29</option>
+                            </select>
                         </ul>
-                        <button type="button" class="btn btn-success show-ann">Zobacz ogłoszenia!</button>
-                        <button type="button" class="btn btn-info">Edytuj profil</button>
-                      </div>
-                </div>
+                    </div>
+                    <button type="button" class="btn btn-success show-ann">Zatwierdź</button>
+                    <div class="alert alert-dismissible alert-danger formError">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Coś poszło nie tak!</strong> <a href="#" class="alert-link">Wypełnij formularz poprawnie</a> i spróbuj przesłać ponownie.
+                    </div>
+                  </div>
+            </div>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/popper.min.js"></script>
