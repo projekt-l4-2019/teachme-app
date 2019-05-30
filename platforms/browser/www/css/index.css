@@ -43,16 +43,6 @@ button#submitNoticeBtn {
     z-index: 1;
 }
 
-.addCircle {
-    right: 5vw;
-    top: 80vh;
-}
-
-.searchCircle {
-    right: 22vw;
-    top: 80vh;
-}
-
 #bgimg {
     position: fixed;
     width: 70%;
@@ -291,9 +281,14 @@ a.article:hover {
 
 .profile-name {
     text-align: center;
-    margin: 0px;
+    margin: -10px;
 }
 
 .show-ann {
     font-size: 30px;
+}
+
+.formError {
+    position: fixed;
+    margin-right: 16px;
 }
