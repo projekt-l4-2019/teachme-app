@@ -23,7 +23,7 @@ button#submitNoticeBtn {
     width: 100%;
 }
 
-#addNoticeButton{
+.circleButton{
     background: #00bc8c;
     border-color: #00bc8c;
     border: none;

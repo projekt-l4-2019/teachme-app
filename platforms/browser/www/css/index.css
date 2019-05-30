@@ -23,7 +23,7 @@ button#submitNoticeBtn {
     width: 100%;
 }
 
-#addNoticeButton{
+.circleButton{
     background: #00bc8c;
     border-color: #00bc8c;
     border: none;
@@ -41,6 +41,16 @@ button#submitNoticeBtn {
     line-height: 10px;
     outline: none;
     z-index: 1;
+}
+
+.addCircle {
+    right: 5vw;
+    top: 80vh;
+}
+
+.searchCircle {
+    right: 22vw;
+    top: 80vh;
 }
 
 #bgimg {
