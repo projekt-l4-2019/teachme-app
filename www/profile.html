@@ -1,93 +1,101 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 
-<head>
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
-    <meta name="format-detection" content="telephone=no">
-    <meta name="msapplication-tap-highlight" content="no">
-    <meta name="viewport"
-        content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/iconfont/material-icons.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.min.css">
+        
 
-    <link rel="stylesheet" type="text/css" href="css/iconfont/material-icons.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-    <link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.min.css">
+        <title>TeachMe</title>
+    </head>
 
+    <body>
+        <div class="wrapper">
+            <!-- Sidebar  -->
+            <nav id="sidebar">
+                <div id="dismiss" class="btn btn-success">
+                    <i class="material-icons align-content-center">arrow_back</i>
+                </div>
 
-    <title>TeachMe</title>
-</head>
+                <div class="sidebar-header">
+                    <h5>$USER$</h5>
+                    <h5>$EMAIL$</h5>
+                </div>
 
-<body>
-    <div class="wrapper">
-        <!-- Sidebar  -->
-        <nav id="sidebar">
-            <div id="dismiss" class="btn btn-success">
-                <i class="material-icons align-content-center">arrow_back</i>
-            </div>
+                <ul class="list-unstyled components" id="menuList"></ul>
 
-            <div class="sidebar-header">
-                <h5>$USER$</h5>
-                <h5>$EMAIL$</h5>
-            </div>
-
-            <ul class="list-unstyled components" id="menuList"></ul>
-
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="#" class="download">Zaloguj Się</a>
-                </li>
-                <li>
-                    <a href="#" class="article">Rejestracja</a>
-                </li>
-            </ul>
-        </nav>
-
-        <div class="overlay"></div>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-success">
-                    <i class="material-icons">menu</i>
-                </button>
-                <img src=img/banner.png id="banner" alt="TeachMe" width="120">
-                <button type="button" id="search" class="btn btn-success disabled">
-                    <i class="material-icons">search</i>
-                </button>
-            </div>
-        </nav>
-    </div>
-    <div class="profilePage jumbotron">
-        <div class="card mb-3">
-            <div class="card-body">
-                <h4 class="card-title profile-name">Michał Białek</h4>
-            </div>
-            <img class="avatar" src="img/avatars/default.PNG" alt="Card image">
-            <div class="card-body">
-                <h5 class="card-title">O mnie</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Doświadczony korepetytor(jakaś ranga/ocena?)</h6>
-                <p class="card-text">Od 5 lat udzielam korepetycji z matematyki (opis własny użytkownika)</p>
-                <ul class="list-group list-group-flush" style="font-size: 20px;">
-                    <li class="list-group-item"><i class="material-icons">phone</i>+48 123732217</li>
-                    <li class="list-group-item"><i class="material-icons">email</i>roga@le.com</li>
-                    <li class="list-group-item"><i class="material-icons">location_city</i>Rzeszów</li>
-                    <li class="list-group-item"><i class="material-icons">account_box</i>21 Lat</li>
+                <ul class="list-unstyled CTAs">
+                    <li>
+                        <a href="#" class="download">Zaloguj Się</a>
+                    </li>
+                    <li>
+                        <a href="#" class="article">Rejestracja</a>
+                    </li>
                 </ul>
-            </div>
-            <button type="button" class="btn btn-success show-ann">Zobacz ogłoszenia!</button>
-            <a href="noticeadd.html"><button class="circleButton" style="right: 6vw; top: 32vh;"><i
-                        class="material-icons">edit</i></button></a>
-        </div>
-    </div>
-    </div>
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/popper.min.js"></script>
-    <script type="text/javascript" src="js/pulltorefresh.min.js"></script>
-    <script type="text/javascript" src="js/jquery-3.4.0.min.js"></script>
-    <script type="text/javascript" src="js/jquery.mobile.custom.min.js"></script>
-    <script type="text/javascript" src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/notices.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-</body>
+            </nav>
 
+            <div class="overlay"></div>
+                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <div class="container-fluid">
+                        <button type="button" id="sidebarCollapse" class="btn btn-success">
+                            <i class="material-icons">menu</i>
+                        </button>
+                        <img src=img/banner.png id="banner" alt="TeachMe" width="120">
+                        <button type="button" id="search" class="btn btn-success">
+                           <i class="material-icons">search</i>
+                         </button>
+                    </div>
+                </nav>
+        </div>
+        <div class="profilePage jumbotron" style="margin-bottom: 0px;">
+                <div class="card mb-3">
+                        <div class="card-body">
+                            <h4 class="card-title profile-name">Michał Białek</h4>
+                        </div>
+                        <img class="avatar" src="img/avatars/default.PNG" alt="Card image">
+                        <div class="card-body">
+                            <h5 class="card-title">O mnie</h5>
+                            <p class="card-text">Od 5 lat udzielam korepetycji z matematyki (opis własny użytkownika)</p>
+                            <span class="badge badge-info opinionsBtn">Opinie: 1</span>
+                            <span class="badge badge-warning opinionsBtn">Ocena: 5/5</span>
+                            <ul class="list-group list-group-flush" style="font-size: 20px;">
+                                <li class="list-group-item"><i class="material-icons">phone</i>+48 123732217</li>
+                                <li class="list-group-item"><i class="material-icons">email</i>roga@le.com</li>
+                                <li class="list-group-item"><i class="material-icons">location_city</i>Rzeszów</li>
+                                <li class="list-group-item"><i class="material-icons">account_box</i>21 Lat</li>
+                            </ul>
+                        </div>
+                        <button type="button" class="btn btn-success show-ann">Zobacz ogłoszenia!</button>
+                        <a href="noticeadd.html"><button class="circleButton editButton"><i class="material-icons">edit</i></button></a>
+                      </div>
+
+                </div>
+                <h4 class="card-title" style="margin-left: 15%; margin-bottom: 5px;">Opinie:</h4>
+                <div class="card border-success mb-3 opinionCard" style="max-width: 20rem;">
+                        <div class="card-body">
+                                <em style="font-size: 17px;">Bardzo dobry korepetytor, polecam.</em>
+                                <h6 class="text-muted">Marcin</h6>
+                        </div>
+                        <div class="card-header opinionHeader">
+                                Ocena:
+                                <span class="badge badge-warning note">5</span>
+                        </div>
+                </div>
+        </div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/popper.min.js"></script>
+        <script type="text/javascript" src="js/pulltorefresh.min.js"></script>
+        <script type="text/javascript" src="js/jquery-3.4.0.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mobile.custom.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/notices.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </body>
 </html>
