@@ -71,7 +71,7 @@ PullToRefresh.init({
 
 
 
-if (window.location.pathname.substr(-14) === 'addnotice.html'){
+if (window.location.pathname.substr(-14) === 'noticeadd.html'){
     setInputFilter(document.getElementById("price"), function(value) {
         return /^-?\d*[.,]?\d{0,2}$/.test(value); });
 

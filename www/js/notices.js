@@ -1,4 +1,4 @@
-const url = "https://rhubarb-cobbler-84890.herokuapp.com/noticeFulls";
+const url = "https://rhubarb-cobbler-84890.herokuapp.com/notices";
 
 //Get notices list from server
 const app = document.getElementById('notices');
@@ -8,7 +8,7 @@ request.open('GET', url, true);
 request.onload = function () {
     // Begin accessing JSON data here
     var data = JSON.parse(this.response);
-    notice_list = data._embedded.noticeFulls;
+    notice_list = data;
     if (window.location.pathname.substr(-10) === 'index.html') {
         let html = '';
         if (request.status >= 200 && request.status < 400) {

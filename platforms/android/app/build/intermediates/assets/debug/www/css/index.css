@@ -23,7 +23,7 @@ button#submitNoticeBtn {
     width: 100%;
 }
 
-#addNoticeButton{
+.circleButton{
     background: #00bc8c;
     border-color: #00bc8c;
     border: none;
@@ -281,9 +281,14 @@ a.article:hover {
 
 .profile-name {
     text-align: center;
-    margin: 0px;
+    margin: -10px;
 }
 
 .show-ann {
     font-size: 30px;
+}
+
+.formError {
+    position: fixed;
+    margin-right: 16px;
 }

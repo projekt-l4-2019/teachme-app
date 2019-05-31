@@ -1,89 +1,154 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 
-        <link rel="stylesheet" type="text/css" href="css/iconfont/material-icons.css">
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.min.css">
-        
+<head>
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport"
+        content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 
-        <title>TeachMe</title>
-    </head>
+    <link rel="stylesheet" type="text/css" href="css/iconfont/material-icons.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.min.css">
 
-    <body>
-        <div class="wrapper">
-            <!-- Sidebar  -->
-            <nav id="sidebar">
-                <div id="dismiss" class="btn btn-success">
-                    <i class="material-icons align-content-center">arrow_back</i>
+
+    <title>TeachMe</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div id="dismiss" class="btn btn-success">
+                <i class="material-icons align-content-center">arrow_back</i>
+            </div>
+
+            <div class="sidebar-header">
+                <h5>$USER$</h5>
+                <h5>$EMAIL$</h5>
+            </div>
+
+            <ul class="list-unstyled components" id="menuList"></ul>
+
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="login.html" class="download">Logowanie</a>
+                </li>
+                <li>
+                    <a href="#" class="article">Rejestracja</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="overlay"></div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <button type="button" id="sidebarCollapse" class="btn btn-success">
+                    <i class="material-icons">menu</i>
+                </button>
+                <img src=img/banner.png id="banner" alt="TeachMe" width="120">
+                <button type="button" id="search" class="navbar-toggler btn btn-success" data-toggle="collapse"
+                    data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <i class="material-icons">search</i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <div class="form-group">
+                                <label for="selectSubject">Wybierz przedmiot:</label>
+                                <select class="form-control" id="selectSubject">
+                                    <option> </option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="form-group">
+                                <label for="selectLevel">Wybierz poziom:</label>
+                                <select class="form-control" id="selectLevel">
+                                    <option> </option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="form-group">
+                                <label class="col-form-label" for="selectCity">Miejscowość:</label>
+                                <select class="form-control" id="selectCity">
+                                    <option> </option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="form-group">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
+                                    <label class="custom-control-label" for="customSwitch1">Toggle this switch
+                                        element</label>
+                                </div>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" disabled="" id="customSwitch2">
+                                    <label class="custom-control-label" for="customSwitch2">Disabled switch
+                                        element</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-success" id="submitNoticeBtn" onclick="lookFor()">Szukaj</button>
+                        </li>
+                    </ul>
                 </div>
+            </div>
+        </nav>
+    </div>
 
-                <div class="sidebar-header">
-                    <h5>$USER$</h5>
-                    <h5>$EMAIL$</h5>
-                </div>
+    <div class="mainWindow jumbotron">
+        <!-- <div class="title"><h5>Lista Ogłoszeń:</h5></div> -->
+        <!-- <div class="list-group" id="notices"></div> -->
+        <div class="list-group" id="notices"></div>
+    </div>
+    <a href="noticeadd.html"><button class="circleButton" style="right: 5vw;"><i
+                class="material-icons">search</i></button></a>
+    <a href="noticeadd.html"><button class="circleButton" style="right: 22vw;"><i
+                class="material-icons">add</i></button></a>
 
-                <ul class="list-unstyled components" id="menuList"></ul>
+    <!--            <h4>Dodaj osobę: </h4>-->
+    <!--            <div class = "formPerson">-->
+    <!--                <div class="form-group">-->
+    <!--                    <label class="col-form-label" for="inputDefault">Imię:</label>-->
+    <!--                    <input type="text" class="form-control" placeholder="" id="inputName">-->
+    <!--                </div>-->
+    <!--                <div class="form-group">-->
+    <!--                    <label class="col-form-label" for="inputDefault">Nazwisko:</label>-->
+    <!--                    <input type="text" class="form-control" placeholder="" id="inputSurname">-->
+    <!--                </div>-->
+    <!--                <button type="button" class="btn btn-primary" onclick="sendData()">Dodaj!</button>-->
+    <!--                <button type="button" class="btn btn-primary" onclick="deleteAllUsers()">Usuń wszystkich!</button>-->
+    <!--            </div>-->
 
-                <ul class="list-unstyled CTAs">
-                    <li>
-                        <a href="login.html" class="download">Logowanie</a>
-                    </li>
-                    <li>
-                        <a href="#" class="article">Rejestracja</a>
-                    </li>
-                </ul>
-            </nav>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <script type="text/javascript" src="js/pulltorefresh.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile.custom.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/notices.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+</body>
 
-            <div class="overlay"></div>
-                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <div class="container-fluid">
-                        <button type="button" id="sidebarCollapse" class="btn btn-success">
-                            <i class="material-icons">menu</i>
-                        </button>
-                        <img src=img/banner.png id="banner" alt="TeachMe" width="120">
-                        <button type="button" id="search" class="btn btn-success">
-                           <i class="material-icons">search</i>
-                         </button>
-                    </div>
-                </nav>
-        </div>
-
-        <div class="mainWindow jumbotron">
-            <!-- <div class="title"><h5>Lista Ogłoszeń:</h5></div> -->
-            <!-- <div class="list-group" id="notices"></div> -->
-            <div class="list-group" id="notices"></div>
-        </div>
-        <a href="noticeadd.html"><button class="circleButton" style="right: 5vw;"><i class="material-icons">search</i></button></a>
-        <a href="noticeadd.html"><button class="circleButton" style="right: 22vw;"><i class="material-icons">add</i></button></a>
-
-<!--            <h4>Dodaj osobę: </h4>-->
-<!--            <div class = "formPerson">-->
-<!--                <div class="form-group">-->
-<!--                    <label class="col-form-label" for="inputDefault">Imię:</label>-->
-<!--                    <input type="text" class="form-control" placeholder="" id="inputName">-->
-<!--                </div>-->
-<!--                <div class="form-group">-->
-<!--                    <label class="col-form-label" for="inputDefault">Nazwisko:</label>-->
-<!--                    <input type="text" class="form-control" placeholder="" id="inputSurname">-->
-<!--                </div>-->
-<!--                <button type="button" class="btn btn-primary" onclick="sendData()">Dodaj!</button>-->
-<!--                <button type="button" class="btn btn-primary" onclick="deleteAllUsers()">Usuń wszystkich!</button>-->
-<!--            </div>-->
-
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/popper.min.js"></script>
-        <script type="text/javascript" src="js/pulltorefresh.min.js"></script>
-        <script type="text/javascript" src="js/jquery-3.4.0.min.js"></script>
-        <script type="text/javascript" src="js/jquery.mobile.custom.min.js"></script>
-        <script type="text/javascript" src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/notices.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-    </body>
 </html>

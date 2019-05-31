@@ -50,7 +50,9 @@
                     <i class="material-icons">menu</i>
                 </button>
                 <img src=img/banner.png id="banner" alt="TeachMe" width="120">
-                <button type="button" id="search" class="btn btn-success">
+                <button type="button" id="search" class="navbar-toggler btn btn-success" data-toggle="collapse"
+                    data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <i class="material-icons">search</i>
                 </button>
             </div>
@@ -89,17 +91,28 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="col-form-label" for="meetingPlace">Miejsce spotkania:</label>
-                        <input type="text" class="form-control" placeholder="np. kawiarnia, biblioteka" id="meetingPlace">
+                        <label class="col-form-label" for="selectCity">Miejscowość:</label>
+                        <select class="form-control" id="selectCity">
+                            <option> </option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                            <label class="col-form-label" for="price">Cena za godzinę [PLN]:</label>
-                            <input type="text" class="form-control"  id="price">
+                        <label class="col-form-label" for="meetingPlace">Miejsce spotkania:</label>
+                        <input type="text" class="form-control" placeholder="np. kawiarnia, biblioteka"
+                            id="meetingPlace">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label" for="price">Cena za godzinę [PLN]:</label>
+                        <input type="text" class="form-control" id="price">
                     </div>
                     <div class="form-inline">
-                            <label class="col-form-label" for="timeFrom">Godziny (pomiędzy):<br></label>
-                            <input type="time" class="form-control time"  id="timeFrom">
-                            <input type="time" class="form-control time"  id="timeTo">
+                        <label class="col-form-label" for="timeFrom">Godziny (pomiędzy):<br></label>
+                        <input type="time" class="form-control time" id="timeFrom">
+                        <input type="time" class="form-control time" id="timeTo">
                     </div>
                     <div class="form-group">
                         <label for="noticeDescription">Wprowadź opis:</label>
