@@ -23,6 +23,10 @@ button#submitNoticeBtn {
     width: 100%;
 }
 
+.searchMenu {
+    width: 48vw !important;
+}
+
 .circleButton{
     background: #00bc8c;
     border-color: #00bc8c;

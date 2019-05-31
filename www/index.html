@@ -95,20 +95,36 @@
                         </li>
                         <li class="nav-item">
                             <div class="form-group">
-                                <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
-                                    <label class="custom-control-label" for="customSwitch1">Toggle this switch
-                                        element</label>
-                                </div>
-                                <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" disabled="" id="customSwitch2">
-                                    <label class="custom-control-label" for="customSwitch2">Disabled switch
-                                        element</label>
+                                <label for="selectSubject">Kogo szukasz?:</label><br>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-secondary active searchMenu">
+                                        <input type="radio" name="options" id="offer" autocomplete="off" checked="">
+                                        Korepetytora
+                                    </label>
+                                    <label class="btn btn-secondary searchMenu">
+                                        <input type="radio" name="options" id="lookfor" autocomplete="off">
+                                        Ucznia
+                                    </label>
                                 </div>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <button class="btn btn-success" id="submitNoticeBtn" onclick="lookFor()">Szukaj</button>
+                            <div class="form-group">
+                                <label for="selectSubject">Cena:</label><br>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-secondary active searchMenu">
+                                        <input type="radio" name="options" id="offer" autocomplete="off" checked="">
+                                        Rosnąco
+                                    </label>
+                                    <label class="btn btn-secondary searchMenu">
+                                        <input type="radio" name="options" id="lookfor" autocomplete="off">
+                                        Malejąco
+                                    </label>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-secondary" id="submitNoticeBtn" onclick="lookFor()">Szukaj</button>
                         </li>
                     </ul>
                 </div>
