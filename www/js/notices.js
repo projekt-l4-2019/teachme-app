@@ -7,15 +7,14 @@ let request = new XMLHttpRequest();
 request.open('GET', url, true);
 request.onload = function () {
     // Begin accessing JSON data here
-    var data = JSON.parse(this.response);
-    notice_list = data;
+    var notice_list = JSON.parse(this.response);
     if (window.location.pathname.substr(-10) === 'index.html') {
         let html = '';
         if (request.status >= 200 && request.status < 400) {
             notice_list.forEach(notice => {
-                html += '<a href="notice.html" onclick="getNoticeId(' + notice.id + ')" class="list-group-item list-group-item-action flex-column align-items-start">';
+                html += '<a href="notice.html" onclick="getNoticeId(' + notice.idNotice + ')" class="list-group-item list-group-item-action flex-column align-items-start">';
                 html += '<div class="d-flex w-100 justify-content-between">';
-                html += '<h5 class="mb-1">' + notice.subject + '</h5>';
+                html += '<h5 class="mb-1">' + notice.subjectBySubjectIdSubject.name + '</h5>';
 
                 let date = new Date(notice.timestamp);
 
@@ -26,7 +25,7 @@ request.onload = function () {
                 html += '<small>dodano: ' + dt + '.' + month + '.' + year + '</small>';
                 html += '</div>';
 
-                date = new Date(notice.meeting_date);
+                date = new Date(notice.meetingDate);
 
                 year = date.getFullYear();
                 month = addZero(date.getMonth() + 1);
@@ -38,7 +37,7 @@ request.onload = function () {
                     html += '<p class="mb-1">' + notice.note + '</p>';
                 }
                 html += '<div class="d-flex w-100 justify-content-between">';
-                html += '<h6>Termin spotkania: ' + dt + '.' + month + '.' + year + '</h6>' + '<h6>' + notice.meeting_place + '</h6>' + '<small>#' + notice.id + '</small>';
+                html += '<h6>Termin spotkania: ' + dt + '.' + month + '.' + year + '</h6>' + '<h6>' + notice.meetingByMeetingIdMeeting.meetingPlace + '</h6>' + '<small>#' + notice.idNotice + '</small>';
                 html += '</div>';
                 html += '</a>';
             });
@@ -53,25 +52,26 @@ request.onload = function () {
         let id_notice = localStorage.getItem("noticeID");
         for(var i=0; i<notice_list.length; i++)
         {
-            if(id_notice==notice_list[i].id) break;
+            if(id_notice==notice_list[i].idNotice) break;
         }
         let notice=notice_list[i];
+        console.log(notice);
         const notice_extended = document.getElementById('notice_extended');
         let html = '';
-        html += '<h4 class="card-header">'+ notice.subject +'</h4>';
+        html += '<h4 class="card-header">'+ notice.subjectBySubjectIdSubject.name +'</h4>';
         html += '<div class="card-body"> <p class="card-text">'+ notice.note+'</p></div>';
         html += '<ul class="list-group list-group-flush">';
         html += '<li class="list-group-item">Miejsce spotkania: ' + notice.meeting_place + '</li>';
         html += '<li class="list-group-item">Cena za godzinę: ' + notice.price + ' zł </li>';
-        html += '<li class="list-group-item">Godzina: ' + notice.time_from+ ' - ' + notice.time_to + '</li>';
+        html += '<li class="list-group-item">Godzina: ' + notice.timeFrom+ ' - ' + notice.timeTo + '</li>';
        
-        date = new Date(notice.meeting_date);
+        date = new Date(notice.meetingDate);
         year = date.getFullYear();
         month = addZero(date.getMonth() + 1);
         dt = addZero(date.getDate());
 
         html += '<li class="list-group-item">Termin spotkania: ' + dt + '.' + month + '.' + year +'</li>';
-        if(html) notice_extended.innerHTML = html;
+        notice_extended.innerHTML = html;
     }
 };
 request.send();
