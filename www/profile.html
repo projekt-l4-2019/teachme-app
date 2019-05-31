@@ -53,7 +53,7 @@
                     </div>
                 </nav>
         </div>
-        <div class="profilePage jumbotron">
+        <div class="profilePage jumbotron" style="margin-bottom: 0px;">
                 <div class="card mb-3">
                         <div class="card-body">
                             <h4 class="card-title profile-name">Michał Białek</h4>
@@ -61,11 +61,9 @@
                         <img class="avatar" src="img/avatars/default.PNG" alt="Card image">
                         <div class="card-body">
                             <h5 class="card-title">O mnie</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Doświadczony korepetytor(jakaś ranga/ocena?)</h6>
                             <p class="card-text">Od 5 lat udzielam korepetycji z matematyki (opis własny użytkownika)</p>
-                            <ul class="nav nav-pills">
-                                    <li class="active"><a href="#">Home <span class="badge">42</span></a></li>
-                            </ul>
+                            <span class="badge badge-info opinionsBtn">Opinie: 1</span>
+                            <span class="badge badge-warning opinionsBtn">Ocena: 5/5</span>
                             <ul class="list-group list-group-flush" style="font-size: 20px;">
                                 <li class="list-group-item"><i class="material-icons">phone</i>+48 123732217</li>
                                 <li class="list-group-item"><i class="material-icons">email</i>roga@le.com</li>
@@ -76,6 +74,18 @@
                         <button type="button" class="btn btn-success show-ann">Zobacz ogłoszenia!</button>
                         <a href="noticeadd.html"><button class="circleButton editButton"><i class="material-icons">edit</i></button></a>
                       </div>
+
+                </div>
+                <h4 class="card-title" style="margin-left: 15%; margin-bottom: 5px;">Opinie:</h4>
+                <div class="card border-success mb-3 opinionCard" style="max-width: 20rem;">
+                        <div class="card-body">
+                                <em style="font-size: 17px;">Bardzo dobry korepetytor, polecam.</em>
+                                <h6 class="text-muted">Marcin</h6>
+                        </div>
+                        <div class="card-header opinionHeader">
+                                Ocena:
+                                <span class="badge badge-warning note">5</span>
+                        </div>
                 </div>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
