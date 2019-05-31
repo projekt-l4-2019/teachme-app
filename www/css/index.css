@@ -43,6 +43,12 @@ button#submitNoticeBtn {
     z-index: 1;
 }
 
+.editButton{
+    left: 81vw;
+    top: 1%;
+    position: absolute;
+    padding: 0.2rem;
+}
 #bgimg {
     position: fixed;
     width: 70%;
