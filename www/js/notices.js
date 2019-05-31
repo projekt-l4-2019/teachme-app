@@ -15,29 +15,17 @@ request.onload = function () {
                 html += '<a href="notice.html" onclick="getNoticeId(' + notice.idNotice + ')" class="list-group-item list-group-item-action flex-column align-items-start">';
                 html += '<div class="d-flex w-100 justify-content-between">';
                 html += '<h5 class="mb-1">' + notice.subjectBySubjectIdSubject.name + '</h5>';
-
-                let date = new Date(notice.timestamp);
-
-                let year = date.getFullYear();
-                let month = addZero(date.getMonth() + 1);
-                let dt = addZero(date.getDate());
-
-                html += '<small>dodano: ' + dt + '.' + month + '.' + year + '</small>';
+                html += '<small>dodano: ' + getDate(notice.timestamp) + '</small>';
                 html += '</div>';
-
-                date = new Date(notice.meetingDate);
-
-                year = date.getFullYear();
-                month = addZero(date.getMonth() + 1);
-                dt = addZero(date.getDate());
 
                 if (notice.note.length > 250) {
                     html += '<p class="mb-1">' + notice.note.substring(0, 250) + "..." + '</p>';
                 } else {
                     html += '<p class="mb-1">' + notice.note + '</p>';
                 }
+
                 html += '<div class="d-flex w-100 justify-content-between">';
-                html += '<h6>Termin spotkania: ' + dt + '.' + month + '.' + year + '</h6>' + '<h6>' + notice.meetingByMeetingIdMeeting.meetingPlace + '</h6>' + '<small>#' + notice.idNotice + '</small>';
+                html += '<h6>Termin spotkania: ' + getDate(notice.meetingDate) + '</h6>' + '<h6>' + notice.meetingByMeetingIdMeeting.meetingPlace + '</h6>' + '<small>#' + notice.idNotice + '</small>';
                 html += '</div>';
                 html += '</a>';
             });
@@ -61,16 +49,10 @@ request.onload = function () {
         html += '<h4 class="card-header">'+ notice.subjectBySubjectIdSubject.name +'</h4>';
         html += '<div class="card-body"> <p class="card-text">'+ notice.note+'</p></div>';
         html += '<ul class="list-group list-group-flush">';
-        html += '<li class="list-group-item">Miejsce spotkania: ' + notice.meeting_place + '</li>';
+        html += '<li class="list-group-item">Miejsce spotkania: ' + notice.meetingPlace + '</li>';
         html += '<li class="list-group-item">Cena za godzinę: ' + notice.price + ' zł </li>';
-        html += '<li class="list-group-item">Godzina: ' + notice.timeFrom+ ' - ' + notice.timeTo + '</li>';
-       
-        date = new Date(notice.meetingDate);
-        year = date.getFullYear();
-        month = addZero(date.getMonth() + 1);
-        dt = addZero(date.getDate());
-
-        html += '<li class="list-group-item">Termin spotkania: ' + dt + '.' + month + '.' + year +'</li>';
+        html += '<li class="list-group-item">Godzina: ' + getTime(notice.timeFrom) + ' - ' + getTime(notice.timeTo) + '</li>';
+        html += '<li class="list-group-item">Termin spotkania: ' + getDate(notice.meetingDate) +'</li>';
         notice_extended.innerHTML = html;
     }
 };
@@ -88,6 +70,20 @@ function addZero(int){
     return int;
 }
 
+function getTime(dateJSON){
+    let date = new Date(dateJSON);
+    let hours = addZero(date.getHours());
+    let minutes = addZero(date.getMinutes());
+    return hours + ':' + minutes;
+}
+
+function getDate(dateJSON){
+    let date = new Date(dateJSON);
+    let year = date.getFullYear();
+    let month = addZero(date.getMonth());
+    let day = addZero(date.getDate());
+    return day + '.' + month + '.' + year;
+}
 
 // Post notice to server
 if (window.location.pathname.substr(-14) === 'noticeadd.html'){
