@@ -64,12 +64,12 @@
                     <div class="form-group">
                         <label for="selectSubject">Jesteś?:</label><br>
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-success active btnAddUser">
-                                <input type="radio" name="options" id="offer" autocomplete="off" checked="">
+                            <label class="btn btn-success active btnAddUser" id="offer">
+                                <input type="radio" name="options" autocomplete="off" checked="">
                                 Korepetytorem
                             </label>
-                            <label class="btn btn-success btnAddUser">
-                                <input type="radio" name="options" id="lookfor" autocomplete="off">
+                            <label class="btn btn-success btnAddUser" id="lookfor">
+                                <input type="radio" name="options" autocomplete="off">
                                 Uczniem
                             </label>
                         </div>
@@ -97,14 +97,13 @@
                         <select class="form-control" id="selectCity"></select>
                     </div>
                     <div class="form-group">
-                        <label class="col-form-label" for="meetingPlace">Miejsce spotkania:</label>
-                        <input type="text" class="form-control" placeholder="np. kawiarnia, biblioteka"
-                            id="meetingPlace">
-                    </div>
-                    <div class="form-group">
                         <label class="col-form-label" for="price">Cena za godzinę [PLN]:</label>
                         <input type="text" class="form-control" id="price">
                     </div>
+                    <div class="form-inline">
+                            <label class="col-form-label" for="timeFrom">Data:<br></label>
+                            <input type="date" class="form-control time" id="date">
+                        </div><br>
                     <div class="form-inline">
                         <label class="col-form-label" for="timeFrom">Godziny (pomiędzy):<br></label>
                         <input type="time" class="form-control time" id="timeFrom">

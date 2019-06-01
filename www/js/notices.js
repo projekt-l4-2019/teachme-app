@@ -202,22 +202,6 @@ function loadSelectedNotice() {
     request.send();
 }
 
-if (window.location.pathname.substr(-10) === 'index.html') {
-    loadCities();
-    loadVoivodeships();
-    loadSubjects();
-    loadNotices();
-}
-if (window.location.pathname.substr(-14) === 'noticeadd.html') {
-    loadCities();
-    loadVoivodeships();
-    loadSubjects();
-}
-if (window.location.pathname.substr(-11) === 'notice.html') {
-    loadSelectedNotice();
-}
-
-
 function getNoticeId(id_notice) {
     var noticeID = id_notice;
     localStorage.setItem('noticeID', noticeID);
@@ -245,39 +229,61 @@ function getDate(dateJSON) {
     return day + '.' + month + '.' + year;
 }
 
-// // Post notice to server
-// if (window.location.pathname.substr(-14) === 'noticeadd.html') {
-//     function postNotice() {
-//         var data = {};
-//         data.look_or_offer = document.getElementById("lookOrOffer").tabIndex;
-//         // data.subject = document.getElementById("selectSubject").value;
-//         data.subject = "Geografia";
-//         // data.level = document.getElementById("selectLevel").value; //TEMP DISABLE
-//         data.meeting_place = document.getElementById("meetingPlace").value;
-//         data.price = document.getElementById("price").value;
-//         // data.time_from = document.getElementById("timeFrom").value;
-//         // data.time_to = document.getElementById("timeTo").value;
-//         data.note = document.getElementById("noticeDescription").value;
-//         data.active = 1;
-//         // if(data[7]==='') alert("Nie podano wartosci!");
-//         // else {
-//         let json = JSON.stringify(data);
-//         console.log(json);
-//         let xhr = new XMLHttpRequest();
-//         xhr.open("POST", url, true);
-//         xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-//         xhr.onload = function () {
-//             let users = JSON.parse(xhr.responseText);
-//             if (xhr.readyState === 4 && xhr.status === 201) {
-//                 console.table(users);
-//             } else {
-//                 console.error(users);
-//             }
-//         };
-//         xhr.send(json);
-//         //TODO: Nie nie chce sie dodać przy odświeżeniu zaraz po xhr.send(json). Trzeba skombinować jakieś obejście lepsze niż alert.
-//         alert('Dodano pomyslnie!');
-//         // location.reload();
-//         // }
-//     }
-// }
+if (window.location.pathname.substr(-10) === 'index.html') {
+    loadCities();
+    loadVoivodeships();
+    loadSubjects();
+    loadNotices();
+}
+if (window.location.pathname.substr(-14) === 'noticeadd.html') {
+    loadCities();
+    loadVoivodeships();
+    loadSubjects();
+}
+if (window.location.pathname.substr(-11) === 'notice.html') {
+    loadSelectedNotice();
+}
+
+function timeToTimestamp(date,time) {
+    date = date.split(':');
+    let newTime = new Date(date[1] + '/' + date[2] + '/' + date[0] + ' ' + time);
+    return newTime;
+}
+
+function postNotice() {
+    var data = {};
+    if (document.getElementById('offer').classList.contains('active')) {
+        data.lookOrOffer = 0;
+    } else {
+        data.lookOrOffer = 1;
+    }
+    data.subject = document.getElementById("selectSubject").value;
+    data.level = document.getElementById("selectLevel").value;
+    data.meetingPlace = document.getElementById("selectCity").value;
+    data.price = document.getElementById("price").value;
+    data.date = document.getElementById("date").value;
+    data.timeFrom = timeToTimestamp(data.date,document.getElementById('timeFrom').value);
+    data.timeTo = timeToTimestamp(data.date,document.getElementById('timeTo').value);
+    data.note = document.getElementById("noticeDescription").value;
+    // if(data[7]==='') alert("Nie podano wartosci!");
+    // else {
+    let json = JSON.stringify(data);
+    console.log(json);
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", noticesUrl, true);
+    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    xhr.onload = function () {
+        let users = JSON.parse(xhr.responseText);
+        if (xhr.readyState === 4 && xhr.status === 201) {
+            console.table(users);
+        } else {
+            console.error(users);
+        }
+    };
+    xhr.send(json);
+    alert('Dodano pomyslnie!');
+    //TODO: Nie nie chce sie dodać przy odświeżeniu zaraz po xhr.send(json). Trzeba skombinować jakieś obejście lepsze niż alert.
+
+    // location.reload();
+}
