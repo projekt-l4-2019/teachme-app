@@ -27,6 +27,10 @@ button#submitNoticeBtn {
     width: 48vw !important;
 }
 
+.btnAddUser {
+    width: 46vw !important;
+}
+
 .circleButton{
     background: #00bc8c;
     border-color: #00bc8c;

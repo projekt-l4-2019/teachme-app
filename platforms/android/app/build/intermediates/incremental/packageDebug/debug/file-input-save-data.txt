@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Fri May 31 23:16:16 CEST 2019
+#Sat Jun 01 19:15:57 CEST 2019
 5.base=D\:\\TeachMe\\teachme-app\\platforms\\android\\app\\build\\intermediates\\assets\\debug
 42.base=D\:\\TeachMe\\teachme-app\\platforms\\android\\app\\build\\intermediates\\assets\\debug
 22.path=www/login.html

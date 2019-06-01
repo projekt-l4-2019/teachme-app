@@ -62,41 +62,39 @@
                 <legend>Dodaj ogłoszenie:</legend>
                 <fieldset class="form-group">
                     <div class="form-group">
-                        <label for="lookOrOffer">Oferujesz czy szukasz korepetycji?</label>
-                        <select class="form-control" id="lookOrOffer">
-                            <option>Oferuję korepetycje</option>
-                            <option>Szukam korepetycji</option>
-                        </select>
+                        <label for="selectSubject">Jesteś?:</label><br>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-success active btnAddUser">
+                                <input type="radio" name="options" id="offer" autocomplete="off" checked="">
+                                Korepetytorem
+                            </label>
+                            <label class="btn btn-success btnAddUser">
+                                <input type="radio" name="options" id="lookfor" autocomplete="off">
+                                Uczniem
+                            </label>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="selectSubject">Wybierz przedmiot:</label>
-                        <select class="form-control" id="selectSubject">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
+                        <select class="form-control" id="selectSubject"></select>
                     </div>
                     <div class="form-group">
                         <label for="selectLevel">Wybierz poziom:</label>
                         <select class="form-control" id="selectLevel">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                                <option>Wszystkie</option>
+                                <option>Szkoła podstawowa</option>
+                                <option>Gimnazjum</option>
+                                <option>Szkoła średnia</option>
+                                <option>Szkoła wyższa</option>
                         </select>
                     </div>
                     <div class="form-group">
+                            <label class="col-form-label" for="selectCity">Województwo:</label>
+                            <select class="form-control" id="selectVoivodeship"></select>
+                        </div>
+                    <div class="form-group">
                         <label class="col-form-label" for="selectCity">Miejscowość:</label>
-                        <select class="form-control" id="selectCity">
-                            <option> </option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
+                        <select class="form-control" id="selectCity"></select>
                     </div>
                     <div class="form-group">
                         <label class="col-form-label" for="meetingPlace">Miejsce spotkania:</label>
