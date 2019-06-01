@@ -3,12 +3,24 @@ const citiesUrl = "https://rhubarb-cobbler-84890.herokuapp.com/cities";
 const voivodeshipsUrl = "https://rhubarb-cobbler-84890.herokuapp.com/voivodeships";
 const subjectsUrl = "https://rhubarb-cobbler-84890.herokuapp.com/subjects";
 
+if (window.location.pathname.substr(-10) === 'index.html') {
+    loadNotices();
+    loadVoivodeships();
+    loadSubjects();
+}
+if (window.location.pathname.substr(-14) === 'noticeadd.html') {
+    loadVoivodeships();
+    loadSubjects();
+}
+if (window.location.pathname.substr(-11) === 'notice.html') {
+    loadSelectedNotice();
+}
+
+
 class City {
-    constructor(idCity, cityName, idVoivodeship, nameVoivodeship) {
+    constructor(idCity, cityName) {
         this.idCity = idCity;
         this.cityName = cityName;
-        this.idVoivodeship = idVoivodeship;
-        this.nameVoivodeship = nameVoivodeship;
     }
 }
 
@@ -44,31 +56,36 @@ class Notice {
     }
 }
 
-function loadCities() {
+function loadCities(id) {
     let cityArray = new Array();
     let cityList;
     let request = new XMLHttpRequest();
-    request.open('GET', citiesUrl, true);
-    request.onload = function () {
-        // Begin accessing JSON data here
-        cityList = JSON.parse(this.response);
-        if (request.status >= 200 && request.status < 400) {
-            cityList.forEach(city => {
-                let newCity = new City(city.idCity, city.name, city.voivodeshipByVoivodeshipIdVoivodeship.idVoivodeship, city.voivodeshipByVoivodeshipIdVoivodeship.nameVoivodeship);
-                cityArray.push(newCity);
-            });
+    if (id != 0 && id != "undefined") {
+        request.open('GET', voivodeshipsUrl + '/' + id, true);
+        request.onload = function () {
+            // Begin accessing JSON data here
+            cityList = JSON.parse(this.response);
+            cityList = cityList.citiesByIdVoivodeship;
+            if (request.status >= 200 && request.status < 400) {
+                cityList.forEach(city => {
+                    let newCity = new City(city.idCity, city.name);
 
-        } else {
-            console.log('error');
-        }
-        const cityListHTML = document.getElementById('selectCity');
-        html = '<option>Wszystkie</option>';
-        for (let i = 0; i < cityArray.length; i++) {
-            html += '<option>' + cityArray[i].cityName + '</option>';
-        }
-        cityListHTML.innerHTML = html;
-    };
-    request.send();
+                    cityArray.push(newCity);
+                });
+
+            } else {
+                console.log('error');
+            }
+            const cityListHTML = document.getElementById('selectCity');
+            html = '';
+            for (let i = 0; i < cityArray.length; i++) {
+                html += '<option>' + cityArray[i].cityName + '</option>';
+            }
+            cityListHTML.innerHTML = html;
+
+        };
+        request.send();
+    }
 }
 
 function loadVoivodeships() {
@@ -108,7 +125,7 @@ function loadSubjects() {
         subjectList = JSON.parse(this.response);
         if (request.status >= 200 && request.status < 400) {
             subjectList.forEach(subject => {
-                let newSubject = new Subject(subject.idSubject, subject.name, subject.subjectBySubjectIdSubjec);
+                let newSubject = new Subject(subject.idSubject, subject.name, subject.subjectBySubjectIdSubject);
                 subjectArray.push(newSubject);
             });
 
@@ -207,6 +224,15 @@ function getNoticeId(id_notice) {
     localStorage.setItem('noticeID', noticeID);
 }
 
+function getViovideshipIndex() {
+    let ele = document.getElementById("selectVoivodeship");
+    for (var i = 0; i < ele.length; i++) {
+        if (ele[i].childNodes[0].nodeValue === ele.value) {
+            loadCities(i);
+        }
+    }
+}
+
 function addZero(int) {
     if (int < 10) {
         int = '0' + int;
@@ -229,22 +255,7 @@ function getDate(dateJSON) {
     return day + '.' + month + '.' + year;
 }
 
-if (window.location.pathname.substr(-10) === 'index.html') {
-    loadCities();
-    loadVoivodeships();
-    loadSubjects();
-    loadNotices();
-}
-if (window.location.pathname.substr(-14) === 'noticeadd.html') {
-    loadCities();
-    loadVoivodeships();
-    loadSubjects();
-}
-if (window.location.pathname.substr(-11) === 'notice.html') {
-    loadSelectedNotice();
-}
-
-function timeToTimestamp(date,time) {
+function timeToTimestamp(date, time) {
     date = date.split(':');
     let newTime = new Date(date[1] + '/' + date[2] + '/' + date[0] + ' ' + time);
     return newTime;
@@ -262,8 +273,8 @@ function postNotice() {
     data.meetingPlace = document.getElementById("selectCity").value;
     data.price = document.getElementById("price").value;
     data.date = document.getElementById("date").value;
-    data.timeFrom = timeToTimestamp(data.date,document.getElementById('timeFrom').value);
-    data.timeTo = timeToTimestamp(data.date,document.getElementById('timeTo').value);
+    data.timeFrom = timeToTimestamp(data.date, document.getElementById('timeFrom').value);
+    data.timeTo = timeToTimestamp(data.date, document.getElementById('timeTo').value);
     data.note = document.getElementById("noticeDescription").value;
     // if(data[7]==='') alert("Nie podano wartosci!");
     // else {
