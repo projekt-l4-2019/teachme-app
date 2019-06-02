@@ -72,7 +72,6 @@ function loadCities(id) {
 
                     cityArray.push(newCity);
                 });
-
             } else {
                 console.log('error');
             }
@@ -101,7 +100,6 @@ function loadVoivodeships() {
                 let newVoivodeship = new Voivodeship(voivodeship.idVoivodeship, voivodeship.nameVoivodeship);
                 voivodeshipArray.push(newVoivodeship);
             });
-
         } else {
             console.log('error');
         }
@@ -212,7 +210,6 @@ function loadSelectedNotice() {
             html += '<li class="list-group-item">Cena za godzinę: ' + notice.price + ' zł </li>';
             html += '<li class="list-group-item">Godzina: ' + getTime(notice.timeFrom) + ' - ' + getTime(notice.timeTo) + '</li>';
             html += '<li class="list-group-item">Termin spotkania: ' + getDate(notice.meetingDate) + '</li>';
-            notice_extended.innerHTML = html;
         }
         noticeListHTML.innerHTML = html;
     };

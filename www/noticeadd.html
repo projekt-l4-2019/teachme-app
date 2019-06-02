@@ -81,29 +81,31 @@
                     <div class="form-group">
                         <label for="selectLevel">Wybierz poziom:</label>
                         <select class="form-control" id="selectLevel">
-                                <option>Wszystkie</option>
-                                <option>Szkoła podstawowa</option>
-                                <option>Gimnazjum</option>
-                                <option>Szkoła średnia</option>
-                                <option>Szkoła wyższa</option>
+                            <option>Wszystkie</option>
+                            <option>Szkoła podstawowa</option>
+                            <option>Gimnazjum</option>
+                            <option>Szkoła średnia</option>
+                            <option>Szkoła wyższa</option>
                         </select>
                     </div>
                     <div class="form-group">
-                            <label class="col-form-label" for="selectVoivodeship">Województwo:</label>
-                            <select class="form-control" id="selectVoivodeship" onclick="getViovideshipIndex()"></select>
-                        </div>
+                        <label class="col-form-label" for="selectVoivodeship">Województwo:</label>
+                        <select class="form-control" id="selectVoivodeship" onclick="getViovideshipIndex()"></select>
+                    </div>
                     <div class="form-group">
                         <label class="col-form-label" for="selectCity">Miejscowość:</label>
-                        <select class="form-control" id="selectCity" onclick="getViovideshipIndex()"></select>
+                        <select class="form-control" id="selectCity" onclick="getViovideshipIndex()">
+                            <option>Wybierz województwo</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label class="col-form-label" for="price">Cena za godzinę [PLN]:</label>
                         <input type="text" class="form-control" id="price">
                     </div>
                     <div class="form-inline">
-                            <label class="col-form-label" for="timeFrom">Data:<br></label>
-                            <input type="date" class="form-control time" id="date">
-                        </div><br>
+                        <label class="col-form-label" for="timeFrom">Data:<br></label>
+                        <input type="date" class="form-control time" id="date">
+                    </div><br>
                     <div class="form-inline">
                         <label class="col-form-label" for="timeFrom">Godziny (pomiędzy):<br></label>
                         <input type="time" class="form-control time" id="timeFrom">
