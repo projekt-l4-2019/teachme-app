@@ -3,20 +3,20 @@ const citiesUrl = "https://rhubarb-cobbler-84890.herokuapp.com/cities";
 const voivodeshipsUrl = "https://rhubarb-cobbler-84890.herokuapp.com/voivodeships";
 const subjectsUrl = "https://rhubarb-cobbler-84890.herokuapp.com/subjects";
 const opinionsUrl = "https://rhubarb-cobbler-84890.herokuapp.com/opinions";
+const usersUrl = "https://rhubarb-cobbler-84890.herokuapp.com/users";
 
 if (window.location.pathname.substr(-10) === 'index.html') {
     loadNotices();
     loadVoivodeships();
     loadSubjects();
-}
-else if (window.location.pathname.substr(-14) === 'noticeadd.html') {
+} else if (window.location.pathname.substr(-14) === 'noticeadd.html') {
     loadVoivodeships();
     loadSubjects();
-}
-else if (window.location.pathname.substr(-11) === 'notice.html') {
+} else if (window.location.pathname.substr(-11) === 'notice.html') {
     loadSelectedNotice();
-}
-else if (window.location.pathname.substr(-12) === 'profile.html'){
+    loadUserProfile();
+} else if (window.location.pathname.substr(-12) === 'profile.html') {
+    loadUserProfile();
     loadUserOpinions();
 }
 
@@ -44,12 +44,12 @@ class Subject {
 }
 
 class Opinion {
-    constructor(idOpinion,rating,comment,userTo,userFromName) {
-        this.idOpinion=idOpinion;
-        this.rating=rating;
-        this.comment=comment;
-        this.userTo=userTo;
-        this.userFromName=userFromName;
+    constructor(idOpinion, rating, comment, userTo, userFromName) {
+        this.idOpinion = idOpinion;
+        this.rating = rating;
+        this.comment = comment;
+        this.userTo = userTo;
+        this.userFromName = userFromName;
     }
 }
 
@@ -70,6 +70,19 @@ class Notice {
     }
 }
 
+class User {
+    constructor(name, surname, avatar, phone, email, cityName, about, birthDate, ) {
+        this.name = name;
+        this.surname = surname;
+        this.avatar = avatar;
+        this.phone = phone;
+        this.email = email;
+        this.cityName = cityName;
+        this.about = about;
+        this.birthDate = birthDate;
+    }
+}
+
 function loadCities(id) {
     let cityArray = new Array();
     let cityList;
@@ -83,7 +96,6 @@ function loadCities(id) {
             if (request.status >= 200 && request.status < 400) {
                 cityList.forEach(city => {
                     let newCity = new City(city.idCity, city.name);
-
                     cityArray.push(newCity);
                 });
             } else {
@@ -102,40 +114,43 @@ function loadCities(id) {
     }
 }
 
-function loadUserProfile(localStorage.getItem("userID")) {
-    let opinionArray = new Array();
-    let opinionList;
+storeUserId(1);
+
+function loadUserProfile() {
+    let user;
     let request = new XMLHttpRequest();
-    idUser=1;
-    if (idUser != 0 && idUser != "undefined") {
-        request.open('GET', opinionsUrl, true);
+    if (localStorage.getItem("userID") != 0 && localStorage.getItem("userID") != "undefined") {
+        request.open('GET', usersUrl + '/' + localStorage.getItem("userID"), true);
         request.onload = function () {
             // Begin accessing JSON data here
-            opinionList = JSON.parse(this.response);
+            user = JSON.parse(this.response);
             if (request.status >= 200 && request.status < 400) {
-                opinionList.forEach(opinion => {
-                    console.log(opinion);
-                    let newOpinion = new Opinion(opinion.idOpinion,opinion.rating,opinion.comment,opinion.userTo,opinion.userByUserFrom.name);
-                    opinionArray.push(newOpinion);
-                });
+                user = new User(user.name, user.surname, user.avatar, user.phone, user.email, user.cittIdCity, user.about, user.birthDate);
+                console.log(user);
             } else {
                 console.log('error');
             }
-            const opinionListHTML = document.getElementById('showOpinions');
+            const userHTML = document.getElementById('userProfile');
             html = '';
-            for (let i = 0; i < opinionArray.length; i++) {
-                if(opinionArray[i].userTo===idUser){
-                    html += '<div class="card border-success mb-3 opinionCard" style="max-width: 20rem;">';
-                    html+='<div class="card-body">';
-                    html+='<em style="font-size: 17px;">' + opinionArray[i].comment+'</em>'
-                    html += '<h6 class="text-muted">'+opinionArray[i].userFromName+'</h6></div>';
-                    html+='<div class="card-header opinionHeader">Ocena:';
-                    html+='<span class="badge badge-warning note">'+opinionArray[i].rating+'</span>';
-                    html+='</div></div>';
-                }
-            }
-            opinionListHTML.innerHTML = html;
-
+            html += '<div class="card-body">';
+            html += '<h4 class="card-title profile-name">' + user.name + ' ' + user.surname + '</h4></div>';
+            html += '<img class="avatar" src="img/avatars/default.PNG" alt="Card image">';
+            html += '<div class="card-body">';
+            html += '<h5 class="card-title">O mnie:</h5>'
+            html += '<p class="card-text">' + user.about + '</p>';
+            html += '<span class="badge badge-info opinionsBtn">Opinie: 1</span>';
+            html += '<span class="badge badge-warning opinionsBtn">Ocena: 5/5</span>';
+            html += '<ul class="list-group list-group-flush" style="font-size: 20px;">';
+            html += '<li class="list-group-item"><i class="material-icons">phone</i>' + user.phone + '</li>';
+            html += '<li class="list-group-item"><i class="material-icons">email</i>' + user.email + '</li>';
+            html += '<li class="list-group-item"><i class="material-icons">location_city</i>' + user.name + '</li>';
+            html += '<li class="list-group-item"><i class="material-icons">account_box</i>' + user.birthDate + '</li>';
+            html += '</ul>';
+            html += '</div>';
+            html += '<button type="button" class="btn btn-success show-ann">Zobacz ogłoszenia!</button>';
+            if (window.location.pathname.substr(-12) === 'profile.html')
+                html += '<a href="edit_profile.html"><button class="circleButton editButton"><i class="material-icons">edit</i></button></a>';
+            userHTML.innerHTML = html;
         };
         request.send();
     }
@@ -145,7 +160,7 @@ function loadUserOpinions(idUser) {
     let opinionArray = new Array();
     let opinionList;
     let request = new XMLHttpRequest();
-    idUser=1;
+    idUser = 1;
     if (idUser != 0 && idUser != "undefined") {
         request.open('GET', opinionsUrl, true);
         request.onload = function () {
@@ -153,8 +168,8 @@ function loadUserOpinions(idUser) {
             opinionList = JSON.parse(this.response);
             if (request.status >= 200 && request.status < 400) {
                 opinionList.forEach(opinion => {
-                    console.log(opinion);
-                    let newOpinion = new Opinion(opinion.idOpinion,opinion.rating,opinion.comment,opinion.userTo,opinion.userByUserFrom.name);
+                    // console.log(opinion);
+                    let newOpinion = new Opinion(opinion.idOpinion, opinion.rating, opinion.comment, opinion.userTo, opinion.userByUserFrom.name);
                     opinionArray.push(newOpinion);
                 });
             } else {
@@ -163,14 +178,14 @@ function loadUserOpinions(idUser) {
             const opinionListHTML = document.getElementById('showOpinions');
             html = '';
             for (let i = 0; i < opinionArray.length; i++) {
-                if(opinionArray[i].userTo===idUser){
+                if (opinionArray[i].userTo === idUser) {
                     html += '<div class="card border-success mb-3 opinionCard" style="max-width: 20rem;">';
-                    html+='<div class="card-body">';
-                    html+='<em style="font-size: 17px;">' + opinionArray[i].comment+'</em>'
-                    html += '<h6 class="text-muted">'+opinionArray[i].userFromName+'</h6></div>';
-                    html+='<div class="card-header opinionHeader">Ocena:';
-                    html+='<span class="badge badge-warning note">'+opinionArray[i].rating+'</span>';
-                    html+='</div></div>';
+                    html += '<div class="card-body">';
+                    html += '<em style="font-size: 17px;">' + opinionArray[i].comment + '</em>'
+                    html += '<h6 class="text-muted">' + opinionArray[i].userFromName + '</h6></div>';
+                    html += '<div class="card-header opinionHeader">Ocena:';
+                    html += '<span class="badge badge-warning note">' + opinionArray[i].rating + '</span>';
+                    html += '</div></div>';
                 }
             }
             opinionListHTML.innerHTML = html;
