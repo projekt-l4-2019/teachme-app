@@ -140,16 +140,19 @@ function loadUserProfile() {
             html += '<p class="card-text">' + user.about + '</p>';
             html += '<span class="badge badge-info opinionsBtn">Opinie: 1</span>';
             html += '<span class="badge badge-warning opinionsBtn">Ocena: 5/5</span>';
-            html += '<ul class="list-group list-group-flush" style="font-size: 20px;">';
-            html += '<li class="list-group-item"><i class="material-icons">phone</i>' + user.phone + '</li>';
-            html += '<li class="list-group-item"><i class="material-icons">email</i>' + user.email + '</li>';
-            html += '<li class="list-group-item"><i class="material-icons">location_city</i>' + user.name + '</li>';
-            html += '<li class="list-group-item"><i class="material-icons">account_box</i>' + user.birthDate + '</li>';
-            html += '</ul>';
-            html += '</div>';
-            html += '<button type="button" class="btn btn-success show-ann">Zobacz ogłoszenia!</button>';
-            if (window.location.pathname.substr(-12) === 'profile.html')
-                html += '<a href="edit_profile.html"><button class="circleButton editButton"><i class="material-icons">edit</i></button></a>';
+            if (window.location.pathname.substr(-12) === 'profile.html') {
+                html += '<ul class="list-group list-group-flush" style="font-size: 20px;">';
+                html += '<li class="list-group-item"><i class="material-icons">phone</i>' + user.phone + '</li>';
+                html += '<li class="list-group-item"><i class="material-icons">email</i>' + user.email + '</li>';
+                html += '<li class="list-group-item"><i class="material-icons">location_city</i>' + user.name + '</li>';
+                html += '<li class="list-group-item"><i class="material-icons">account_box</i>' + user.birthDate + '</li>';
+                html += '</ul>';
+                html += '</div>';
+                html += '<button type="button" class="btn btn-success show-ann">Zobacz ogłoszenia!</button><a href="edit_profile.html"><button class="circleButton editButton"><i class="material-icons">edit</i></button></a>';
+            } else {
+                html += '</div>';
+                html += '<button type="button" class="btn btn-success show-ann" id="btnShowProfile">Zobacz Profil</button>';
+            }
             userHTML.innerHTML = html;
         };
         request.send();
