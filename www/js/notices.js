@@ -166,7 +166,7 @@ function loadNotices() {
             html += '<a href="notice.html" onclick="getNoticeId(' + notice.idNotice + ')" class="list-group-item list-group-item-action flex-column align-items-start">';
             html += '<div class="d-flex w-100 justify-content-between">';
             html += '<h5 class="mb-1">' + notice.subjectName + '</h5>';
-            html += '<small>dodano: ' + getDate(notice.timestamp) + '</small>';
+            html += '<small>dodano: ' + getDate(notice.addDate) + '</small>';
             html += '</div>';
 
             if (notice.note.length > 250) {
@@ -231,6 +231,15 @@ function getViovideshipIndex() {
     }
 }
 
+function getListIndex(){
+    let ele = document.getElementById("selectSubject");
+    for (var i = 0; i < ele.length; i++) {
+        if (ele[i].childNodes[0].nodeValue === ele.value) {
+            return i;
+        }
+    }
+}
+
 function addZero(int) {
     if (int < 10) {
         int = '0' + int;
@@ -266,7 +275,8 @@ function postNotice() {
     } else {
         data.lookOrOffer = 1;
     }
-    data.subject = document.getElementById("selectSubject").value;
+    data.subjectBySubjectIdSubject.idSubject[0] = getListIndex();
+    console.log(data);
     data.level = document.getElementById("selectLevel").value;
     data.meetingPlace = document.getElementById("selectCity").value;
     data.price = document.getElementById("price").value;
@@ -274,6 +284,8 @@ function postNotice() {
     data.timeFrom = timeToTimestamp(data.date, document.getElementById('timeFrom').value);
     data.timeTo = timeToTimestamp(data.date, document.getElementById('timeTo').value);
     data.note = document.getElementById("noticeDescription").value;
+    data.userByUserIdUser.idUser = 1;
+    // data.meetingByMeetingIdMeetin
     // if(data[7]==='') alert("Nie podano wartosci!");
     // else {
     let json = JSON.stringify(data);
