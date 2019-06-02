@@ -161,7 +161,7 @@ function loadNotices() {
         }
         const noticeListHTML = document.getElementById('notices');
         html = '';
-        for (let i = 0; i < noticeArray.length; i++) {
+        for (let i = noticeArray.length - 1; i > 0; i--) {
             let notice = noticeArray[i];
             html += '<a href="notice.html" onclick="getNoticeId(' + notice.idNotice + ')" class="list-group-item list-group-item-action flex-column align-items-start">';
             html += '<div class="d-flex w-100 justify-content-between">';
