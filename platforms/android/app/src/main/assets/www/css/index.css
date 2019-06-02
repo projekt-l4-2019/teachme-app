@@ -23,7 +23,15 @@ button#submitNoticeBtn {
     width: 100%;
 }
 
-#addNoticeButton{
+.searchMenu {
+    width: 48vw !important;
+}
+
+.btnAddUser {
+    width: 46vw !important;
+}
+
+.circleButton{
     background: #00bc8c;
     border-color: #00bc8c;
     border: none;
@@ -43,6 +51,30 @@ button#submitNoticeBtn {
     z-index: 1;
 }
 
+.editButton{
+    left: 81vw;
+    top: 1%;
+    position: absolute;
+    padding: 0.2rem;
+}
+
+.opinionsBtn{
+    font-size: 17px;
+    padding: 5px 43px;
+    margin-top: -12px;
+    margin-bottom: 10px;
+    width:50%;
+}
+
+.opinionCard {
+    margin: auto;
+    width: 95vw;
+}
+
+.opinionHeader{
+    text-align: right;
+    font-size: 18px;
+}
 #bgimg {
     position: fixed;
     width: 70%;
@@ -79,6 +111,9 @@ html {
     background: transparent;
 }
 
+.note {
+    font-size: 16px;
+}
 .wrapper {
     height: 55px;
 }
@@ -281,9 +316,14 @@ a.article:hover {
 
 .profile-name {
     text-align: center;
-    margin: 0px;
+    margin: -10px;
 }
 
 .show-ann {
     font-size: 30px;
+}
+
+.formError {
+    position: fixed;
+    margin-right: 16px;
 }

@@ -1,127 +1,364 @@
-const url = "https://rhubarb-cobbler-84890.herokuapp.com/noticeFulls";
+const noticesUrl = "https://rhubarb-cobbler-84890.herokuapp.com/notices";
+const citiesUrl = "https://rhubarb-cobbler-84890.herokuapp.com/cities";
+const voivodeshipsUrl = "https://rhubarb-cobbler-84890.herokuapp.com/voivodeships";
+const subjectsUrl = "https://rhubarb-cobbler-84890.herokuapp.com/subjects";
+const opinionsUrl = "https://rhubarb-cobbler-84890.herokuapp.com/opinions";
 
-//Get notices list from server
-const app = document.getElementById('notices');
-let notice_list;
-let request = new XMLHttpRequest();
-request.open('GET', url, true);
-request.onload = function () {
-    // Begin accessing JSON data here
-    var data = JSON.parse(this.response);
-    notice_list = data._embedded.noticeFulls;
-    if (window.location.pathname.substr(-10) === 'index.html') {
-        let html = '';
-        if (request.status >= 200 && request.status < 400) {
-            notice_list.forEach(notice => {
-                html += '<a href="notice.html" onclick="getNoticeId(' + notice.id + ')" class="list-group-item list-group-item-action flex-column align-items-start">';
-                html += '<div class="d-flex w-100 justify-content-between">';
-                html += '<h5 class="mb-1">' + notice.subject + '</h5>';
+if (window.location.pathname.substr(-10) === 'index.html') {
+    loadNotices();
+    loadVoivodeships();
+    loadSubjects();
+}
+else if (window.location.pathname.substr(-14) === 'noticeadd.html') {
+    loadVoivodeships();
+    loadSubjects();
+}
+else if (window.location.pathname.substr(-11) === 'notice.html') {
+    loadSelectedNotice();
+}
+else if (window.location.pathname.substr(-12) === 'profile.html'){
+    loadUserOpinions();
+}
 
-                let date = new Date(notice.timestamp);
 
-                let year = date.getFullYear();
-                let month = addZero(date.getMonth() + 1);
-                let dt = addZero(date.getDate());
+class City {
+    constructor(idCity, cityName) {
+        this.idCity = idCity;
+        this.cityName = cityName;
+    }
+}
 
-                html += '<small>dodano: ' + dt + '.' + month + '.' + year + '</small>';
-                html += '</div>';
+class Voivodeship {
+    constructor(idVoivodeship, nameVoivodeship) {
+        this.idVoivodeship = idVoivodeship;
+        this.nameVoivodeship = nameVoivodeship;
+    }
+}
 
-                date = new Date(notice.meeting_date);
+class Subject {
+    constructor(idSubject, name, subjectParent) {
+        this.idSubject = idSubject;
+        this.name = name;
+        this.subjectParent = subjectParent;
+    }
+}
 
-                year = date.getFullYear();
-                month = addZero(date.getMonth() + 1);
-                dt = addZero(date.getDate());
+class Opinion {
+    constructor(idOpinion,rating,comment,userTo,userFromName) {
+        this.idOpinion=idOpinion;
+        this.rating=rating;
+        this.comment=comment;
+        this.userTo=userTo;
+        this.userFromName=userFromName;
+    }
+}
 
-                if (notice.note.length > 250) {
-                    html += '<p class="mb-1">' + notice.note.substring(0, 250) + "..." + '</p>';
-                } else {
-                    html += '<p class="mb-1">' + notice.note + '</p>';
+class Notice {
+    constructor(idNotice, lookOrOffer, note, meetingPlace, meetingDate, price, level, addDate, addedByUser, timeFrom, timeTo, subjectName) {
+        this.idNotice = idNotice;
+        this.lookOrOffer = lookOrOffer;
+        this.note = note;
+        this.meetingPlace = meetingPlace;
+        this.meetingDate = meetingDate;
+        this.price = price;
+        this.level = level;
+        this.addDate = addDate;
+        this.addedByUser = addedByUser;
+        this.timeFrom = timeFrom;
+        this.timeTo = timeTo;
+        this.subjectName = subjectName;
+    }
+}
+
+function loadCities(id) {
+    let cityArray = new Array();
+    let cityList;
+    let request = new XMLHttpRequest();
+    if (id != 0 && id != "undefined") {
+        request.open('GET', voivodeshipsUrl + '/' + id, true);
+        request.onload = function () {
+            // Begin accessing JSON data here
+            cityList = JSON.parse(this.response);
+            cityList = cityList.citiesByIdVoivodeship;
+            if (request.status >= 200 && request.status < 400) {
+                cityList.forEach(city => {
+                    let newCity = new City(city.idCity, city.name);
+
+                    cityArray.push(newCity);
+                });
+            } else {
+                console.log('error');
+            }
+            const cityListHTML = document.getElementById('selectCity');
+            html = '';
+            if (window.location.pathname.substr(-10) === 'index.html') html = 'Wszystkie';
+            for (let i = 0; i < cityArray.length; i++) {
+                html += '<option>' + cityArray[i].cityName + '</option>';
+            }
+            cityListHTML.innerHTML = html;
+
+        };
+        request.send();
+    }
+}
+
+function loadUserOpinions(idUser) {
+    let opinionArray = new Array();
+    let opinionList;
+    let request = new XMLHttpRequest();
+    idUser=1;
+    if (idUser != 0 && idUser != "undefined") {
+        request.open('GET', opinionsUrl, true);
+        request.onload = function () {
+            // Begin accessing JSON data here
+            opinionList = JSON.parse(this.response);
+            if (request.status >= 200 && request.status < 400) {
+                opinionList.forEach(opinion => {
+                    console.log(opinion);
+                    let newOpinion = new Opinion(opinion.idOpinion,opinion.rating,opinion.comment,opinion.userTo,opinion.userByUserFrom.name);
+                    opinionArray.push(newOpinion);
+                });
+            } else {
+                console.log('error');
+            }
+            const opinionListHTML = document.getElementById('showOpinions');
+            html = '';
+            for (let i = 0; i < opinionArray.length; i++) {
+                if(opinionArray[i].userTo===idUser){
+                    html += '<div class="card border-success mb-3 opinionCard" style="max-width: 20rem;">';
+                    html+='<div class="card-body">';
+                    html+='<em style="font-size: 17px;">' + opinionArray[i].comment+'</em>'
+                    html += '<h6 class="text-muted">'+opinionArray[i].userFromName+'</h6></div>';
+                    html+='<div class="card-header opinionHeader">Ocena:';
+                    html+='<span class="badge badge-warning note">'+opinionArray[i].rating+'</span>';
+                    html+='</div></div>';
                 }
-                html += '<div class="d-flex w-100 justify-content-between">';
-                html += '<h6>Termin spotkania: ' + dt + '.' + month + '.' + year + '</h6>' + '<h6>' + notice.meeting_place + '</h6>' + '<small>#' + notice.id + '</small>';
-                html += '</div>';
-                html += '</a>';
+            }
+            opinionListHTML.innerHTML = html;
+
+        };
+        request.send();
+    }
+}
+
+function loadVoivodeships() {
+    let voivodeshipArray = new Array();
+    let voivodeshipList;
+    let request = new XMLHttpRequest();
+    request.open('GET', voivodeshipsUrl, true);
+    request.onload = function () {
+        // Begin accessing JSON data here
+        voivodeshipList = JSON.parse(this.response);
+        if (request.status >= 200 && request.status < 400) {
+            voivodeshipList.forEach(voivodeship => {
+                let newVoivodeship = new Voivodeship(voivodeship.idVoivodeship, voivodeship.nameVoivodeship);
+                voivodeshipArray.push(newVoivodeship);
+            });
+        } else {
+            console.log('error');
+        }
+        const voivodeshipListHTML = document.getElementById('selectVoivodeship');
+        html = '<option>Wszystkie</option>';
+        for (let i = 0; i < voivodeshipArray.length; i++) {
+            html += '<option>' + voivodeshipArray[i].nameVoivodeship + '</option>';
+        }
+        voivodeshipListHTML.innerHTML = html;
+    };
+    request.send();
+}
+
+function loadSubjects() {
+    let subjectArray = new Array();
+    let subjectList;
+    let request = new XMLHttpRequest();
+    request.open('GET', subjectsUrl, true);
+    request.onload = function () {
+        // Begin accessing JSON data here
+        subjectList = JSON.parse(this.response);
+        if (request.status >= 200 && request.status < 400) {
+            subjectList.forEach(subject => {
+                let newSubject = new Subject(subject.idSubject, subject.name, subject.subjectBySubjectIdSubject);
+                subjectArray.push(newSubject);
             });
 
         } else {
             console.log('error');
         }
-        app.innerHTML = html;
-    }
-
-    if (window.location.pathname.substr(-11) === 'notice.html') {
-        let id_notice = localStorage.getItem("noticeID");
-        for(var i=0; i<notice_list.length; i++)
-        {
-            if(id_notice==notice_list[i].id) break;
+        const subjectListHTML = document.getElementById('selectSubject');
+        html = '<option>Wszystkie</option>';
+        for (let i = 0; i < subjectArray.length; i++) {
+            html += '<option>' + subjectArray[i].name + '</option>';
         }
-        let notice=notice_list[i];
-        const notice_extended = document.getElementById('notice_extended');
-        let html = '';
-        html += '<h4 class="card-header">'+ notice.subject +'</h4>';
-        html += '<div class="card-body"> <p class="card-text">'+ notice.note+'</p></div>';
-        html += '<ul class="list-group list-group-flush">';
-        html += '<li class="list-group-item">Miejsce spotkania: ' + notice.meeting_place + '</li>';
-        html += '<li class="list-group-item">Cena za godzinę: ' + notice.price + ' zł </li>';
-        html += '<li class="list-group-item">Godzina: ' + notice.time_from+ ' - ' + notice.time_to + '</li>';
-       
-        date = new Date(notice.meeting_date);
-        year = date.getFullYear();
-        month = addZero(date.getMonth() + 1);
-        dt = addZero(date.getDate());
+        subjectListHTML.innerHTML = html;
+    };
+    request.send();
+}
 
-        html += '<li class="list-group-item">Termin spotkania: ' + dt + '.' + month + '.' + year +'</li>';
-        if(html) notice_extended.innerHTML = html;
-    }
-};
-request.send();
+//Get notices list from server
+function loadNotices() {
+    let noticeArray = new Array();
+    let noticeList;
+    let request = new XMLHttpRequest();
+    request.open('GET', noticesUrl, true);
+    request.onload = function () {
+        // Begin accessing JSON data here
+        noticeList = JSON.parse(this.response);
+        if (request.status >= 200 && request.status < 400) {
+            noticeList.forEach(notice => {
+                console.log(notice);
+                let newNotice = new Notice(notice.idNotice, notice.lookOrOffer, notice.note, notice.meetingPlace, notice.meetingDate, notice.price, notice.level, notice.timestamp, notice.userIdUser, notice.timeFrom, notice.timeTo, notice.subjectBySubjectIdSubject.name);
+                noticeArray.push(newNotice);
+            });
+
+        } else {
+            console.log('error');
+        }
+        const noticeListHTML = document.getElementById('notices');
+        html = '';
+        for (let i = noticeArray.length - 1; i >= 0; i--) {
+            let notice = noticeArray[i];
+            html += '<a href="notice.html" onclick="getNoticeId(' + notice.idNotice + ')" class="list-group-item list-group-item-action flex-column align-items-start">';
+            html += '<div class="d-flex w-100 justify-content-between">';
+            html += '<h5 class="mb-1">' + notice.subjectName + '</h5>';
+            html += '<small>dodano: ' + getDate(notice.addDate) + '</small>';
+            html += '</div>';
+
+            if (notice.note.length > 250) {
+                html += '<p class="mb-1">' + notice.note.substring(0, 250) + "..." + '</p>';
+            } else {
+                html += '<p class="mb-1">' + notice.note + '</p>';
+            }
+
+            html += '<div class="d-flex w-100 justify-content-between">';
+            html += '<h6>Termin spotkania: ' + getDate(notice.meetingDate) + '</h6>' + '<h6>' + notice.meetingPlace + '</h6>' + '<small>#' + notice.idNotice + '</small>';
+            html += '</div>';
+            html += '</a>';
+        }
+        noticeListHTML.innerHTML = html;
+    };
+    request.send();
+}
+
+function loadSelectedNotice() {
+    let noticeArray = new Array();
+    let notice;
+    let request = new XMLHttpRequest();
+    request.open('GET', noticesUrl + '/' + localStorage.getItem("noticeID"), true);
+    request.onload = function () {
+        // Begin accessing JSON data here
+        notice = JSON.parse(this.response);
+        if (request.status >= 200 && request.status < 400) {
+            let newNotice = new Notice(notice.idNotice, notice.lookOrOffer, notice.note, notice.meetingPlace, notice.meetingDate, notice.price, notice.level, notice.timestamp, notice.userIdUser, notice.timeFrom, notice.timeTo, notice.subjectBySubjectIdSubject.name);
+            noticeArray.push(newNotice);
+
+        } else {
+            console.log('error');
+        }
+        const noticeListHTML = document.getElementById('notice_extended');
+        html = '';
+        for (let i = 0; i < noticeArray.length; i++) {
+            let notice = noticeArray[i];
+            html += '<h4 class="card-header">' + notice.subjectName + '</h4>';
+            html += '<div class="card-body"> <p class="card-text">' + notice.note + '</p></div>';
+            html += '<ul class="list-group list-group-flush">';
+            html += '<li class="list-group-item">Miejsce spotkania: ' + notice.meetingPlace + '</li>';
+            html += '<li class="list-group-item">Cena za godzinę: ' + notice.price + ' zł </li>';
+            html += '<li class="list-group-item">Godzina: ' + getTime(notice.timeFrom) + ' - ' + getTime(notice.timeTo) + '</li>';
+            html += '<li class="list-group-item">Termin spotkania: ' + getDate(notice.meetingDate) + '</li>';
+        }
+        noticeListHTML.innerHTML = html;
+    };
+    request.send();
+}
 
 function getNoticeId(id_notice) {
     var noticeID = id_notice;
     localStorage.setItem('noticeID', noticeID);
 }
 
-function addZero(int){
-    if(int < 10){
+function getViovideshipIndex() {
+    let ele = document.getElementById("selectVoivodeship");
+    for (var i = 0; i < ele.length; i++) {
+        if (ele[i].childNodes[0].nodeValue === ele.value) {
+            loadCities(i);
+        }
+    }
+}
+
+function getListIndex(idHTML) {
+    let ele = document.getElementById(idHTML);
+    for (var i = 0; i < ele.length; i++) {
+        if (ele[i].childNodes[0].nodeValue === ele.value) {
+            return i;
+        }
+    }
+}
+
+function addZero(int) {
+    if (int < 10) {
         int = '0' + int;
     }
     return int;
 }
 
+function getTime(dateJSON) {
+    let date = new Date(dateJSON);
+    let hours = addZero(date.getHours());
+    let minutes = addZero(date.getMinutes());
+    return hours + ':' + minutes;
+}
 
-// Post notice to server
-if (window.location.pathname.substr(-14) === 'noticeadd.html'){
-    function postNotice() {
-        var data = {};
-        data.look_or_offer = document.getElementById("lookOrOffer").tabIndex;
-        // data.subject = document.getElementById("selectSubject").value;
-        data.subject = "Geografia";
-        // data.level = document.getElementById("selectLevel").value; //TEMP DISABLE
-        data.meeting_place = document.getElementById("meetingPlace").value;
-        data.price = document.getElementById("price").value;
-        // data.time_from = document.getElementById("timeFrom").value;
-        // data.time_to = document.getElementById("timeTo").value;
-        data.note = document.getElementById("noticeDescription").value;
-        data.active = 1;
-        // if(data[7]==='') alert("Nie podano wartosci!");
-        // else {
-            let json = JSON.stringify(data);
-            console.log(json);
-            let xhr = new XMLHttpRequest();
-            xhr.open("POST", url, true);
-            xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
-            xhr.onload = function () {
-                let users = JSON.parse(xhr.responseText);
-                if (xhr.readyState === 4 && xhr.status === 201) {
-                    console.table(users);
-                } else {
-                    console.error(users);
-                }
-            };
-            xhr.send(json);
-            //TODO: Nie nie chce sie dodać przy odświeżeniu zaraz po xhr.send(json). Trzeba skombinować jakieś obejście lepsze niż alert.
-            alert('Dodano pomyslnie!');
-            // location.reload();
-        // }
+function getDate(dateJSON) {
+    let date = new Date(dateJSON);
+    let year = date.getFullYear();
+    let month = addZero(date.getMonth());
+    let day = addZero(date.getDate());
+    return day + '.' + month + '.' + year;
+}
+
+function timeToTimestamp(date, time) {
+    date = date.split(':');
+    let newTime = new Date(date[1] + '/' + date[2] + '/' + date[0] + ' ' + time);
+    return newTime;
+}
+
+function postNotice() {
+    var data = {};
+    if (document.getElementById('offer').classList.contains('active')) {
+        data.lookOrOffer = 0;
+    } else {
+        data.lookOrOffer = 1;
     }
+    data.subjectBySubjectIdSubject.idSubject[0] = getListIndex();
+    console.log(data);
+    data.level = document.getElementById("selectLevel").value;
+    data.meetingPlace = document.getElementById("selectCity").value;
+    data.price = document.getElementById("price").value;
+    data.date = document.getElementById("date").value;
+    data.timeFrom = timeToTimestamp(data.date, document.getElementById('timeFrom').value);
+    data.timeTo = timeToTimestamp(data.date, document.getElementById('timeTo').value);
+    data.note = document.getElementById("noticeDescription").value;
+    data.userByUserIdUser.idUser = 1;
+    // data.meetingByMeetingIdMeetin
+    // if(data[7]==='') alert("Nie podano wartosci!");
+    // else {
+    let json = JSON.stringify(data);
+    console.log(json);
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", noticesUrl, true);
+    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    xhr.onload = function () {
+        let users = JSON.parse(xhr.responseText);
+        if (xhr.readyState === 4 && xhr.status === 201) {
+            console.table(users);
+        } else {
+            console.error(users);
+        }
+    };
+    xhr.send(json);
+    alert('Dodano pomyslnie!');
+    //TODO: Nie nie chce sie dodać przy odświeżeniu zaraz po xhr.send(json). Trzeba skombinować jakieś obejście lepsze niż alert.
+
+    // location.reload();
 }
