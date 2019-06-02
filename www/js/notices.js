@@ -77,6 +77,7 @@ function loadCities(id) {
             }
             const cityListHTML = document.getElementById('selectCity');
             html = '';
+            if (window.location.pathname.substr(-10) === 'index.html') html = 'Wszystkie';
             for (let i = 0; i < cityArray.length; i++) {
                 html += '<option>' + cityArray[i].cityName + '</option>';
             }
