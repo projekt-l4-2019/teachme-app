@@ -8,6 +8,11 @@ html += '<li><a href="profile.html">Profil</a></li>';
 html += '<li><a href="about.html">O Aplikacji</a></li>';
 menu.innerHTML=html;
 
+const userInfo = document.getElementById('userInfo');
+html = '<h5>Michał Białek</h5>';
+html += '<h5>roga@le.com</h5>';
+userInfo.innerHTML=html;
+
 //Insert bg image
 let bimg = document.createElement("img");
 bimg.setAttribute('src', 'img/book.png');
