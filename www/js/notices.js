@@ -2,18 +2,22 @@ const noticesUrl = "https://rhubarb-cobbler-84890.herokuapp.com/notices";
 const citiesUrl = "https://rhubarb-cobbler-84890.herokuapp.com/cities";
 const voivodeshipsUrl = "https://rhubarb-cobbler-84890.herokuapp.com/voivodeships";
 const subjectsUrl = "https://rhubarb-cobbler-84890.herokuapp.com/subjects";
+const opinionsUrl = "https://rhubarb-cobbler-84890.herokuapp.com/opinions";
 
 if (window.location.pathname.substr(-10) === 'index.html') {
     loadNotices();
     loadVoivodeships();
     loadSubjects();
 }
-if (window.location.pathname.substr(-14) === 'noticeadd.html') {
+else if (window.location.pathname.substr(-14) === 'noticeadd.html') {
     loadVoivodeships();
     loadSubjects();
 }
-if (window.location.pathname.substr(-11) === 'notice.html') {
+else if (window.location.pathname.substr(-11) === 'notice.html') {
     loadSelectedNotice();
+}
+else if (window.location.pathname.substr(-12) === 'profile.html'){
+    loadUserOpinions();
 }
 
 
@@ -36,6 +40,16 @@ class Subject {
         this.idSubject = idSubject;
         this.name = name;
         this.subjectParent = subjectParent;
+    }
+}
+
+class Opinion {
+    constructor(idOpinion,rating,comment,userTo,userFromName) {
+        this.idOpinion=idOpinion;
+        this.rating=rating;
+        this.comment=comment;
+        this.userTo=userTo;
+        this.userFromName=userFromName;
     }
 }
 
@@ -82,6 +96,45 @@ function loadCities(id) {
                 html += '<option>' + cityArray[i].cityName + '</option>';
             }
             cityListHTML.innerHTML = html;
+
+        };
+        request.send();
+    }
+}
+
+function loadUserOpinions(idUser) {
+    let opinionArray = new Array();
+    let opinionList;
+    let request = new XMLHttpRequest();
+    idUser=1;
+    if (idUser != 0 && idUser != "undefined") {
+        request.open('GET', opinionsUrl, true);
+        request.onload = function () {
+            // Begin accessing JSON data here
+            opinionList = JSON.parse(this.response);
+            if (request.status >= 200 && request.status < 400) {
+                opinionList.forEach(opinion => {
+                    console.log(opinion);
+                    let newOpinion = new Opinion(opinion.idOpinion,opinion.rating,opinion.comment,opinion.userTo,opinion.userByUserFrom.name);
+                    opinionArray.push(newOpinion);
+                });
+            } else {
+                console.log('error');
+            }
+            const opinionListHTML = document.getElementById('showOpinions');
+            html = '';
+            for (let i = 0; i < opinionArray.length; i++) {
+                if(opinionArray[i].userTo===idUser){
+                    html += '<div class="card border-success mb-3 opinionCard" style="max-width: 20rem;">';
+                    html+='<div class="card-body">';
+                    html+='<em style="font-size: 17px;">' + opinionArray[i].comment+'</em>'
+                    html += '<h6 class="text-muted">'+opinionArray[i].userFromName+'</h6></div>';
+                    html+='<div class="card-header opinionHeader">Ocena:';
+                    html+='<span class="badge badge-warning note">'+opinionArray[i].rating+'</span>';
+                    html+='</div></div>';
+                }
+            }
+            opinionListHTML.innerHTML = html;
 
         };
         request.send();
@@ -152,6 +205,7 @@ function loadNotices() {
         noticeList = JSON.parse(this.response);
         if (request.status >= 200 && request.status < 400) {
             noticeList.forEach(notice => {
+                console.log(notice);
                 let newNotice = new Notice(notice.idNotice, notice.lookOrOffer, notice.note, notice.meetingPlace, notice.meetingDate, notice.price, notice.level, notice.timestamp, notice.userIdUser, notice.timeFrom, notice.timeTo, notice.subjectBySubjectIdSubject.name);
                 noticeArray.push(newNotice);
             });
@@ -161,7 +215,7 @@ function loadNotices() {
         }
         const noticeListHTML = document.getElementById('notices');
         html = '';
-        for (let i = noticeArray.length - 1; i > 0; i--) {
+        for (let i = noticeArray.length - 1; i >= 0; i--) {
             let notice = noticeArray[i];
             html += '<a href="notice.html" onclick="getNoticeId(' + notice.idNotice + ')" class="list-group-item list-group-item-action flex-column align-items-start">';
             html += '<div class="d-flex w-100 justify-content-between">';
@@ -231,8 +285,8 @@ function getViovideshipIndex() {
     }
 }
 
-function getListIndex(){
-    let ele = document.getElementById("selectSubject");
+function getListIndex(idHTML) {
+    let ele = document.getElementById(idHTML);
     for (var i = 0; i < ele.length; i++) {
         if (ele[i].childNodes[0].nodeValue === ele.value) {
             return i;
