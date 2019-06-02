@@ -125,7 +125,7 @@ function loadUserProfile() {
             // Begin accessing JSON data here
             user = JSON.parse(this.response);
             if (request.status >= 200 && request.status < 400) {
-                user = new User(user.name, user.surname, user.avatar, user.phone, user.email, user.cittIdCity, user.about, user.birthDate);
+                user = new User(user.name, user.surname, user.avatar, user.phone, user.email, user.cityByCityIdCity.name, user.about, user.birthDate);
                 console.log(user);
             } else {
                 console.log('error');
@@ -144,11 +144,11 @@ function loadUserProfile() {
                 html += '<ul class="list-group list-group-flush" style="font-size: 20px;">';
                 html += '<li class="list-group-item"><i class="material-icons">phone</i>' + user.phone + '</li>';
                 html += '<li class="list-group-item"><i class="material-icons">email</i>' + user.email + '</li>';
-                html += '<li class="list-group-item"><i class="material-icons">location_city</i>' + user.name + '</li>';
-                html += '<li class="list-group-item"><i class="material-icons">account_box</i>' + user.birthDate + '</li>';
+                html += '<li class="list-group-item"><i class="material-icons">location_city</i>' + user.cityName + '</li>';
+                html += '<li class="list-group-item"><i class="material-icons">account_box</i>' + getAgeFromBirthDate(user.birthDate) + ' lat(a)</li>';
                 html += '</ul>';
                 html += '</div>';
-                html += '<button type="button" class="btn btn-success show-ann">Zobacz ogłoszenia!</button><a href="edit_profile.html"><button class="circleButton editButton"><i class="material-icons">edit</i></button></a>';
+                html += '<button type="button" class="btn btn-success show-ann">Zobacz ogłoszenia</button><a href="edit_profile.html"><button class="circleButton editButton"><i class="material-icons">edit</i></button></a>';
             } else {
                 html += '</div>';
                 html += '<button type="button" class="btn btn-success show-ann" id="btnShowProfile">Zobacz Profil</button>';
@@ -287,7 +287,7 @@ function loadNotices() {
             }
 
             html += '<div class="d-flex w-100 justify-content-between">';
-            html += '<h6>Termin spotkania: ' + getDate(notice.meetingDate) + '</h6>' + '<h6>' + notice.meetingPlace + '</h6>' + '<small>#' + notice.idNotice + '</small>';
+            html += '<h6>Termin spotkania: ' + getDate(notice.meetingDate) + '</h6>' + '<h6>' + notice.meetingPlace + '</h6>' + '<small>' + notice.price + ' zł/h</small>';
             html += '</div>';
             html += '</a>';
         }
@@ -382,6 +382,12 @@ function timeToTimestamp(date, time) {
     date = date.split(':');
     let newTime = new Date(date[1] + '/' + date[2] + '/' + date[0] + ' ' + time);
     return newTime;
+}
+
+function getAgeFromBirthDate(birthDate) {
+    let date = new Date();
+    let bYear = new Date(birthDate);
+    return date.getFullYear() - bYear.getFullYear();
 }
 
 function postNotice() {
