@@ -1,7 +1,9 @@
 const noticesUrl = "https://rhubarb-cobbler-84890.herokuapp.com/notices";
+const userUrl = "https://rhubarb-cobbler-84890.herokuapp.com/users";
 const citiesUrl = "https://rhubarb-cobbler-84890.herokuapp.com/cities";
 const voivodeshipsUrl = "https://rhubarb-cobbler-84890.herokuapp.com/voivodeships";
 const subjectsUrl = "https://rhubarb-cobbler-84890.herokuapp.com/subjects";
+const apiUrl = 'https://rhubarb-cobbler-84890.herokuapp.com';
 
 if (window.location.pathname.substr(-10) === 'index.html') {
     loadNotices();
@@ -15,7 +17,6 @@ if (window.location.pathname.substr(-14) === 'noticeadd.html') {
 if (window.location.pathname.substr(-11) === 'notice.html') {
     loadSelectedNotice();
 }
-
 
 class City {
     constructor(idCity, cityName) {
@@ -40,7 +41,7 @@ class Subject {
 }
 
 class Notice {
-    constructor(idNotice, lookOrOffer, note, meetingPlace, meetingDate, price, level, addDate, addedByUser, timeFrom, timeTo, subjectName) {
+    constructor(idNotice, lookOrOffer, note, meetingPlace, meetingDate, price, level, addDate, addedByUser, timeFrom, timeTo, subjectName, userName) {
         this.idNotice = idNotice;
         this.lookOrOffer = lookOrOffer;
         this.note = note;
@@ -53,6 +54,7 @@ class Notice {
         this.timeFrom = timeFrom;
         this.timeTo = timeTo;
         this.subjectName = subjectName;
+        this.userName = userName;
     }
 }
 
@@ -189,14 +191,20 @@ function loadSelectedNotice() {
     let noticeArray = new Array();
     let notice;
     let request = new XMLHttpRequest();
+    let userRequest = new XMLHttpRequest();
     request.open('GET', noticesUrl + '/' + localStorage.getItem("noticeID"), true);
     request.onload = function () {
         // Begin accessing JSON data here
         notice = JSON.parse(this.response);
         if (request.status >= 200 && request.status < 400) {
-            let newNotice = new Notice(notice.idNotice, notice.lookOrOffer, notice.note, notice.meetingPlace, notice.meetingDate, notice.price, notice.level, notice.timestamp, notice.userIdUser, notice.timeFrom, notice.timeTo, notice.subjectBySubjectIdSubject.name);
+            let newNotice = new Notice(notice.idNotice, notice.lookOrOffer, notice.note, notice.meetingPlace, notice.meetingDate, notice.price,
+                 notice.level, notice.timestamp, notice.userIdUser, notice.timeFrom, notice.timeTo, notice.subjectBySubjectIdSubject.name,
+                 notice.userIdUser.name);
             noticeArray.push(newNotice);
+            userRequest.open('GET', `${userUrl}/${newNotice.addedByUser}`, true);
+            userRequest.onload = function () {
 
+            }
         } else {
             console.log('error');
         }
@@ -211,6 +219,7 @@ function loadSelectedNotice() {
             html += '<li class="list-group-item">Cena za godzinę: ' + notice.price + ' zł </li>';
             html += '<li class="list-group-item">Godzina: ' + getTime(notice.timeFrom) + ' - ' + getTime(notice.timeTo) + '</li>';
             html += '<li class="list-group-item">Termin spotkania: ' + getDate(notice.meetingDate) + '</li>';
+            html += '<li class="list-group-item">Profil korepetytora: ' + notice.userName + '</li>';
         }
         noticeListHTML.innerHTML = html;
     };
