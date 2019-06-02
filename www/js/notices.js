@@ -102,6 +102,45 @@ function loadCities(id) {
     }
 }
 
+function loadUserProfile(localStorage.getItem("userID")) {
+    let opinionArray = new Array();
+    let opinionList;
+    let request = new XMLHttpRequest();
+    idUser=1;
+    if (idUser != 0 && idUser != "undefined") {
+        request.open('GET', opinionsUrl, true);
+        request.onload = function () {
+            // Begin accessing JSON data here
+            opinionList = JSON.parse(this.response);
+            if (request.status >= 200 && request.status < 400) {
+                opinionList.forEach(opinion => {
+                    console.log(opinion);
+                    let newOpinion = new Opinion(opinion.idOpinion,opinion.rating,opinion.comment,opinion.userTo,opinion.userByUserFrom.name);
+                    opinionArray.push(newOpinion);
+                });
+            } else {
+                console.log('error');
+            }
+            const opinionListHTML = document.getElementById('showOpinions');
+            html = '';
+            for (let i = 0; i < opinionArray.length; i++) {
+                if(opinionArray[i].userTo===idUser){
+                    html += '<div class="card border-success mb-3 opinionCard" style="max-width: 20rem;">';
+                    html+='<div class="card-body">';
+                    html+='<em style="font-size: 17px;">' + opinionArray[i].comment+'</em>'
+                    html += '<h6 class="text-muted">'+opinionArray[i].userFromName+'</h6></div>';
+                    html+='<div class="card-header opinionHeader">Ocena:';
+                    html+='<span class="badge badge-warning note">'+opinionArray[i].rating+'</span>';
+                    html+='</div></div>';
+                }
+            }
+            opinionListHTML.innerHTML = html;
+
+        };
+        request.send();
+    }
+}
+
 function loadUserOpinions(idUser) {
     let opinionArray = new Array();
     let opinionList;
@@ -250,6 +289,7 @@ function loadSelectedNotice() {
         if (request.status >= 200 && request.status < 400) {
             let newNotice = new Notice(notice.idNotice, notice.lookOrOffer, notice.note, notice.meetingPlace, notice.meetingDate, notice.price, notice.level, notice.timestamp, notice.userIdUser, notice.timeFrom, notice.timeTo, notice.subjectBySubjectIdSubject.name);
             noticeArray.push(newNotice);
+            console.log(notice);
 
         } else {
             console.log('error');
@@ -274,6 +314,10 @@ function loadSelectedNotice() {
 function getNoticeId(id_notice) {
     var noticeID = id_notice;
     localStorage.setItem('noticeID', noticeID);
+}
+
+function storeUserId(userID) {
+    localStorage.setItem('userID', userID);
 }
 
 function getViovideshipIndex() {
@@ -324,41 +368,46 @@ function timeToTimestamp(date, time) {
 
 function postNotice() {
     var data = {};
+    var dataIdUser = {};
+    var dataIdSubject = {};
+
     if (document.getElementById('offer').classList.contains('active')) {
         data.lookOrOffer = 0;
     } else {
         data.lookOrOffer = 1;
     }
-    data.subjectBySubjectIdSubject.idSubject[0] = getListIndex();
-    console.log(data);
-    data.level = document.getElementById("selectLevel").value;
+
+    dataIdSubject.idSubject = getListIndex('selectSubject');
+    data.subjectBySubjectIdSubject = dataIdSubject;
+    data.level = getListIndex('selectLevel');
     data.meetingPlace = document.getElementById("selectCity").value;
     data.price = document.getElementById("price").value;
     data.date = document.getElementById("date").value;
     data.timeFrom = timeToTimestamp(data.date, document.getElementById('timeFrom').value);
     data.timeTo = timeToTimestamp(data.date, document.getElementById('timeTo').value);
     data.note = document.getElementById("noticeDescription").value;
-    data.userByUserIdUser.idUser = 1;
+    dataIdUser.idUser = 1;
+    data.userByUserIdUser = dataIdUser;
     // data.meetingByMeetingIdMeetin
     // if(data[7]==='') alert("Nie podano wartosci!");
     // else {
     let json = JSON.stringify(data);
     console.log(json);
 
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", noticesUrl, true);
-    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-    xhr.onload = function () {
-        let users = JSON.parse(xhr.responseText);
-        if (xhr.readyState === 4 && xhr.status === 201) {
-            console.table(users);
-        } else {
-            console.error(users);
-        }
-    };
-    xhr.send(json);
+    // let xhr = new XMLHttpRequest();
+    // xhr.open("POST", noticesUrl, true);
+    // xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    // xhr.onload = function () {
+    //     let users = JSON.parse(xhr.responseText);
+    //     if (xhr.readyState === 4 && xhr.status === 201) {
+    //         console.table(users);
+    //     } else {
+    //         console.error(users);
+    //     }
+    // };
+    // xhr.send(json);
     alert('Dodano pomyslnie!');
-    //TODO: Nie nie chce sie dodać przy odświeżeniu zaraz po xhr.send(json). Trzeba skombinować jakieś obejście lepsze niż alert.
+    // TODO: Nie nie chce sie dodać przy odświeżeniu zaraz po xhr.send(json).Trzeba skombinować jakieś obejście lepsze niż alert.
 
-    // location.reload();
+    window.location.pathname = '/index.html';
 }
