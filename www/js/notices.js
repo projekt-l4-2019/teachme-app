@@ -137,7 +137,8 @@ function loadUserProfile() {
             html += '<img class="avatar" src="img/avatars/default.PNG" alt="Card image">';
             html += '<div class="card-body">';
             html += '<h5 class="card-title">O mnie:</h5>'
-            html += '<p class="card-text">' + user.about + '</p>';
+            // html += '<p class="card-text">' + user.about + '</p>';
+            html += '<p class="card-text">Pasjonat matematyki, od dziecka startowałem w olimpiadach. Nie ma dla mnie rzeczy niemożliwych.</p>';
             html += '<span class="badge badge-info opinionsBtn">Opinie: 1</span>';
             html += '<span class="badge badge-warning opinionsBtn">Ocena: 5/5</span>';
             if (window.location.pathname.substr(-12) === 'profile.html') {
@@ -148,10 +149,12 @@ function loadUserProfile() {
                 html += '<li class="list-group-item"><i class="material-icons">account_box</i>' + getAgeFromBirthDate(user.birthDate) + ' lat(a)</li>';
                 html += '</ul>';
                 html += '</div>';
-                html += '<button type="button" class="btn btn-success show-ann">Zobacz ogłoszenia</button><a href="edit_profile.html"><button class="circleButton editButton"><i class="material-icons">edit</i></button></a>';
+                html += '<a href="noticesuser.html"><button type="button" class="btn btn-success show-ann" style="margin-bottom:5px">Zobacz ogłoszenia</button></a>';
+                html += '<a href="addopinion.html"><button type="button" class="btn btn-success show-ann">Dodaj opinię</button></a>';
+                html += '<a href="profileedit.html"><button class="circleButton editButton"><i class="material-icons">edit</i></button></a>'
             } else {
                 html += '</div>';
-                html += '<button type="button" class="btn btn-success show-ann" id="btnShowProfile">Zobacz Profil</button>';
+                html += '<a href="profile.html"><button type="button" class="btn btn-success show-ann" id="btnShowProfile">Zobacz Profil</button></a>';
             }
             userHTML.innerHTML = html;
         };
@@ -184,10 +187,13 @@ function loadUserOpinions(idUser) {
                 if (opinionArray[i].userTo === idUser) {
                     html += '<div class="card border-success mb-3 opinionCard" style="max-width: 20rem;">';
                     html += '<div class="card-body">';
-                    html += '<em style="font-size: 17px;">' + opinionArray[i].comment + '</em>'
-                    html += '<h6 class="text-muted">' + opinionArray[i].userFromName + '</h6></div>';
+                    html += '<em style="font-size: 17px;">Bardzo dobry korepetytor, świetnie tłumaczy. Matematyka staje się prosta :)</em>'
+                    // html += '<em style="font-size: 17px;">' + opinionArray[i].comment + '</em>'
+                    html += '<h6 class="text-muted">Marek</h6></div>';
+                    // html += '<h6 class="text-muted">' + opinionArray[i].userFromName + '</h6></div>';
                     html += '<div class="card-header opinionHeader">Ocena:';
-                    html += '<span class="badge badge-warning note">' + opinionArray[i].rating + '</span>';
+                    // html += '<span class="badge badge-warning note">' + opinionArray[i].rating + '</span>';
+                    html += '<span class="badge badge-warning note"> 5 </span>';
                     html += '</div></div>';
                 }
             }

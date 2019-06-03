@@ -6,6 +6,10 @@
 /*    margin-top: -2%;*/
 /*    !*height: 20px;*!*/
 /*}*/
+button.btn.btn-success.show-ann {
+    min-width: 100%;
+}
+
 input#timeFrom, input#timeTo {
     width: 25%;
     margin: unset;
