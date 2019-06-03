@@ -90,37 +90,6 @@ class User {
     }
 }
 
-function loadCities(id) {
-    let cityArray = new Array();
-    let cityList;
-    let request = new XMLHttpRequest();
-    if (id != 0 && id != "undefined") {
-        request.open('GET', voivodeshipsUrl + '/' + id, true);
-        request.onload = function () {
-            // Begin accessing JSON data here
-            cityList = JSON.parse(this.response);
-            cityList = cityList.citiesByIdVoivodeship;
-            if (request.status >= 200 && request.status < 400) {
-                cityList.forEach(city => {
-                    let newCity = new City(city.idCity, city.name);
-                    cityArray.push(newCity);
-                });
-            } else {
-                console.log('error');
-            }
-            const cityListHTML = document.getElementById('selectCity');
-            html = '';
-            if (window.location.pathname.substr(-10) === 'index.html') html = 'Wszystkie';
-            for (let i = 0; i < cityArray.length; i++) {
-                html += '<option>' + cityArray[i].cityName + '</option>';
-            }
-            cityListHTML.innerHTML = html;
-
-        };
-        request.send();
-    }
-}
-
 function loadUserProfile() {
     let user;
     let request = new XMLHttpRequest();
@@ -209,32 +178,6 @@ function loadUserOpinions(idUser) {
     }
 }
 
-function loadVoivodeships() {
-    let voivodeshipArray = new Array();
-    let voivodeshipList;
-    let request = new XMLHttpRequest();
-    request.open('GET', voivodeshipsUrl, true);
-    request.onload = function () {
-        // Begin accessing JSON data here
-        voivodeshipList = JSON.parse(this.response);
-        if (request.status >= 200 && request.status < 400) {
-            voivodeshipList.forEach(voivodeship => {
-                let newVoivodeship = new Voivodeship(voivodeship.idVoivodeship, voivodeship.nameVoivodeship);
-                voivodeshipArray.push(newVoivodeship);
-            });
-        } else {
-            console.log('error');
-        }
-        const voivodeshipListHTML = document.getElementById('selectVoivodeship');
-        html = '<option>Wszystkie</option>';
-        for (let i = 0; i < voivodeshipArray.length; i++) {
-            html += '<option>' + voivodeshipArray[i].nameVoivodeship + '</option>';
-        }
-        voivodeshipListHTML.innerHTML = html;
-    };
-    request.send();
-}
-
 function loadSubjects() {
     let subjectArray = new Array();
     let subjectList;
@@ -254,12 +197,71 @@ function loadSubjects() {
         }
         const subjectListHTML = document.getElementById('selectSubject');
         html = '<option>Wszystkie</option>';
+        if (window.location.pathname.substr(-14) === 'noticeadd.html') html = '<option disabled="disabled" selected="selected"></option>'
         for (let i = 0; i < subjectArray.length; i++) {
             html += '<option>' + subjectArray[i].name + '</option>';
         }
         subjectListHTML.innerHTML = html;
     };
     request.send();
+}
+
+function loadVoivodeships() {
+    let voivodeshipArray = new Array();
+    let voivodeshipList;
+    let request = new XMLHttpRequest();
+    request.open('GET', voivodeshipsUrl, true);
+    request.onload = function () {
+        // Begin accessing JSON data here
+        voivodeshipList = JSON.parse(this.response);
+        if (request.status >= 200 && request.status < 400) {
+            voivodeshipList.forEach(voivodeship => {
+                let newVoivodeship = new Voivodeship(voivodeship.idVoivodeship, voivodeship.nameVoivodeship);
+                voivodeshipArray.push(newVoivodeship);
+            });
+        } else {
+            console.log('error');
+        }
+        const voivodeshipListHTML = document.getElementById('selectVoivodeship');
+        html = '<option>Wszystkie</option>';
+        if (window.location.pathname.substr(-14) === 'noticeadd.html') html = '<option disabled="disabled" selected="selected"></option>'
+        for (let i = 0; i < voivodeshipArray.length; i++) {
+            html += '<option>' + voivodeshipArray[i].nameVoivodeship + '</option>';
+        }
+        voivodeshipListHTML.innerHTML = html;
+    };
+    request.send();
+}
+
+function loadCities(id) {
+    let cityArray = new Array();
+    let cityList;
+    let request = new XMLHttpRequest();
+    if (id != 0 && id != "undefined") {
+        request.open('GET', voivodeshipsUrl + '/' + id, true);
+        request.onload = function () {
+            // Begin accessing JSON data here
+            cityList = JSON.parse(this.response);
+            cityList = cityList.citiesByIdVoivodeship;
+            if (request.status >= 200 && request.status < 400) {
+                cityList.forEach(city => {
+                    let newCity = new City(city.idCity, city.name);
+                    cityArray.push(newCity);
+                });
+            } else {
+                console.log('error');
+            }
+            const cityListHTML = document.getElementById('selectCity');
+            html = '<option>Wszystkie</option>';
+            if (window.location.pathname.substr(-14) === 'noticeadd.html') html = '<option disabled="disabled" selected="selected"></option>'
+            for (let i = 0; i < cityArray.length; i++) {
+                html += '<option>' + cityArray[i].cityName + '</option>';
+            }
+            cityListHTML.innerHTML = html;
+
+        };
+        request.send();
+    }
 }
 
 //Get notices list from server
@@ -355,7 +357,7 @@ function storeUserEmail(userEmail) {
 
 function getViovideshipIndex() {
     let ele = document.getElementById("selectVoivodeship");
-    for (var i = 0; i < ele.length; i++) {
+    for (var i = 1; i < ele.length; i++) {
         if (ele[i].childNodes[0].nodeValue === ele.value) {
             loadCities(i);
         }
