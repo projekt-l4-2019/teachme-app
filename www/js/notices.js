@@ -6,6 +6,12 @@ const apiUrl = 'https://rhubarb-cobbler-84890.herokuapp.com';
 const opinionsUrl = "https://rhubarb-cobbler-84890.herokuapp.com/opinions";
 const usersUrl = "https://rhubarb-cobbler-84890.herokuapp.com/users";
 
+
+///TEMP SETTINGS:
+storeUserId(1);
+
+
+
 if (window.location.pathname.substr(-10) === 'index.html') {
     loadNotices();
     loadVoivodeships();
@@ -114,8 +120,6 @@ function loadCities(id) {
         request.send();
     }
 }
-
-storeUserId(1);
 
 function loadUserProfile() {
     let user;
@@ -343,6 +347,10 @@ function getNoticeId(id_notice) {
 
 function storeUserId(userID) {
     localStorage.setItem('userID', userID);
+}
+
+function storeUserEmail(userEmail) {
+    localStorage.setItem('userEmail', userEmail);
 }
 
 function getViovideshipIndex() {

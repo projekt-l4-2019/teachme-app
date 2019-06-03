@@ -65,11 +65,11 @@
                     <textarea class="form-control" id="noticeDescription" rows="8"></textarea>
                 </ul>
             </div>
-            <button type="button" class="btn btn-success show-ann">Wyślij</button>
+            <a
+                onclick="window.location='mailto:pgp2019l4@gmail.com?subject=Wiadomość od użytkownika TeachMe&body='+document.getElementById('noticeDescription').value">
+                <button type="button" class="btn btn-success show-ann">Wyślij</button>
+            </a>
             <div class="alert alert-dismissible alert-danger formError">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>Coś poszło nie tak!</strong> <a href="#" class="alert-link">Wypełnij formularz poprawnie</a> i
-                spróbuj przesłać ponownie.
             </div>
         </div>
 

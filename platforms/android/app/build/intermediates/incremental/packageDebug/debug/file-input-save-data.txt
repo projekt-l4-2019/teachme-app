@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Mon Jun 03 03:06:52 CEST 2019
+#Mon Jun 03 23:45:29 CEST 2019
 5.base=D\:\\TeachMe\\teachme-app\\platforms\\android\\app\\build\\intermediates\\assets\\debug
 42.base=D\:\\TeachMe\\teachme-app\\platforms\\android\\app\\build\\intermediates\\assets\\debug
 22.path=www/login.html
@@ -15,7 +15,7 @@
 39.set=ASSET
 26.path=www/details.html
 6.baseType=DIRECTORY
-36.path=www/img/banner.png
+36.path=www/contact.html
 10.set=ASSET
 28.set=ASSET
 22.base=D\:\\TeachMe\\teachme-app\\platforms\\android\\app\\build\\intermediates\\assets\\debug
@@ -56,7 +56,7 @@
 39.baseType=DIRECTORY
 20.baseType=DIRECTORY
 27.path=www/js/popper.min.js
-37.path=www/contact.html
+37.path=www/img/banner.png
 20.set=ASSET
 38.set=ASSET
 23.base=D\:\\TeachMe\\teachme-app\\platforms\\android\\app\\build\\intermediates\\assets\\debug
