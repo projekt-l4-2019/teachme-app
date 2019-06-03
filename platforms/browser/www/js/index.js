@@ -5,12 +5,13 @@ const menu = document.getElementById('menuList');
 let html = '<li class="active"><a href="index.html">Lista ogłoszeń</a></li>';
 html += '<li><a href="noticeadd.html">Dodaj ogłoszenie</a></li>';
 html += '<li><a href="profile.html">Profil</a></li>';
+html += '<li><a href="contact.html">Kontakt</a></li>';
 html += '<li><a href="about.html">O Aplikacji</a></li>';
 menu.innerHTML=html;
 
 const userInfo = document.getElementById('userInfo');
-html = '<h5>Michał Białek</h5>';
-html += '<h5>roga@le.com</h5>';
+html = '<h5>Mateusz Kukla</h5>';
+html += '<h6>mateuszkukla24680@gmail.com</h6>';
 userInfo.innerHTML=html;
 
 //Insert bg image
