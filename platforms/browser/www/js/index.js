@@ -111,7 +111,10 @@ function lookFor(){
     lookForData.level = getListIndex("selectLevel");
     lookForData.voivodeship = getListIndex("selectVoivodeship");    
     lookForData.city = getListIndex("selectCity");
+    //gdy offer jest zaznaczony to offer, else
     lookForData.offerOrLookFor = document.getElementById("ooffer").innerText;
+
+    //gdy asc jest zaznaczony to aasc else
     lookForData.ascOrDesc = document.getElementById("aasc").innerText;
     var data = JSON.stringify(lookForData);
     console.log(data);
