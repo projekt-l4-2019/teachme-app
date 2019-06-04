@@ -113,8 +113,8 @@ function loadUserProfile() {
             html += '<h5 class="card-title">O mnie:</h5>'
             // html += '<p class="card-text">' + user.about + '</p>';
             html += '<p class="card-text">Pasjonat matematyki, od dziecka startowałem w olimpiadach. Nie ma dla mnie rzeczy niemożliwych.</p>';
-            html += '<span class="badge badge-info opinionsBtn">Opinie: 1</span>';
-            html += '<span class="badge badge-warning opinionsBtn">Ocena: 5/5</span>';
+            html += '<span class="badge badge-info opinionsBtn" id="opinionAmount" onclick="scrollDown()"></span>';
+            html += '<span class="badge badge-warning opinionsBtn" id="ratingAvg"></span>';
             if (window.location.pathname.substr(-12) === 'profile.html') {
                 html += '<ul class="list-group list-group-flush" style="font-size: 20px;">';
                 html += '<li class="list-group-item"><i class="material-icons">phone</i>' + user.phone + '</li>';
@@ -156,6 +156,8 @@ function loadUserOpinions(idUser) {
             } else {
                 console.log('error');
             }
+            let ratesSum = 0;
+            let ratesAmount = 0;
             const opinionListHTML = document.getElementById('showOpinions');
             html = '';
             for (let i = 0; i < opinionArray.length; i++) {
@@ -170,10 +172,17 @@ function loadUserOpinions(idUser) {
                     html += '<span class="badge badge-warning note">' + opinionArray[i].rating + '</span>';
                     // html += '<span class="badge badge-warning note"> 5 </span>';
                     html += '</div></div>';
+
+                    ratesAmount++;
+                    ratesSum += opinionArray[i].rating;
                 }
             }
+            document.getElementById("opinionAmount").innerText = 'Opinie: ' + ratesAmount;
+            if(ratesAmount > 0){
+                document.getElementById("ratingAvg").innerText = 'Ocena: ' + ratesSum/ratesAmount + '/5';
+                html = '<h4 class="card-title" style="margin-bottom: 5px; margin-left: 5vw">Opinie:</h4>' + html;
+            }
             opinionListHTML.innerHTML = html;
-
         };
         request.send();
     }

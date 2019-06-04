@@ -107,4 +107,6 @@ if (window.location.pathname.substr(-14) === 'noticeadd.html'){
     }
 }
 
-
+function scrollDown() {
+    window.scrollTo(0, document.body.scrollHeight);
+}
