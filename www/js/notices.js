@@ -481,7 +481,30 @@ function lookFor(){
     } else {
         lookForData.ascOrDesc = 1;
     }
-    
+
     var data = JSON.stringify(lookForData);
     console.log(data);
+}
+
+function addOpinion() {
+    var opinion = {};
+    var opinion2 = {};
+    var opinion3 = {};
+    opinion.idOpinion = "";
+    opinion.rating = document.getElementById("userAddOpinion").value;
+    opinion.comment = document.getElementById("userAddOpinionDescription").value;
+    opinion.userTo = 1;
+    opinion.userFrom = 2;
+    opinion2.idUser = 1;
+    opinion3.idUser = 2;
+    opinion.userrByUserTo = opinion2;
+    opinion.userrByUserFrom = opinion3;
+
+    let postOpinion = new XMLHttpRequest();
+    let json=JSON.stringify(opinion);
+    postOpinion.open("POST", opinionsUrl, true);
+    postOpinion.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    postOpinion.onload();
+    postOpinion.send(json);
+
 }
