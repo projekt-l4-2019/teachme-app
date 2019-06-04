@@ -452,3 +452,28 @@ function postNotice() {
 
     window.location.pathname = '/index.html';
 }
+
+function lookFor(){
+    let lookForData = {};
+
+    lookForData.subjectName = getListIndex("selectSubject");
+    lookForData.level = getListIndex("selectLevel");
+    lookForData.voivodeship = getListIndex("selectVoivodeship");    
+    lookForData.city = getListIndex("selectCity");
+    lookForData.timeFrom = document.getElementById("timeFrom").value;
+    lookForData.timeTo = document.getElementById("timeTo").value;
+
+    if (document.getElementById('offer').classList.contains('active')) {
+        lookForData.offerOrLookFor = 0;
+    } else {
+        lookForData.offerOrLookFor = 1;
+    }
+    if (document.getElementById('asc').classList.contains('active')) {
+        lookForData.ascOrDesc = 0;
+    } else {
+        lookForData.ascOrDesc = 1;
+    }
+    
+    var data = JSON.stringify(lookForData);
+    console.log(data);
+}

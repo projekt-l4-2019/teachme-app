@@ -2,17 +2,28 @@ document.addEventListener('deviceready', onDeviceReady, false);
 
 //Menu options
 const menu = document.getElementById('menuList');
-let html = '<li class="active"><a href="index.html">Lista ogłoszeń</a></li>';
-html += '<li><a href="noticeadd.html">Dodaj ogłoszenie</a></li>';
-html += '<li><a href="profile.html">Profil</a></li>';
-html += '<li><a href="contact.html">Kontakt</a></li>';
-html += '<li><a href="about.html">O Aplikacji</a></li>';
+let html = '<li id="index.html"><a href="index.html">Lista ogłoszeń</a></li>';
+html += '<li id="noticeadd.html"><a href="noticeadd.html">Dodaj ogłoszenie</a></li>';
+html += '<li id="profile.html"><a href="profile.html">Profil</a></li>';
+html += '<li id="contact.html"><a href="contact.html">Kontakt</a></li>';
+html += '<li id="about.html"><a href="about.html">O Aplikacji</a></li>';
 menu.innerHTML=html;
 
 const userInfo = document.getElementById('userInfo');
 html = '<h5>Mateusz Kukla</h5>';
 html += '<h6>mateuszkukla24680@gmail.com</h6>';
 userInfo.innerHTML=html;
+
+
+//Check element from menu list
+let re = /(?=\w+\.\w{3,4}$).+/;
+var page;
+var path = window.location.pathname;
+var match = path.match(re);
+if(match)
+    page = match[0];
+console.log(document.getElementById(page));
+document.getElementById(page).classList.add("active");
 
 //Insert bg image
 let bimg = document.createElement("img");
@@ -96,26 +107,4 @@ if (window.location.pathname.substr(-14) === 'noticeadd.html'){
     }
 }
 
-function getListIndex(idHTML) {
-    let ele = document.getElementById(idHTML);
-    for (var i = 0; i < ele.length; i++) {
-        if (ele[i].childNodes[0].nodeValue === ele.value) {
-            return i;
-        }
-    }
-}
 
-function lookFor(){
-    let lookForData = {};
-    lookForData.subjectName = getListIndex("selectSubject");
-    lookForData.level = getListIndex("selectLevel");
-    lookForData.voivodeship = getListIndex("selectVoivodeship");    
-    lookForData.city = getListIndex("selectCity");
-    //gdy offer jest zaznaczony to offer, else
-    lookForData.offerOrLookFor = document.getElementById("ooffer").innerText;
-
-    //gdy asc jest zaznaczony to aasc else
-    lookForData.ascOrDesc = document.getElementById("aasc").innerText;
-    var data = JSON.stringify(lookForData);
-    console.log(data);
-}
