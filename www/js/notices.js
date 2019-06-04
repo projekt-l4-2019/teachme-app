@@ -8,7 +8,7 @@ const usersUrl = "https://rhubarb-cobbler-84890.herokuapp.com/users";
 
 
 ///TEMP SETTINGS:
-storeUserId(2);
+storeUserId(1);
 
 
 
@@ -22,6 +22,7 @@ if (window.location.pathname.substr(-10) === 'index.html') {
 } else if (window.location.pathname.substr(-11) === 'notice.html') {
     loadSelectedNotice();
     loadUserProfile();
+    loadUserOpinions();
 } else if (window.location.pathname.substr(-12) === 'profile.html') {
     loadUserProfile();
     loadUserOpinions();
@@ -90,6 +91,7 @@ class User {
     }
 }
 
+//////////////////////////////////////////Load user profile
 function loadUserProfile() {
     let user;
     let request = new XMLHttpRequest();
@@ -100,7 +102,6 @@ function loadUserProfile() {
             user = JSON.parse(this.response);
             if (request.status >= 200 && request.status < 400) {
                 user = new User(user.name, user.surname, user.avatar, user.phone, user.email, user.cityByCityIdCity.name, user.about, user.birthDate);
-                console.log(user);
             } else {
                 console.log('error');
             }
@@ -111,16 +112,15 @@ function loadUserProfile() {
             html += '<img class="avatar" src="img/avatars/default.PNG" alt="Card image">';
             html += '<div class="card-body">';
             html += '<h5 class="card-title">O mnie:</h5>'
-            // html += '<p class="card-text">' + user.about + '</p>';
-            html += '<p class="card-text">Pasjonat matematyki, od dziecka startowałem w olimpiadach. Nie ma dla mnie rzeczy niemożliwych.</p>';
+            html += '<p class="card-text">' + user.about + '</p>';
             html += '<span class="badge badge-info opinionsBtn" id="opinionAmount" onclick="scrollDown()"></span>';
             html += '<span class="badge badge-warning opinionsBtn" id="ratingAvg"></span>';
             if (window.location.pathname.substr(-12) === 'profile.html') {
                 html += '<ul class="list-group list-group-flush" style="font-size: 20px;">';
-                html += '<li class="list-group-item"><i class="material-icons">phone</i>' + user.phone + '</li>';
-                html += '<li class="list-group-item"><i class="material-icons">email</i>' + user.email + '</li>';
-                html += '<li class="list-group-item"><i class="material-icons">location_city</i>' + user.cityName + '</li>';
-                html += '<li class="list-group-item"><i class="material-icons">account_box</i>' + getAgeFromBirthDate(user.birthDate) + ' lat(a)</li>';
+                html += '<li class="list-group-item"><i class="material-icons">phone</i> ' + user.phone + '</li>';
+                html += '<li class="list-group-item"><i class="material-icons">email</i> ' + user.email + '</li>';
+                html += '<li class="list-group-item"><i class="material-icons">location_city</i> ' + user.cityName + '</li>';
+                html += '<li class="list-group-item"><i class="material-icons">account_box</i> ' + getAgeFromBirthDate(user.birthDate) + ' lat(a)</li>';
                 html += '</ul>';
                 html += '</div>';
                 html += '<a href="noticesuser.html"><button type="button" class="btn btn-success show-ann" style="margin-bottom:5px">Zobacz ogłoszenia</button></a>';
@@ -136,20 +136,18 @@ function loadUserProfile() {
     }
 }
 
+/////////////////////////////////// Load user opinions
 function loadUserOpinions() {
     let opinionArray = new Array();
     let opinionList;
     let request = new XMLHttpRequest();
-    let idUser = localStorage.getItem("userID").toI;
-    
+    var idUser = localStorage.getItem("userID");
     if (idUser != 0 && idUser != "undefined") {
         request.open('GET', opinionsUrl, true);
         request.onload = function () {
-            // Begin accessing JSON data here
             opinionList = JSON.parse(this.response);
             if (request.status >= 200 && request.status < 400) {
                 opinionList.forEach(opinion => {
-                    // console.log(opinion);
                     let newOpinion = new Opinion(opinion.idOpinion, opinion.rating, opinion.comment, opinion.userTo, opinion.userrByUserFrom.name);
                     opinionArray.push(newOpinion);
                 });
@@ -161,21 +159,14 @@ function loadUserOpinions() {
             const opinionListHTML = document.getElementById('showOpinions');
             html = '';
             for (let i = 0; i < opinionArray.length; i++) {
-                if (opinionArray[i].userTo === idUser) {
-                    console.log(idUser);
-                    console.log("DUPA");
-                    
+                if (opinionArray[i].userTo === Number(idUser)) {
                     html += '<div class="card border-success mb-3 opinionCard" style="max-width: 20rem;">';
                     html += '<div class="card-body">';
-                    // html += '<em style="font-size: 17px;">Bardzo dobry korepetytor, świetnie tłumaczy. Matematyka staje się prosta :)</em>'
                     html += '<em style="font-size: 17px;">' + opinionArray[i].comment + '</em>'
-                    // html += '<h6 class="text-muted">Marek</h6></div>';
                     html += '<h6 class="text-muted">' + opinionArray[i].userFromName + '</h6></div>';
-                    html += '<div class="card-header opinionHeader">Ocena:';
+                    html += '<div class="card-header opinionHeader">Ocena: ';
                     html += '<span class="badge badge-warning note">' + opinionArray[i].rating + '</span>';
-                    // html += '<span class="badge badge-warning note"> 5 </span>';
                     html += '</div></div>';
-
                     ratesAmount++;
                     ratesSum += opinionArray[i].rating;
                 }
