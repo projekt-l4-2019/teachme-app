@@ -8,7 +8,7 @@ const usersUrl = "https://rhubarb-cobbler-84890.herokuapp.com/users";
 
 
 ///TEMP SETTINGS:
-storeUserId(1);
+storeUserId(2);
 
 
 
@@ -136,11 +136,12 @@ function loadUserProfile() {
     }
 }
 
-function loadUserOpinions(idUser) {
+function loadUserOpinions() {
     let opinionArray = new Array();
     let opinionList;
     let request = new XMLHttpRequest();
-    idUser = 1;
+    let idUser = localStorage.getItem("userID").toI;
+    
     if (idUser != 0 && idUser != "undefined") {
         request.open('GET', opinionsUrl, true);
         request.onload = function () {
@@ -148,7 +149,6 @@ function loadUserOpinions(idUser) {
             opinionList = JSON.parse(this.response);
             if (request.status >= 200 && request.status < 400) {
                 opinionList.forEach(opinion => {
-                    console.log(opinion);
                     // console.log(opinion);
                     let newOpinion = new Opinion(opinion.idOpinion, opinion.rating, opinion.comment, opinion.userTo, opinion.userrByUserFrom.name);
                     opinionArray.push(newOpinion);
@@ -160,6 +160,9 @@ function loadUserOpinions(idUser) {
             html = '';
             for (let i = 0; i < opinionArray.length; i++) {
                 if (opinionArray[i].userTo === idUser) {
+                    console.log(idUser);
+                    console.log("DUPA");
+                    
                     html += '<div class="card border-success mb-3 opinionCard" style="max-width: 20rem;">';
                     html += '<div class="card-body">';
                     // html += '<em style="font-size: 17px;">Bardzo dobry korepetytor, świetnie tłumaczy. Matematyka staje się prosta :)</em>'
@@ -367,7 +370,7 @@ function getViovideshipIndex() {
 
 function getListIndex(idHTML) {
     let ele = document.getElementById(idHTML);
-    for (var i = 0; i < ele.length; i++) {
+    for (var i = 1; i < ele.length; i++) {
         if (ele[i].childNodes[0].nodeValue === ele.value) {
             return i;
         }
@@ -413,23 +416,27 @@ function postNotice() {
     var dataIdUser = {};
     var dataIdSubject = {};
 
+    data.idNotice="";
     if (document.getElementById('offer').classList.contains('active')) {
         data.lookOrOffer = 0;
     } else {
         data.lookOrOffer = 1;
     }
-
-    dataIdSubject.idSubject = getListIndex('selectSubject');
-    data.subjectBySubjectIdSubject = dataIdSubject;
-    data.level = getListIndex('selectLevel');
+    data.note = document.getElementById("noticeDescription").value;
     data.meetingPlace = document.getElementById("selectCity").value;
+    data.meetingDate = document.getElementById("date").value;
+    
     data.price = document.getElementById("price").value;
-    data.date = document.getElementById("date").value;
+    dataIdSubject.idSubject = getListIndex('selectSubject');
+    
+    data.active = 1;
+    data.level = getListIndex('selectLevel');
     data.timeFrom = timeToTimestamp(data.date, document.getElementById('timeFrom').value);
     data.timeTo = timeToTimestamp(data.date, document.getElementById('timeTo').value);
-    data.note = document.getElementById("noticeDescription").value;
-    dataIdUser.idUser = 1;
-    data.userByUserIdUser = dataIdUser;
+    alert('Dodano pomyslnie!');
+    data.subjectBySubjectIdSubject = dataIdSubject;
+    dataIdUser.userIdUser = 1;
+    data.userByUserrIdUser = dataIdUser;
     // data.meetingByMeetingIdMeetin
     // if(data[7]==='') alert("Nie podano wartosci!");
     // else {
