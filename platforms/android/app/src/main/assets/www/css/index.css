@@ -6,6 +6,10 @@
 /*    margin-top: -2%;*/
 /*    !*height: 20px;*!*/
 /*}*/
+i.material-icons {
+    vertical-align: bottom;
+}
+
 button.btn.btn-success.show-ann {
     min-width: 100%;
 }

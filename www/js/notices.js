@@ -412,53 +412,54 @@ function getAgeFromBirthDate(birthDate) {
 }
 
 function postNotice() {
-    var data = {};
-    var dataIdUser = {};
-    var dataIdSubject = {};
+    let data = {};
+    let dataIdUser = {};
+    let dataIdSubject = {};
 
     data.idNotice = "";
     if (document.getElementById('offer').classList.contains('active')) {
-        data.lookOrOffer = 0;
+        data.lookOrOffer = "0";
     } else {
-        data.lookOrOffer = 1;
+        data.lookOrOffer = "1";
     }
     data.note = document.getElementById("noticeDescription").value;
     data.meetingPlace = document.getElementById("selectCity").value;
     data.meetingDate = document.getElementById("date").value;
 
-    data.price = document.getElementById("price").value;
+    data.price = Number(document.getElementById("price").value);
     dataIdSubject.idSubject = getListIndex('selectSubject');
 
-    data.active = 1;
+    data.active = "1";
     data.level = getListIndex('selectLevel');
-    data.timeFrom = timeToTimestamp(data.date, document.getElementById('timeFrom').value);
-    data.timeTo = timeToTimestamp(data.date, document.getElementById('timeTo').value);
+    data.timestamp = "";
+    data.timeFrom = timeToTimestamp(data.meetingDate, document.getElementById('timeFrom').value);
+    data.timeTo = timeToTimestamp(data.meetingDate, document.getElementById('timeTo').value);
     alert('Dodano pomyslnie!');
     data.subjectBySubjectIdSubject = dataIdSubject;
-    dataIdUser.userIdUser = 1;
-    data.userByUserrIdUser = dataIdUser;
+    dataIdUser.idUser = 1;
+    data.userrByUserrIdUser =dataIdUser;
+
+    let json = JSON.stringify(data);
+    console.log(json);
+    
     // data.meetingByMeetingIdMeetin
     // if(data[7]==='') alert("Nie podano wartosci!");
     // else {
-    let json = JSON.stringify(data);
-    console.log(json);
-
+    // let json = JSON.stringify(data);
+    
+    // alert('Dodano pomyslnie!');
+    // alert('Dodano pomyslnie!');
     // let xhr = new XMLHttpRequest();
-    // xhr.open("POST", noticesUrl, true);
-    // xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-    // xhr.onload = function () {
-    //     let users = JSON.parse(xhr.responseText);
-    //     if (xhr.readyState === 4 && xhr.status === 201) {
-    //         console.table(users);
-    //     } else {
-    //         console.error(users);
-    //     }
-    // };
-    // xhr.send(json);
+    let postNotice = new XMLHttpRequest();
+    
+    postNotice.open("POST", noticesUrl, true);
+    postNotice.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    postNotice.onload;
+    postNotice.send(json);
     alert('Dodano pomyslnie!');
     // TODO: Nie nie chce sie dodać przy odświeżeniu zaraz po xhr.send(json).Trzeba skombinować jakieś obejście lepsze niż alert.
 
-    window.location.pathname = '/index.html';
+    // window.location.pathname = '/index.html';
 }
 
 function lookFor() {
@@ -501,10 +502,9 @@ function postOpinion() {
     opinion.userrByUserFrom = opinion3;
 
     let postOpinion = new XMLHttpRequest();
-    let json=JSON.stringify(opinion);
+    let json = JSON.stringify(opinion);
     postOpinion.open("POST", opinionsUrl, true);
     postOpinion.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-    postOpinion.onload();
+    postOpinion.onload;
     postOpinion.send(json);
-
 }
