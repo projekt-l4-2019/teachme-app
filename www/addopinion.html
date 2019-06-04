@@ -62,9 +62,9 @@
             <img class="avatar" src="img/avatars/default.PNG" alt="Card image">
             <div class="card-body">
                 <ul class="list-group list-group-flush" style="font-size: 20px;">
-                    <li class="list-group-item">Ocena:</li>
-                    <select class="custom-select">
-                        <option selected="">Wybierz ocenę...</option>
+                    <li class="list-group-item">Wybierz ocenę:</li>
+                    <select class="custom-select" id="userAddOpinion">
+                        <option selected="selected" disabled="disabled"></option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -72,15 +72,15 @@
                         <option value="5">5</option>
                     </select>
                     <li class="list-group-item">Komentarz:</li>
-                    <textarea class="form-control" id="noticeDescription" rows="4"></textarea>
+                    <textarea class="form-control" id="userAddOpinionDescription" rows="4"></textarea>
                 </ul>
             </div>
-            <button type="button" class="btn btn-success show-ann">Dodaj</button>
-            <div class="alert alert-dismissible alert-danger formError">
+            <button type="button" class="btn btn-success show-ann" onclick="postOpinion()">Dodaj</button>
+            <!-- <div class="alert alert-dismissible alert-danger formError">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 <strong>Coś poszło nie tak!</strong> <a href="#" class="alert-link">Wypełnij formularz poprawnie</a> i
                 spróbuj przesłać ponownie.
-            </div>
+            </div> -->
         </div>
 
         <script type="text/javascript" src="cordova.js"></script>

@@ -24,8 +24,8 @@ if (window.location.pathname.substr(-10) === 'index.html') {
     loadUserProfile();
     loadUserOpinions();
 } else if (window.location.pathname.substr(-12) === 'profile.html') {
-    loadUserProfile();
     loadUserOpinions();
+    loadUserProfile();
 }
 
 
@@ -172,8 +172,8 @@ function loadUserOpinions() {
                 }
             }
             document.getElementById("opinionAmount").innerText = 'Opinie: ' + ratesAmount;
-            if(ratesAmount > 0){
-                document.getElementById("ratingAvg").innerText = 'Ocena: ' + ratesSum/ratesAmount + '/5';
+            if (ratesAmount > 0) {
+                document.getElementById("ratingAvg").innerText = 'Ocena: ' + (ratesSum / ratesAmount).toFixed(1) + '/5';
                 html = '<h4 class="card-title" style="margin-bottom: 5px; margin-left: 5vw">Opinie:</h4>' + html;
             }
             opinionListHTML.innerHTML = html;
@@ -416,7 +416,7 @@ function postNotice() {
     var dataIdUser = {};
     var dataIdSubject = {};
 
-    data.idNotice="";
+    data.idNotice = "";
     if (document.getElementById('offer').classList.contains('active')) {
         data.lookOrOffer = 0;
     } else {
@@ -425,10 +425,10 @@ function postNotice() {
     data.note = document.getElementById("noticeDescription").value;
     data.meetingPlace = document.getElementById("selectCity").value;
     data.meetingDate = document.getElementById("date").value;
-    
+
     data.price = document.getElementById("price").value;
     dataIdSubject.idSubject = getListIndex('selectSubject');
-    
+
     data.active = 1;
     data.level = getListIndex('selectLevel');
     data.timeFrom = timeToTimestamp(data.date, document.getElementById('timeFrom').value);
@@ -461,12 +461,12 @@ function postNotice() {
     window.location.pathname = '/index.html';
 }
 
-function lookFor(){
+function lookFor() {
     let lookForData = {};
 
     lookForData.subjectName = getListIndex("selectSubject");
     lookForData.level = getListIndex("selectLevel");
-    lookForData.voivodeship = getListIndex("selectVoivodeship");    
+    lookForData.voivodeship = getListIndex("selectVoivodeship");
     lookForData.city = getListIndex("selectCity");
     lookForData.timeFrom = document.getElementById("timeFrom").value;
     lookForData.timeTo = document.getElementById("timeTo").value;
@@ -486,7 +486,7 @@ function lookFor(){
     console.log(data);
 }
 
-function addOpinion() {
+function postOpinion() {
     var opinion = {};
     var opinion2 = {};
     var opinion3 = {};
