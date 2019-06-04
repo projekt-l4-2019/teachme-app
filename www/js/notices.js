@@ -148,8 +148,9 @@ function loadUserOpinions(idUser) {
             opinionList = JSON.parse(this.response);
             if (request.status >= 200 && request.status < 400) {
                 opinionList.forEach(opinion => {
+                    console.log(opinion);
                     // console.log(opinion);
-                    let newOpinion = new Opinion(opinion.idOpinion, opinion.rating, opinion.comment, opinion.userTo, opinion.userByUserFrom.name);
+                    let newOpinion = new Opinion(opinion.idOpinion, opinion.rating, opinion.comment, opinion.userTo, opinion.userrByUserFrom.name);
                     opinionArray.push(newOpinion);
                 });
             } else {
@@ -161,13 +162,13 @@ function loadUserOpinions(idUser) {
                 if (opinionArray[i].userTo === idUser) {
                     html += '<div class="card border-success mb-3 opinionCard" style="max-width: 20rem;">';
                     html += '<div class="card-body">';
-                    html += '<em style="font-size: 17px;">Bardzo dobry korepetytor, świetnie tłumaczy. Matematyka staje się prosta :)</em>'
-                    // html += '<em style="font-size: 17px;">' + opinionArray[i].comment + '</em>'
-                    html += '<h6 class="text-muted">Marek</h6></div>';
-                    // html += '<h6 class="text-muted">' + opinionArray[i].userFromName + '</h6></div>';
+                    // html += '<em style="font-size: 17px;">Bardzo dobry korepetytor, świetnie tłumaczy. Matematyka staje się prosta :)</em>'
+                    html += '<em style="font-size: 17px;">' + opinionArray[i].comment + '</em>'
+                    // html += '<h6 class="text-muted">Marek</h6></div>';
+                    html += '<h6 class="text-muted">' + opinionArray[i].userFromName + '</h6></div>';
                     html += '<div class="card-header opinionHeader">Ocena:';
-                    // html += '<span class="badge badge-warning note">' + opinionArray[i].rating + '</span>';
-                    html += '<span class="badge badge-warning note"> 5 </span>';
+                    html += '<span class="badge badge-warning note">' + opinionArray[i].rating + '</span>';
+                    // html += '<span class="badge badge-warning note"> 5 </span>';
                     html += '</div></div>';
                 }
             }

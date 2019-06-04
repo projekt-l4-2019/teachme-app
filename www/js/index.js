@@ -22,7 +22,7 @@ var path = window.location.pathname;
 var match = path.match(re);
 if(match)
     page = match[0];
-console.log(document.getElementById(page));
+// console.log(document.getElementById(page));
 document.getElementById(page).classList.add("active");
 
 //Insert bg image
