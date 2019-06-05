@@ -353,7 +353,7 @@ function loadSelectedNotice() {
             html += '<li class="list-group-item">Cena za godzinę: ' + notice.price + ' zł </li>';
             html += '<li class="list-group-item">Godzina: ' + getTime(notice.timeFrom) + ' - ' + getTime(notice.timeTo) + '</li>';
             html += '<li class="list-group-item">Termin spotkania: ' + getDate(notice.meetingDate) + '</li>';
-            html += '<button type="button" class="btn btn-danger" onclick="deleteNotice(' + notice.idNotice + ')">Usuń</button>';
+            html += '<button type="button" class="btn btn-danger show-ann" onclick="deleteNotice(' + notice.idNotice + ')">Usuń</button>';
         }
         noticeListHTML.innerHTML = html;
     };
@@ -463,14 +463,10 @@ function postNotice() {
 
     let json = JSON.stringify(data);
     let postNotice = new XMLHttpRequest();
-    postNotice.open("POST", noticesUrl, true);
+    postNotice.open("POST", noticesUrl, false);
     postNotice.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-    postNotice.onload;
     postNotice.send(json);
-    alert('Dodano pomyslnie!');
-    // TODO: Nie nie chce sie dodać przy odświeżeniu zaraz po xhr.send(json).Trzeba skombinować jakieś obejście lepsze niż alert.
-
-    // window.location.pathname = '/index.html';
+    postNotice.onreadystatechange(window.history.back());
 }
 
 function lookFor() {
