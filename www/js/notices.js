@@ -158,7 +158,7 @@ function loadUserOpinions() {
             let ratesAmount = 0;
             const opinionListHTML = document.getElementById('showOpinions');
             html = '';
-            for (let i = opinionArray.length-1; i>=0; i--) {
+            for (let i = opinionArray.length - 1; i >= 0; i--) {
                 if (opinionArray[i].userTo === Number(idUser)) {
                     console.log(opinionArray[i].idOpinion);
                     html += '<div class="card border-success mb-3 opinionCard" style="max-width: 20rem;">';
@@ -353,10 +353,20 @@ function loadSelectedNotice() {
             html += '<li class="list-group-item">Cena za godzinę: ' + notice.price + ' zł </li>';
             html += '<li class="list-group-item">Godzina: ' + getTime(notice.timeFrom) + ' - ' + getTime(notice.timeTo) + '</li>';
             html += '<li class="list-group-item">Termin spotkania: ' + getDate(notice.meetingDate) + '</li>';
+            html += '<button type="button" class="btn btn-danger" onclick="deleteNotice(' + notice.idNotice + ')">Usuń</button>';
         }
         noticeListHTML.innerHTML = html;
     };
     request.send();
+}
+
+function deleteNotice(idNotice) {
+    let json = JSON.stringify('');
+    let deleteNotice = new XMLHttpRequest();
+    deleteNotice.open("DELETE", noticesUrl + '/' + idNotice, false);
+    deleteNotice.setRequestHeader('Content-Type', 'application/json');
+    deleteNotice.send(json);
+    deleteNotice.onreadystatechange(window.history.back());
 }
 
 function getNoticeId(id_notice) {
