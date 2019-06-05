@@ -192,8 +192,6 @@ function deleteOpinion(idOpinion) {
     postOpinion.onload;
     console.log(deleteOpinion);
     deleteOpinion.send(json);
-    
-    // alert("Usunięto komentarz");
     deleteOpinion.onreadystatechange(window.location.reload());
 }
 
@@ -257,7 +255,7 @@ function loadCities(id) {
     let cityList;
     let request = new XMLHttpRequest();
     if (id != 0 && id != "undefined") {
-        request.open('GET', voivodeshipsUrl + '/' + id, false);
+        request.open('GET', voivodeshipsUrl + '/' + id, true);
         request.onload = function () {
             // Begin accessing JSON data here
             cityList = JSON.parse(this.response);
@@ -506,8 +504,9 @@ function postOpinion() {
 
     let postOpinion = new XMLHttpRequest();
     let json = JSON.stringify(opinion);
-    postOpinion.open("POST", opinionsUrl, true);
+    postOpinion.open("POST", opinionsUrl, false);
     postOpinion.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     postOpinion.onload;
     postOpinion.send(json);
+    postOpinion.onreadystatechange(window.history.back());
 }
