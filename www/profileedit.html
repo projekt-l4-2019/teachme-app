@@ -62,40 +62,20 @@
             <div class="card-body">
                 <ul class="list-group list-group-flush" style="font-size: 20px;">
                     <li class="list-group-item">Imię:</li>
-                    <input type="text" class="form-control" placeholder="Podaj imię..." id="userAbout" />
+                    <input type="text" class="form-control" placeholder="Podaj imię..." id="userName" />
                     <li class="list-group-item">Nazwisko:</li>
-                    <input type="text" class="form-control" placeholder="Podaj nazwisko..." id="userAbout" />
+                    <input type="text" class="form-control" placeholder="Podaj nazwisko..." id="userSurname" />
                     <li class="list-group-item">O mnie:</li>
                     <input type="text" class="form-control" placeholder="Napisz swój opis..." id="userAbout" />
                     <li class="list-group-item">Telefon:</li>
-                    <input type="text" class="form-control" placeholder="Podaj numer telefonu..." id="userAbout" />
+                    <input type="text" class="form-control" placeholder="Podaj numer telefonu..." id="userPhone" />
                     <li class="list-group-item">E-mail:</li>
-                    <input type="text" class="form-control" placeholder="Podaj e-mail..." id="userAbout" />
+                    <input type="text" class="form-control" placeholder="Podaj e-mail..." id="userEmail" />
                     <li class="list-group-item">Miasto:</li>
-                    <input type="text" class="form-control" placeholder="Podaj miasto..." id="userAbout" />
-                    <!-- <li class="list-group-item">Wiek:</li>
-                    <select class="custom-select">
-                        <option selected="">Wybierz wiek...</option>
-                        <option value="1">15</option>
-                        <option value="2">16</option>
-                        <option value="3">17</option>
-                        <option value="4">18</option>
-                        <option value="5">19</option>
-                        <option value="6">20</option>
-                        <option value="7">21</option>
-                        <option value="8">22</option>
-                        <option value="9">23</option>
-                        <option value="10">24</option>
-                        <option value="11">25</option>
-                        <option value="12">26</option>
-                        <option value="13">27</option>
-                        <option value="14">28</option>
-                        <option value="15">29</option>
-                        <option value="16">29+</option>
-                    </select> -->
+                    <input type="text" class="form-control" placeholder="Podaj miasto..." id="userCity" />
                 </ul>
             </div>
-            <button type="button" class="btn btn-success show-ann">Zatwierdź</button>
+        <button type="button" class="btn btn-success show-ann" onclick="editProfile()">Zatwierdź</button>
             <div class="alert alert-dismissible alert-danger formError">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 <strong>Coś poszło nie tak!</strong> <a href="#" class="alert-link">Wypełnij formularz poprawnie</a> i

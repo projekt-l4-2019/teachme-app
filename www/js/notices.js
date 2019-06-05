@@ -498,6 +498,20 @@ function lookFor() {
     console.log(data);
 }
 
+function editProfile() {
+    let editData = {};
+
+    editData.userName = document.getElementById("userName").value;
+    editData.userSurname = document.getElementById("userSurname").value;
+    editData.userAbout = document.getElementById("userAbout").value;
+    editData.userPhone = document.getElementById("userPhone").value;
+    editData.userEmail = document.getElementById("userEmail").value;
+    editData.userCity = document.getElementById("userCity").value;
+
+    var data = JSON.stringify(editData);
+    console.log(data);
+}
+
 function postOpinion() {
     var opinion = {};
     var opinion2 = {};
