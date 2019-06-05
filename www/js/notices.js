@@ -61,16 +61,18 @@ class Notice {
 }
 
 class User {
-    constructor(id, name, surname, avatar, phone, email, cityName, about, birthDate, ) {
-        this.id = id;
+    constructor(idUser, login, name, surname, birthDate, avatar, phone, email, cityName, idCity, about, ) {
+        this.idUser = idUser;
+        this.login = login;
         this.name = name;
         this.surname = surname;
+        this.birthDate = birthDate;
         this.avatar = avatar;
         this.phone = phone;
         this.email = email;
         this.cityName = cityName;
         this.about = about;
-        this.birthDate = birthDate;
+        this.idCity = idCity;
     }
 }
 
@@ -90,6 +92,8 @@ if (window.location.pathname.substr(-10) === 'index.html') {
 } else if (window.location.pathname.substr(-12) === 'profile.html') {
     loadUserProfile();
     loadUserOpinions();
+} else if (window.location.pathname.substr(-16) === 'profileedit.html') {
+    loadVoivodeships();
 }
 
 //////////////////////////////////////////Load user profile
@@ -101,8 +105,10 @@ function loadUserProfile() {
         request.onload = function () {
             // Begin accessing JSON data here
             user = JSON.parse(this.response);
+            console.log(user);
             if (request.status >= 200 && request.status < 400) {
-                user = new User(user.idUser, user.name, user.surname, user.avatar, user.phone, user.email, user.cityByCityIdCity.name, user.about, user.birthDate);
+                user = new User(user.idUser, user.login, user.name, user.surname, user.birthDate, user.avatar, user.phone, user.email, user.cityByCityIdCity.name, user.cityByCityIdCity.idCity, user.about);
+
             } else {
                 console.log('error');
             }
@@ -114,7 +120,7 @@ function loadUserProfile() {
             html += '<div class="card-body">';
             html += '<h5 class="card-title">O mnie:</h5>'
             html += '<p class="card-text">' + user.about + '</p>';
-            html += '<span class="badge badge-info opinionsBtn" id="opinionAmount" onclick="scrollDown(); loadUserOpinions(' + user.id + ');"></span>';
+            html += '<span class="badge badge-info opinionsBtn" id="opinionAmount" onclick="scrollDown(); loadUserOpinions(' + user.idUser + ');"></span>';
             html += '<span class="badge badge-warning opinionsBtn" id="ratingAvg"></span>';
             if (window.location.pathname.substr(-12) === 'profile.html') {
                 html += '<ul class="list-group list-group-flush" style="font-size: 20px;">';
@@ -124,8 +130,8 @@ function loadUserProfile() {
                 html += '<li class="list-group-item"><i class="material-icons">account_box</i> ' + getAgeFromBirthDate(user.birthDate) + ' lat(a)</li>';
                 html += '</ul>';
                 html += '</div>';
-                html += '<button type="button" class="btn btn-success show-ann" id="showNoticesBtn" style="margin-bottom:5px" onclick="loadUserNotices(' + user.id + ')">Zobacz ogłoszenia</button>';
-                html += '<button type="button" class="btn btn-success show-ann" id="showOpinionBtn" style="margin-bottom:5px" onclick="loadUserOpinions(' + user.id + ')">Zobacz opinie</button>';
+                html += '<button type="button" class="btn btn-success show-ann" id="showNoticesBtn" style="margin-bottom:5px" onclick="loadUserNotices(' + user.idUser + ')">Zobacz ogłoszenia</button>';
+                html += '<button type="button" class="btn btn-success show-ann" id="showOpinionBtn" style="margin-bottom:5px" onclick="loadUserOpinions(' + user.idUser + ')">Zobacz opinie</button>';
                 html += '<a href="addopinion.html"><button type="button" class="btn btn-success show-ann">Dodaj opinię</button></a>';
                 html += '<a href="profileedit.html"><button class="circleButton editButton"><i class="material-icons">edit</i></button></a>'
             } else {
@@ -327,7 +333,7 @@ function loadCities(id) {
             html = '<option>Wszystkie</option>';
             if (window.location.pathname.substr(-14) === 'noticeadd.html') html = '<option disabled="disabled" selected="selected"></option>'
             for (let i = 0; i < cityArray.length; i++) {
-                html += '<option>' + cityArray[i].cityName + '</option>';
+                html += '<option value=' + cityArray[i].idCity + '>' + cityArray[i].cityName + '</option>';
             }
             cityListHTML.innerHTML = html;
 
@@ -472,7 +478,7 @@ function getTime(dateJSON) {
 function getDate(dateJSON) {
     let date = new Date(dateJSON);
     let year = date.getFullYear();
-    let month = addZero(date.getMonth()+1);
+    let month = addZero(date.getMonth() + 1);
     let day = addZero(date.getDate());
     return day + '.' + month + '.' + year;
 }
@@ -551,16 +557,38 @@ function lookFor() {
 
 function editProfile() {
     let editData = {};
+    let editData2 = {};
+    let user;
+    let request = new XMLHttpRequest();
+    request.open('GET', usersUrl + '/' + localStorage.getItem("userID"), false);
+    request.onreadystatechange = function () {
+        user = JSON.parse(this.response);
+        if (request.status >= 200 && request.status < 400) {
+            user = new User(user.idUser, user.login, user.name, user.surname, user.birthDate, user.avatar, user.phone, user.email, user.cityByCityIdCity.name, user.cityByCityIdCity.idCity, user.about);
+        } else {
+            console.log('error');
+        }
+    }
+    request.send();
 
-    editData.userName = document.getElementById("userName").value;
-    editData.userSurname = document.getElementById("userSurname").value;
-    editData.userAbout = document.getElementById("userAbout").value;
-    editData.userPhone = document.getElementById("userPhone").value;
-    editData.userEmail = document.getElementById("userEmail").value;
-    editData.userCity = document.getElementById("userCity").value;
+    editData.idUser = user.idUser;
+    editData.name = document.getElementById("userName").value;
+    editData.surname = document.getElementById("userSurname").value;
+    editData.birthDate = user.birthDate;
+    editData.avatar = user.avatar;
+    editData.phone = document.getElementById("userPhone").value;
+    editData.email = user.email;
+    editData.about = document.getElementById("userAbout").value;
+    editData2.idCity = document.getElementById('selectCity').value;
+    editData.cityByCityIdCity = editData2;
 
-    var data = JSON.stringify(editData);
-    console.log(data);
+    let data = JSON.stringify(editData);
+
+    let editUser = new XMLHttpRequest();
+    editUser.open('PUT', usersUrl + '/' + user.idUser, false);
+    editUser.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    editUser.send(data);
+    editUser.onreadystatechange(window.history.back());
 }
 
 function postOpinion() {

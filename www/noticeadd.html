@@ -88,11 +88,11 @@
                 </div>
                 <div class="form-group">
                     <label class="col-form-label" for="selectVoivodeship">Województwo:</label>
-                    <select class="form-control" id="selectVoivodeship"></select>
+                    <select class="form-control" id="selectVoivodeship" onclick="getViovideshipIndex()"></select>
                 </div>
                 <div class="form-group">
                     <label class="col-form-label" for="selectCity">Miejscowość:</label>
-                    <select class="form-control" id="selectCity" onclick="getViovideshipIndex()">
+                    <select class="form-control" id="selectCity" onclick="(cordova.platformId==='android') ? getViovideshipIndex() : 0">
                     </select>
                 </div>
                 <div class="form-group">

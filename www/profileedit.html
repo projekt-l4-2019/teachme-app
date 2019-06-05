@@ -66,13 +66,18 @@
                     <li class="list-group-item">Nazwisko:</li>
                     <input type="text" class="form-control" placeholder="Podaj nazwisko..." id="userSurname" />
                     <li class="list-group-item">O mnie:</li>
-                    <input type="text" class="form-control" placeholder="Napisz swój opis..." id="userAbout" />
+                    <textarea type="text" class="form-control" placeholder="Napisz swój opis..." id="userAbout" rows="3"></textarea>
                     <li class="list-group-item">Telefon:</li>
                     <input type="text" class="form-control" placeholder="Podaj numer telefonu..." id="userPhone" />
-                    <li class="list-group-item">E-mail:</li>
-                    <input type="text" class="form-control" placeholder="Podaj e-mail..." id="userEmail" />
-                    <li class="list-group-item">Miasto:</li>
-                    <input type="text" class="form-control" placeholder="Podaj miasto..." id="userCity" />
+                    <div class="form-group">
+                        <label class="list-group-item" for="selectVoivodeship">Województwo:</label>
+                        <select class="form-control" id="selectVoivodeship" onclick="getViovideshipIndex()"></select>
+                    </div>
+                    <div class="form-group">
+                        <label class="list-group-item" for="selectCity">Miejscowość:</label>
+                        <select class="form-control" id="selectCity" onclick="(cordova.platformId==='android') ? getViovideshipIndex() : 0">
+                        </select>
+                    </div>
                 </ul>
             </div>
         <button type="button" class="btn btn-success show-ann" onclick="editProfile()">Zatwierdź</button>
