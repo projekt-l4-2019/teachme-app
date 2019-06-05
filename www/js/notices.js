@@ -505,7 +505,7 @@ function postNotice() {
 
     data.active = "1";
     data.level = getListIndex('selectLevel');
-    data.timestamp = "";
+    // data.timestamp = "";
     data.timeFrom = timeToTimestamp(data.meetingDate, document.getElementById('timeFrom').value);
     data.timeTo = timeToTimestamp(data.meetingDate, document.getElementById('timeTo').value);
     data.subjectBySubjectIdSubject = dataIdSubject;
