@@ -10,7 +10,6 @@ const usersUrl = "https://rhubarb-cobbler-84890.herokuapp.com/users";
 ///TEMP SETTINGS:
 storeUserId(1);
 
-
 class City {
     constructor(idCity, cityName) {
         this.idCity = idCity;
@@ -75,8 +74,6 @@ class User {
         this.idCity = idCity;
     }
 }
-
-
 
 if (window.location.pathname.substr(-10) === 'index.html') {
     loadNotices();
@@ -489,9 +486,9 @@ function postNotice() {
         data.lookOrOffer = "1";
     }
     data.note = document.getElementById("noticeDescription").value;
-    data.meetingPlace = document.getElementById("selectCity").value;
+    data.meetingPlace = $( "#selectCity option:selected" ).text();
     data.meetingDate = document.getElementById("date").value;
-
+    
     data.price = Number(document.getElementById("price").value);
     dataIdSubject.idSubject = document.getElementById('selectSubject').value;
 
@@ -509,9 +506,8 @@ function postNotice() {
     postNotice.open("POST", noticesUrl, false);
     postNotice.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     postNotice.send(json);
-    console.log(json);
-    alert("DUPA");
-    // postNotice.onreadystatechange(window.history.back());
+    
+    postNotice.onreadystatechange(window.history.back());
 }
 
 function lookFor() {
