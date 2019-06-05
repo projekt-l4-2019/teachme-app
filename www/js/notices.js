@@ -142,8 +142,12 @@ function loadUserProfile() {
 function loadUserOpinions() {
     let opinionArray = new Array();
     let opinionList;
-    document.getElementById("showNoticesBtn").style.setProperty("display","block");
-    document.getElementById("showOpinionBtn").style.setProperty("display","none");
+
+    if (window.location.pathname.substr(-12) === 'profile.html') {
+        document.getElementById("showNoticesBtn").style.setProperty("display", "block");
+        document.getElementById("showOpinionBtn").style.setProperty("display", "none");
+    }
+    
     let request = new XMLHttpRequest();
     var idUser = localStorage.getItem("userID");
     if (idUser != 0 && idUser != "undefined") {
@@ -191,8 +195,8 @@ function loadUserOpinions() {
 function loadUserNotices(idUser) {
     let noticeArray = new Array();
     let noticeList;
-    document.getElementById("showNoticesBtn").style.setProperty("display","none");
-    document.getElementById("showOpinionBtn").style.setProperty("display","block");
+    document.getElementById("showNoticesBtn").style.setProperty("display", "none");
+    document.getElementById("showOpinionBtn").style.setProperty("display", "block");
     let request = new XMLHttpRequest();
     request.open('GET', usersUrl + '/' + idUser, true);
     request.onload = function () {
