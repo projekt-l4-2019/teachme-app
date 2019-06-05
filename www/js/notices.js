@@ -11,24 +11,6 @@ const usersUrl = "https://rhubarb-cobbler-84890.herokuapp.com/users";
 storeUserId(1);
 
 
-
-if (window.location.pathname.substr(-10) === 'index.html') {
-    loadNotices();
-    loadVoivodeships();
-    loadSubjects();
-} else if (window.location.pathname.substr(-14) === 'noticeadd.html') {
-    loadVoivodeships();
-    loadSubjects();
-} else if (window.location.pathname.substr(-11) === 'notice.html') {
-    loadSelectedNotice();
-    loadUserProfile();
-    loadUserOpinions();
-} else if (window.location.pathname.substr(-12) === 'profile.html') {
-    loadUserOpinions();
-    loadUserProfile();
-}
-
-
 class City {
     constructor(idCity, cityName) {
         this.idCity = idCity;
@@ -91,12 +73,30 @@ class User {
     }
 }
 
+
+
+if (window.location.pathname.substr(-10) === 'index.html') {
+    loadNotices();
+    loadVoivodeships();
+    loadSubjects();
+} else if (window.location.pathname.substr(-14) === 'noticeadd.html') {
+    loadVoivodeships();
+    loadSubjects();
+} else if (window.location.pathname.substr(-11) === 'notice.html') {
+    loadSelectedNotice();
+    loadUserProfile();
+    loadUserOpinions();
+} else if (window.location.pathname.substr(-12) === 'profile.html') {
+    loadUserProfile();
+    loadUserOpinions();
+}
+
 //////////////////////////////////////////Load user profile
 function loadUserProfile() {
     let user;
     let request = new XMLHttpRequest();
     if (localStorage.getItem("userID") != 0 && localStorage.getItem("userID") != "undefined") {
-        request.open('GET', usersUrl + '/' + localStorage.getItem("userID"), true);
+        request.open('GET', usersUrl + '/' + localStorage.getItem("userID"), false);
         request.onload = function () {
             // Begin accessing JSON data here
             user = JSON.parse(this.response);
@@ -143,7 +143,7 @@ function loadUserOpinions() {
     let request = new XMLHttpRequest();
     var idUser = localStorage.getItem("userID");
     if (idUser != 0 && idUser != "undefined") {
-        request.open('GET', opinionsUrl, true);
+        request.open('GET', opinionsUrl, false);
         request.onload = function () {
             opinionList = JSON.parse(this.response);
             if (request.status >= 200 && request.status < 400) {
@@ -158,15 +158,17 @@ function loadUserOpinions() {
             let ratesAmount = 0;
             const opinionListHTML = document.getElementById('showOpinions');
             html = '';
-            for (let i = 0; i < opinionArray.length; i++) {
+            for (let i = opinionArray.length-1; i>=0; i--) {
                 if (opinionArray[i].userTo === Number(idUser)) {
+                    console.log(opinionArray[i].idOpinion);
                     html += '<div class="card border-success mb-3 opinionCard" style="max-width: 20rem;">';
                     html += '<div class="card-body">';
                     html += '<em style="font-size: 17px;">' + opinionArray[i].comment + '</em>'
                     html += '<h6 class="text-muted">' + opinionArray[i].userFromName + '</h6></div>';
                     html += '<div class="card-header opinionHeader">Ocena: ';
                     html += '<span class="badge badge-warning note">' + opinionArray[i].rating + '</span>';
-                    html += '</div></div>';
+                    html += '</div>';
+                    html += '<button type="button" class="btn btn-danger" onclick="deleteOpinion(' + opinionArray[i].idOpinion + ')">Usuń</button></div>';
                     ratesAmount++;
                     ratesSum += opinionArray[i].rating;
                 }
@@ -182,11 +184,24 @@ function loadUserOpinions() {
     }
 }
 
+function deleteOpinion(idOpinion) {
+    let json = JSON.stringify('');
+    let deleteOpinion = new XMLHttpRequest();
+    deleteOpinion.open("DELETE", opinionsUrl + '/' + idOpinion, false);
+    deleteOpinion.setRequestHeader('Content-Type', 'application/json');
+    postOpinion.onload;
+    console.log(deleteOpinion);
+    deleteOpinion.send(json);
+    
+    // alert("Usunięto komentarz");
+    deleteOpinion.onreadystatechange(window.location.reload());
+}
+
 function loadSubjects() {
     let subjectArray = new Array();
     let subjectList;
     let request = new XMLHttpRequest();
-    request.open('GET', subjectsUrl, true);
+    request.open('GET', subjectsUrl, false);
     request.onload = function () {
         // Begin accessing JSON data here
         subjectList = JSON.parse(this.response);
@@ -214,7 +229,7 @@ function loadVoivodeships() {
     let voivodeshipArray = new Array();
     let voivodeshipList;
     let request = new XMLHttpRequest();
-    request.open('GET', voivodeshipsUrl, true);
+    request.open('GET', voivodeshipsUrl, false);
     request.onload = function () {
         // Begin accessing JSON data here
         voivodeshipList = JSON.parse(this.response);
@@ -242,7 +257,7 @@ function loadCities(id) {
     let cityList;
     let request = new XMLHttpRequest();
     if (id != 0 && id != "undefined") {
-        request.open('GET', voivodeshipsUrl + '/' + id, true);
+        request.open('GET', voivodeshipsUrl + '/' + id, false);
         request.onload = function () {
             // Begin accessing JSON data here
             cityList = JSON.parse(this.response);
@@ -317,7 +332,7 @@ function loadSelectedNotice() {
     let noticeArray = new Array();
     let notice;
     let request = new XMLHttpRequest();
-    request.open('GET', noticesUrl + '/' + localStorage.getItem("noticeID"), true);
+    request.open('GET', noticesUrl + '/' + localStorage.getItem("noticeID"), false);
     request.onload = function () {
         // Begin accessing JSON data here
         notice = JSON.parse(this.response);
@@ -434,24 +449,12 @@ function postNotice() {
     data.timestamp = "";
     data.timeFrom = timeToTimestamp(data.meetingDate, document.getElementById('timeFrom').value);
     data.timeTo = timeToTimestamp(data.meetingDate, document.getElementById('timeTo').value);
-    alert('Dodano pomyslnie!');
     data.subjectBySubjectIdSubject = dataIdSubject;
     dataIdUser.idUser = 1;
-    data.userrByUserrIdUser =dataIdUser;
+    data.userrByUserrIdUser = dataIdUser;
 
     let json = JSON.stringify(data);
-    console.log(json);
-    
-    // data.meetingByMeetingIdMeetin
-    // if(data[7]==='') alert("Nie podano wartosci!");
-    // else {
-    // let json = JSON.stringify(data);
-    
-    // alert('Dodano pomyslnie!');
-    // alert('Dodano pomyslnie!');
-    // let xhr = new XMLHttpRequest();
     let postNotice = new XMLHttpRequest();
-    
     postNotice.open("POST", noticesUrl, true);
     postNotice.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     postNotice.onload;
