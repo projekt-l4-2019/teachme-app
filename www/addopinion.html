@@ -53,8 +53,36 @@
             </div>
         </nav>
     </div>
+
     <div class="mainWindow jumbotron">
         <form>
+            <fieldset class="form-group">
+                <div class="card mb-3 form-group">
+                    <div class="card-body form-group">
+                        <h4 class="card-title profile-name">Michał Białek</h4>
+                    </div>
+                    <img class="avatar" src="img/avatars/default.PNG" alt="Card image">
+                    <div class="card-body form-group">
+                        <ul class="list-group list-group-flush" style="font-size: 20px;">
+                            <li class="list-group-item">Wybierz ocenę:</li>
+                            <select class="custom-select" id="userAddOpinion" required>
+                                <option selected="selected" disabled="disabled"></option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <li class="list-group-item">Komentarz:</li>
+                            <textarea class="form-control" id="userAddOpinionDescription" rows="4" required></textarea>
+                        </ul>
+                    </div>
+                    <button type="button" class="btn btn-success show-ann" onclick="postOpinion()">Dodaj</button>
+                </div>
+            </fieldset>
+        </form>
+
+        <!-- <form>
             <legend>Dodaj ogłoszenie:</legend>
             <fieldset class="form-group">
                 <div class="form-group">
@@ -72,11 +100,11 @@
                 </div>
                 <div class="form-group">
                     <label for="selectSubject">Wybierz przedmiot:</label>
-                    <select class="form-control" id="selectSubject"></select>
+                    <select class="form-control" id="selectSubject" required></select>
                 </div>
                 <div class="form-group">
                     <label for="selectLevel">Wybierz poziom:</label>
-                    <select class="form-control" id="selectLevel">
+                    <select class="form-control" id="selectLevel" required>
                         <option disabled="disabled" selected="selected"></option>
                         <option>Szkoła podstawowa</option>
                         <option>Gimnazjum</option>
@@ -86,11 +114,11 @@
                 </div>
                 <div class="form-group">
                     <label class="col-form-label" for="selectVoivodeship">Województwo:</label>
-                    <select class="form-control" id="selectVoivodeship" ></select>
+                    <select class="form-control" id="selectVoivodeship" onclick="getViovideshipIndex()"></select>
                 </div>
                 <div class="form-group">
                     <label class="col-form-label" for="selectCity">Miejscowość:</label>
-                    <select class="form-control" id="selectCity" onclick="getViovideshipIndex()">
+                    <select class="form-control" id="selectCity">
                     </select>
                 </div>
                 <div class="form-group">
@@ -112,7 +140,7 @@
                 </div>
                 <button class="btn btn-success" id="submitNoticeBtn" onclick="postNotice()">Wyślij</button>
             </fieldset>
-        </form>
+        </form> -->
     </div>
 
     <script type="text/javascript" src="cordova.js"></script>

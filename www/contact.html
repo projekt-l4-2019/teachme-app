@@ -55,21 +55,31 @@
     </div>
 
     <div class="mainWindow jumbotron">
-        <!-- <div class="title"><h5>Lista Ogłoszeń:</h5></div>
-            <div class="list-group" id="notices"></div> -->
-        <div class="card mb-3" id="notice_extended"></div>
-        <div class="card mb-3" id="userProfile"></div>
-    </div>
+        <div class="card mb-3">
+            <div class="card-body">
+                <h4 class="card-title profile-name" style="font-size: 20px;">Wyślij wiadomość do twórców aplikacji</h4>
+            </div>
+            <div class="card-body" style="padding-top:0">
+                <ul class="list-group list-group-flush" style="font-size: 20px;">
+                    <li class="list-group-item">Treść:</li>
+                    <textarea class="form-control" id="noticeDescription" rows="8" required></textarea>
+                </ul>
+            </div>
+            <a
+                onclick="window.location='mailto:pgp2019l4@gmail.com?subject=Wiadomość od użytkownika TeachMe&body='+document.getElementById('noticeDescription').value">
+                <button type="button" class="btn btn-success show-ann">Wyślij</button>
+            </a>
+        </div>
 
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/popper.min.js"></script>
-    <script type="text/javascript" src="js/pulltorefresh.min.js"></script>
-    <script type="text/javascript" src="js/jquery-3.4.0.min.js"></script>
-    <script type="text/javascript" src="js/jquery.mobile.custom.min.js"></script>
-    <script type="text/javascript" src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/notices.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/popper.min.js"></script>
+        <script type="text/javascript" src="js/pulltorefresh.min.js"></script>
+        <script type="text/javascript" src="js/jquery-3.4.0.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mobile.custom.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/notices.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
 </body>
 
 </html>

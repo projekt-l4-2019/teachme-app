@@ -6,9 +6,21 @@
 /*    margin-top: -2%;*/
 /*    !*height: 20px;*!*/
 /*}*/
+i.material-icons {
+    vertical-align: bottom;
+}
+
+button.btn.btn-success.show-ann {
+    min-width: 100%;
+}
+
 input#timeFrom, input#timeTo {
     width: 25%;
     margin: unset;
+}
+
+ul.list-group.list-group-flush {
+    font-size: 17px !important;
 }
 
 a.list-group-item.list-group-item-action.flex-column.align-items-start {
@@ -58,12 +70,14 @@ button#submitNoticeBtn {
     padding: 0.2rem;
 }
 
-.opinionsBtn{
+.opinionsBtn {
     font-size: 17px;
-    padding: 5px 43px;
-    margin-top: -12px;
+    /* padding: 5px 43px; */
+    /* margin-top: -12px; */
     margin-bottom: 10px;
-    width:50%;
+    /* width: 50%; */
+    margin-right: 1vw;
+    /* right: 0 !important; */
 }
 
 .opinionCard {
