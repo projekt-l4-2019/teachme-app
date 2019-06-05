@@ -74,8 +74,6 @@
                         <label class="list-group-item" for="selectVoivodeship">Województwo:</label>
                         <select class="form-control" id="selectVoivodeship"
                             onclick="loadCities(document.getElementById('selectVoivodeship').value);"></select>
-                    </div>
-                    <div class="form-group">
                         <label class="list-group-item" for="selectCity">Miejscowość:</label>
                         <select class="form-control" id="selectCity"
                             onclick="(cordova.platformId==='android') ? loadCities(document.getElementById('selectVoivodeship').value) : 0">
@@ -84,11 +82,6 @@
                 </ul>
             </div>
             <button type="button" class="btn btn-success show-ann" onclick="editProfile()">Zatwierdź</button>
-            <div class="alert alert-dismissible alert-danger formError">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>Coś poszło nie tak!</strong> <a href="#" class="alert-link">Wypełnij formularz poprawnie</a> i
-                spróbuj przesłać ponownie.
-            </div>
         </div>
     </div>
     </div>

@@ -10,11 +10,15 @@ i.material-icons {
     vertical-align: bottom;
 }
 
+#dismiss{
+    line-height: unset;
+}
+
 button.btn.btn-success.show-ann {
     min-width: 100%;
 }
 
-input#timeFrom, input#timeTo {
+input#timeFrom, input#timeTo, input#priceMin, input#priceMax {
     width: 25%;
     margin: unset;
 }

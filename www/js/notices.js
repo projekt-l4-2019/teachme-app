@@ -235,6 +235,12 @@ function loadUserNotices(idUser) {
             html += '<div class="d-flex w-100 justify-content-between">';
             html += '<h6>Termin spotkania: ' + getDate(notice.meetingDate) + '</h6>' + '<h6>' + notice.meetingPlace + '</h6>' + '<small>' + notice.price + ' zł/h</small>';
             html += '</div>';
+
+            html += '<div class="d-flex w-100 justify-content-between">';
+            html += '<h6 class="mb-1">' + ((notice.lookOrOffer==1) ? 'uczeń' : 'korepetytor') + '</h6>';
+            html += '<h6>' + getTime(notice.timeFrom) + ' - ' + getTime(notice.timeTo) + '</h6>';
+            html += '</div>';
+            
             html += '</a>';
         }
         noticeListHTML.innerHTML = html;
@@ -271,8 +277,8 @@ function loadSubjects() {
             console.log('error');
         }
         const subjectListHTML = document.getElementById('selectSubject');
-        html = '<option>Wszystkie</option>';
-        if (window.location.pathname.substr(-14) === 'noticeadd.html') html = '<option disabled="disabled" selected="selected"></option>'
+        html = '<option disabled="disabled" selected="selected" value="0"></option>';
+        // if (window.location.pathname.substr(-14) === 'noticeadd.html') html = '<option disabled="disabled" selected="selected"></option>'
         for (let i = 0; i < subjectArray.length; i++) {
             html += '<option value=' + subjectArray[i].idSubject + '>' + subjectArray[i].name + '</option>';
         }
@@ -298,8 +304,8 @@ function loadVoivodeships() {
             console.log('error');
         }
         const voivodeshipListHTML = document.getElementById('selectVoivodeship');
-        html = '<option>Wszystkie</option>';
-        if (window.location.pathname.substr(-14) === 'noticeadd.html') html = '<option disabled="disabled" selected="selected"></option>'
+        html = '<option disabled="disabled" selected="selected" value="0"></option>';
+        // if (window.location.pathname.substr(-14) === 'noticeadd.html') html = '<option disabled="disabled" selected="selected"></option>'
         for (let i = 0; i < voivodeshipArray.length; i++) {
             html += '<option value=' + voivodeshipArray[i].idVoivodeship + '>' + voivodeshipArray[i].nameVoivodeship + '</option>';
         }
@@ -327,7 +333,7 @@ function loadCities(id) {
                 console.log('error');
             }
             const cityListHTML = document.getElementById('selectCity');
-            html = '<option>Wszystkie</option>';
+            html = '<option disabled="disabled" selected="selected" value="0"></option>';
             if (window.location.pathname.substr(-14) === 'noticeadd.html') html = '<option disabled="disabled" selected="selected"></option>'
             for (let i = 0; i < cityArray.length; i++) {
                 html += '<option value=' + cityArray[i].idCity + '>' + cityArray[i].cityName + '</option>';
@@ -367,15 +373,18 @@ function loadNotices() {
             html += '<h5 class="mb-1">' + notice.subjectName + '</h5>';
             html += '<small>dodano: ' + getDate(notice.addDate) + '</small>';
             html += '</div>';
-
             if (notice.note.length > 250) {
                 html += '<p class="mb-1">' + notice.note.substring(0, 250) + "..." + '</p>';
             } else {
                 html += '<p class="mb-1">' + notice.note + '</p>';
             }
-
             html += '<div class="d-flex w-100 justify-content-between">';
             html += '<h6>Termin spotkania: ' + getDate(notice.meetingDate) + '</h6>' + '<h6>' + notice.meetingPlace + '</h6>' + '<small>' + notice.price + ' zł/h</small>';
+            html += '</div>';
+
+            html += '<div class="d-flex w-100 justify-content-between">';
+            html += '<h6 class="mb-1">' + ((notice.lookOrOffer==1) ? 'uczeń' : 'korepetytor') + '</h6>';
+            html += '<h6>' + getTime(notice.timeFrom) + ' - ' + getTime(notice.timeTo) + '</h6>';
             html += '</div>';
             html += '</a>';
         }
@@ -486,9 +495,9 @@ function postNotice() {
         data.lookOrOffer = "1";
     }
     data.note = document.getElementById("noticeDescription").value;
-    data.meetingPlace = $( "#selectCity option:selected" ).text();
+    data.meetingPlace = $("#selectCity option:selected").text();
     data.meetingDate = document.getElementById("date").value;
-    
+
     data.price = Number(document.getElementById("price").value);
     dataIdSubject.idSubject = document.getElementById('selectSubject').value;
 
@@ -506,7 +515,7 @@ function postNotice() {
     postNotice.open("POST", noticesUrl, false);
     postNotice.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     postNotice.send(json);
-    
+
     postNotice.onreadystatechange(window.history.back());
 }
 
@@ -516,14 +525,14 @@ function lookFor() {
     lookForData.subjectName = document.getElementById('selectSubject').value;
     lookForData.level = document.getElementById('selectLevel').value;
     lookForData.voivodeship = document.getElementById('selectVoivodeship').value;
-    lookForData.city = document.getElementById('selectCity').value;
-    lookForData.timeFrom = document.getElementById("timeFrom").value;
-    lookForData.timeTo = document.getElementById("timeTo").value;
+    lookForData.city = $("#selectCity option:selected").text();
+    lookForData.priceMin = document.getElementById("priceMin").value;
+    lookForData.priceMax = document.getElementById("priceMax").value;
 
     if (document.getElementById('offer').classList.contains('active')) {
-        lookForData.offerOrLookFor = 0;
-    } else {
         lookForData.offerOrLookFor = 1;
+    } else {
+        lookForData.offerOrLookFor = 0;
     }
     if (document.getElementById('asc').classList.contains('active')) {
         lookForData.ascOrDesc = 0;
@@ -531,8 +540,52 @@ function lookFor() {
         lookForData.ascOrDesc = 1;
     }
 
-    var data = JSON.stringify(lookForData);
-    console.log(data);
+    let noticeArray = new Array();
+    let noticeList;
+    let request = new XMLHttpRequest();
+    request.open('GET', noticesUrl + '/find/' + lookForData.subjectName + '/' + lookForData.level + '/' + lookForData.offerOrLookFor + '/' + lookForData.city + '/' + lookForData.priceMin + '/' + lookForData.priceMax, true);
+    request.onload = function () {
+        noticeList = JSON.parse(this.response);
+        if (request.status >= 200 && request.status < 400) {
+            noticeList.forEach(notice => {
+                console.log(notice);
+                let newNotice = new Notice(notice.idNotice, notice.lookOrOffer, notice.note, notice.meetingPlace, notice.meetingDate, notice.price, notice.level, notice.timestamp, notice.userIdUser, notice.timeFrom, notice.timeTo, notice.subjectBySubjectIdSubject.name);
+                noticeArray.push(newNotice);
+            });
+
+        } else {
+            console.log('error');
+        }
+        const noticeListHTML = document.getElementById('notices');
+        html = '';
+        for (let i = noticeArray.length - 1; i >= 0; i--) {
+            let notice = noticeArray[i];
+            html += '<a href="notice.html" onclick="getNoticeId(' + notice.idNotice + ')" class="list-group-item list-group-item-action flex-column align-items-start">';
+            html += '<div class="d-flex w-100 justify-content-between">';
+            html += '<h5 class="mb-1">' + notice.subjectName + '</h5>';
+            html += '<small>dodano: ' + getDate(notice.addDate) + '</small>';
+            html += '</div>';
+
+            if (notice.note.length > 250) {
+                html += '<p class="mb-1">' + notice.note.substring(0, 250) + "..." + '</p>';
+            } else {
+                html += '<p class="mb-1">' + notice.note + '</p>';
+            }
+
+            html += '<div class="d-flex w-100 justify-content-between">';
+            html += '<h6>Termin spotkania: ' + getDate(notice.meetingDate) + '</h6>' + '<h6>' + notice.meetingPlace + '</h6>' + '<small>' + notice.price + ' zł/h</small>';
+            html += '</div>';
+            
+            html += '<div class="d-flex w-100 justify-content-between">';
+            html += '<h6 class="mb-1">' + ((notice.lookOrOffer==1) ? 'uczeń' : 'korepetytor') + '</h6>';
+            html += '<h6>' + getTime(notice.timeFrom) + ' - ' + getTime(notice.timeTo) + '</h6>';
+            html += '</div>';
+            html += '</a>';
+        }
+        noticeListHTML.innerHTML = html;
+    };
+    request.send();
+
 }
 
 function editProfile() {
