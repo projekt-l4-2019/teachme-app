@@ -66,21 +66,24 @@
                     <li class="list-group-item">Nazwisko:</li>
                     <input type="text" class="form-control" placeholder="Podaj nazwisko..." id="userSurname" />
                     <li class="list-group-item">O mnie:</li>
-                    <textarea type="text" class="form-control" placeholder="Napisz swój opis..." id="userAbout" rows="3"></textarea>
+                    <textarea type="text" class="form-control" placeholder="Napisz swój opis..." id="userAbout"
+                        rows="3"></textarea>
                     <li class="list-group-item">Telefon:</li>
                     <input type="text" class="form-control" placeholder="Podaj numer telefonu..." id="userPhone" />
                     <div class="form-group">
                         <label class="list-group-item" for="selectVoivodeship">Województwo:</label>
-                        <select class="form-control" id="selectVoivodeship" onclick="getViovideshipIndex()"></select>
+                        <select class="form-control" id="selectVoivodeship"
+                            onclick="loadCities(document.getElementById('selectVoivodeship').value);"></select>
                     </div>
                     <div class="form-group">
                         <label class="list-group-item" for="selectCity">Miejscowość:</label>
-                        <select class="form-control" id="selectCity" onclick="(cordova.platformId==='android') ? getViovideshipIndex() : 0">
+                        <select class="form-control" id="selectCity"
+                            onclick="(cordova.platformId==='android') ? loadCities(document.getElementById('selectVoivodeship').value) : 0">
                         </select>
                     </div>
                 </ul>
             </div>
-        <button type="button" class="btn btn-success show-ann" onclick="editProfile()">Zatwierdź</button>
+            <button type="button" class="btn btn-success show-ann" onclick="editProfile()">Zatwierdź</button>
             <div class="alert alert-dismissible alert-danger formError">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 <strong>Coś poszło nie tak!</strong> <a href="#" class="alert-link">Wypełnij formularz poprawnie</a> i

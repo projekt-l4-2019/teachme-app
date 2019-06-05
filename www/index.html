@@ -66,24 +66,24 @@
                             <div class="form-group">
                                 <label for="selectLevel">Wybierz poziom:</label>
                                 <select class="form-control" id="selectLevel">
-                                    <option>Wszystkie</option>
-                                    <option>Szkoła podstawowa</option>
-                                    <option>Gimnazjum</option>s
-                                    <option>Szkoła średnia</option>
-                                    <option>Szkoła wyższa</option>
+                                    <option value='0'>Wszystkie</option>
+                                    <option value='1'>Szkoła podstawowa</option>
+                                    <option value='2'>Gimnazjum</option>
+                                    <option value='3'>Szkoła średnia</option>
+                                    <option value='4'>Szkoła wyższa</option>
                                 </select>
                             </div>
                         </li>
                         <li class="nav-item">
                             <div class="form-group">
                                 <label class="col-form-label" for="selectVoivodeship">Województwo:</label>
-                                <select class="form-control" id="selectVoivodeship" onclick="getViovideshipIndex()"></select>
+                                <select class="form-control" id="selectVoivodeship" onclick="loadCities(document.getElementById('selectVoivodeship').value)"></select>
                             </div>
                         </li>
                         <li class="nav-item">
                             <div class="form-group">
                                 <label class="col-form-label" for="selectCity">Miejscowość:</label>
-                                <select class="form-control" id="selectCity" onclick="(cordova.platformId==='android') ? getViovideshipIndex() : 0">
+                                <select class="form-control" id="selectCity" onclick="(cordova.platformId==='android') ? loadCities(document.getElementById('selectVoivodeship').value) : 0">
                                     <option>Wszystkie</option>
                                 </select>
                             </div>

@@ -277,7 +277,7 @@ function loadSubjects() {
         html = '<option>Wszystkie</option>';
         if (window.location.pathname.substr(-14) === 'noticeadd.html') html = '<option disabled="disabled" selected="selected"></option>'
         for (let i = 0; i < subjectArray.length; i++) {
-            html += '<option>' + subjectArray[i].name + '</option>';
+            html += '<option value=' + subjectArray[i].idSubject + '>' + subjectArray[i].name + '</option>';
         }
         subjectListHTML.innerHTML = html;
     };
@@ -304,7 +304,7 @@ function loadVoivodeships() {
         html = '<option>Wszystkie</option>';
         if (window.location.pathname.substr(-14) === 'noticeadd.html') html = '<option disabled="disabled" selected="selected"></option>'
         for (let i = 0; i < voivodeshipArray.length; i++) {
-            html += '<option>' + voivodeshipArray[i].nameVoivodeship + '</option>';
+            html += '<option value=' + voivodeshipArray[i].idVoivodeship + '>' + voivodeshipArray[i].nameVoivodeship + '</option>';
         }
         voivodeshipListHTML.innerHTML = html;
     };
@@ -443,24 +443,6 @@ function storeUserEmail(userEmail) {
     localStorage.setItem('userEmail', userEmail);
 }
 
-function getViovideshipIndex() {
-    let ele = document.getElementById("selectVoivodeship");
-    for (var i = 1; i < ele.length; i++) {
-        if (ele[i].childNodes[0].nodeValue === ele.value) {
-            loadCities(i);
-        }
-    }
-}
-
-function getListIndex(idHTML) {
-    let ele = document.getElementById(idHTML);
-    for (var i = 1; i < ele.length; i++) {
-        if (ele[i].childNodes[0].nodeValue === ele.value) {
-            return i;
-        }
-    }
-}
-
 function addZero(int) {
     if (int < 10) {
         int = '0' + int;
@@ -511,11 +493,11 @@ function postNotice() {
     data.meetingDate = document.getElementById("date").value;
 
     data.price = Number(document.getElementById("price").value);
-    dataIdSubject.idSubject = getListIndex('selectSubject');
+    dataIdSubject.idSubject = document.getElementById('selectSubject').value;
 
     data.active = "1";
-    data.level = getListIndex('selectLevel');
-    // data.timestamp = "";
+    data.level = document.getElementById('selectLevel').value;
+
     data.timeFrom = timeToTimestamp(data.meetingDate, document.getElementById('timeFrom').value);
     data.timeTo = timeToTimestamp(data.meetingDate, document.getElementById('timeTo').value);
     data.subjectBySubjectIdSubject = dataIdSubject;
@@ -527,16 +509,18 @@ function postNotice() {
     postNotice.open("POST", noticesUrl, false);
     postNotice.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     postNotice.send(json);
-    postNotice.onreadystatechange(window.history.back());
+    console.log(json);
+    alert("DUPA");
+    // postNotice.onreadystatechange(window.history.back());
 }
 
 function lookFor() {
     let lookForData = {};
 
-    lookForData.subjectName = getListIndex("selectSubject");
-    lookForData.level = getListIndex("selectLevel");
-    lookForData.voivodeship = getListIndex("selectVoivodeship");
-    lookForData.city = getListIndex("selectCity");
+    lookForData.subjectName = document.getElementById('selectSubject').value;
+    lookForData.level = document.getElementById('selectLevel').value;
+    lookForData.voivodeship = document.getElementById('selectVoivodeship').value;
+    lookForData.city = document.getElementById('selectCity').value;
     lookForData.timeFrom = document.getElementById("timeFrom").value;
     lookForData.timeTo = document.getElementById("timeTo").value;
 
