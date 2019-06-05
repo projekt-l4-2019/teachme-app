@@ -8,16 +8,14 @@
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport"
         content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-    <meta charset="utf-8">
-    <meta name="description" content="TeachMe">
-    <meta name="author" content="Polska Grupa Programistyczna L4 2019">
-
-    <title>TeachMe</title>
 
     <link rel="stylesheet" type="text/css" href="css/iconfont/material-icons.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.min.css">
+
+
+    <title>TeachMe</title>
 </head>
 
 <body>
@@ -64,20 +62,20 @@
             <div class="card-body">
                 <ul class="list-group list-group-flush" style="font-size: 20px;">
                     <li class="list-group-item">Imię:</li>
-                    <input type="text" class="form-control" placeholder="Podaj imię..." id="userAbout" />
+                    <input type="text" class="form-control" placeholder="Podaj imię..." id="userName" />
                     <li class="list-group-item">Nazwisko:</li>
-                    <input type="text" class="form-control" placeholder="Podaj nazwisko..." id="userAbout" />
+                    <input type="text" class="form-control" placeholder="Podaj nazwisko..." id="userSurname" />
                     <li class="list-group-item">O mnie:</li>
                     <input type="text" class="form-control" placeholder="Napisz swój opis..." id="userAbout" />
                     <li class="list-group-item">Telefon:</li>
-                    <input type="text" class="form-control" placeholder="Podaj numer telefonu..." id="userAbout" />
+                    <input type="text" class="form-control" placeholder="Podaj numer telefonu..." id="userPhone" />
                     <li class="list-group-item">E-mail:</li>
-                    <input type="text" class="form-control" placeholder="Podaj e-mail..." id="userAbout" />
+                    <input type="text" class="form-control" placeholder="Podaj e-mail..." id="userEmail" />
                     <li class="list-group-item">Miasto:</li>
-                    <input type="text" class="form-control" placeholder="Podaj miasto..." id="userAbout" />
+                    <input type="text" class="form-control" placeholder="Podaj miasto..." id="userCity" />
                 </ul>
             </div>
-            <button type="button" class="btn btn-success show-ann">Zatwierdź</button>
+        <button type="button" class="btn btn-success show-ann" onclick="editProfile()">Zatwierdź</button>
             <div class="alert alert-dismissible alert-danger formError">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 <strong>Coś poszło nie tak!</strong> <a href="#" class="alert-link">Wypełnij formularz poprawnie</a> i
