@@ -54,7 +54,7 @@ button#submitNoticeBtn {
     margin: 4px 2px;
     border-radius: 2rem;
     position: fixed;
-    right: 8vw;
+    right: 5vw;
     top: 80vh;
     padding: 1.2rem;
     text-align: center;
@@ -78,11 +78,6 @@ button#submitNoticeBtn {
     /* width: 50%; */
     margin-right: 1vw;
     /* right: 0 !important; */
-}
-
-.opinionCard {
-    margin: auto;
-    width: 95vw;
 }
 
 .opinionHeader{

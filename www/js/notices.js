@@ -147,7 +147,7 @@ function loadUserOpinions() {
         document.getElementById("showNoticesBtn").style.setProperty("display", "block");
         document.getElementById("showOpinionBtn").style.setProperty("display", "none");
     }
-    
+
     let request = new XMLHttpRequest();
     var idUser = localStorage.getItem("userID");
     if (idUser != 0 && idUser != "undefined") {
@@ -254,7 +254,7 @@ function loadSubjects() {
     let subjectArray = new Array();
     let subjectList;
     let request = new XMLHttpRequest();
-    request.open('GET', subjectsUrl, false);
+    request.open('GET', subjectsUrl, true);
     request.onload = function () {
         // Begin accessing JSON data here
         subjectList = JSON.parse(this.response);
@@ -472,7 +472,7 @@ function getTime(dateJSON) {
 function getDate(dateJSON) {
     let date = new Date(dateJSON);
     let year = date.getFullYear();
-    let month = addZero(date.getMonth());
+    let month = addZero(date.getMonth()+1);
     let day = addZero(date.getDate());
     return day + '.' + month + '.' + year;
 }

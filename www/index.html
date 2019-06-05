@@ -77,14 +77,13 @@
                         <li class="nav-item">
                             <div class="form-group">
                                 <label class="col-form-label" for="selectVoivodeship">Województwo:</label>
-                                <select class="form-control" id="selectVoivodeship"
-                                    onclick="getViovideshipIndex()"></select>
+                                <select class="form-control" id="selectVoivodeship"></select>
                             </div>
                         </li>
                         <li class="nav-item">
                             <div class="form-group">
                                 <label class="col-form-label" for="selectCity">Miejscowość:</label>
-                                <select class="form-control" id="selectCity">
+                                <select class="form-control" id="selectCity" onclick="getViovideshipIndex()">
                                     <option>Wszystkie</option>
                                 </select>
                             </div>
@@ -138,8 +137,7 @@
     <div class="mainWindow jumbotron">
         <div class="list-group" id="notices"></div>
     </div>
-    <a href="noticeadd.html"><button class="circleButton" style="right: 5vw;"><i
-                class="material-icons">add</i></button></a>
+    <a href="noticeadd.html"><button class="circleButton"><i class="material-icons">add</i></button></a>
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/popper.min.js"></script>
