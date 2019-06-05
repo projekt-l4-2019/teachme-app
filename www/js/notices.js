@@ -61,7 +61,8 @@ class Notice {
 }
 
 class User {
-    constructor(name, surname, avatar, phone, email, cityName, about, birthDate, ) {
+    constructor(id, name, surname, avatar, phone, email, cityName, about, birthDate, ) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.avatar = avatar;
@@ -101,7 +102,7 @@ function loadUserProfile() {
             // Begin accessing JSON data here
             user = JSON.parse(this.response);
             if (request.status >= 200 && request.status < 400) {
-                user = new User(user.name, user.surname, user.avatar, user.phone, user.email, user.cityByCityIdCity.name, user.about, user.birthDate);
+                user = new User(user.idUser, user.name, user.surname, user.avatar, user.phone, user.email, user.cityByCityIdCity.name, user.about, user.birthDate);
             } else {
                 console.log('error');
             }
@@ -113,7 +114,7 @@ function loadUserProfile() {
             html += '<div class="card-body">';
             html += '<h5 class="card-title">O mnie:</h5>'
             html += '<p class="card-text">' + user.about + '</p>';
-            html += '<span class="badge badge-info opinionsBtn" id="opinionAmount" onclick="scrollDown()"></span>';
+            html += '<span class="badge badge-info opinionsBtn" id="opinionAmount" onclick="scrollDown(); loadUserOpinions(' + user.id + ');"></span>';
             html += '<span class="badge badge-warning opinionsBtn" id="ratingAvg"></span>';
             if (window.location.pathname.substr(-12) === 'profile.html') {
                 html += '<ul class="list-group list-group-flush" style="font-size: 20px;">';
@@ -123,12 +124,13 @@ function loadUserProfile() {
                 html += '<li class="list-group-item"><i class="material-icons">account_box</i> ' + getAgeFromBirthDate(user.birthDate) + ' lat(a)</li>';
                 html += '</ul>';
                 html += '</div>';
-                html += '<a href="noticesuser.html"><button type="button" class="btn btn-success show-ann" style="margin-bottom:5px">Zobacz ogłoszenia</button></a>';
+                html += '<button type="button" class="btn btn-success show-ann" id="showNoticesBtn" style="margin-bottom:5px" onclick="loadUserNotices(' + user.id + ')">Zobacz ogłoszenia</button>';
+                html += '<button type="button" class="btn btn-success show-ann" id="showOpinionBtn" style="margin-bottom:5px" onclick="loadUserOpinions(' + user.id + ')">Zobacz opinie</button>';
                 html += '<a href="addopinion.html"><button type="button" class="btn btn-success show-ann">Dodaj opinię</button></a>';
                 html += '<a href="profileedit.html"><button class="circleButton editButton"><i class="material-icons">edit</i></button></a>'
             } else {
                 html += '</div>';
-                html += '<a href="profile.html"><button type="button" class="btn btn-success show-ann" id="btnShowProfile">Zobacz Profil</button></a>';
+                html += '<a href="profile.html"><button type="button" class="btn btn-success show-ann" id="btnShowProfile"">Zobacz Profil</button></a>';
             }
             userHTML.innerHTML = html;
         };
@@ -140,6 +142,8 @@ function loadUserProfile() {
 function loadUserOpinions() {
     let opinionArray = new Array();
     let opinionList;
+    document.getElementById("showNoticesBtn").style.setProperty("display","block");
+    document.getElementById("showOpinionBtn").style.setProperty("display","none");
     let request = new XMLHttpRequest();
     var idUser = localStorage.getItem("userID");
     if (idUser != 0 && idUser != "undefined") {
@@ -156,12 +160,11 @@ function loadUserOpinions() {
             }
             let ratesSum = 0;
             let ratesAmount = 0;
-            const opinionListHTML = document.getElementById('showOpinions');
+            const opinionListHTML = document.getElementById('showUserOpinionsOrNotices');
             html = '';
             for (let i = opinionArray.length - 1; i >= 0; i--) {
                 if (opinionArray[i].userTo === Number(idUser)) {
-                    console.log(opinionArray[i].idOpinion);
-                    html += '<div class="card border-success mb-3 opinionCard" style="max-width: 20rem;">';
+                    html += '<div class="card border-success opinionCard mb-3">';
                     html += '<div class="card-body">';
                     html += '<em style="font-size: 17px;">' + opinionArray[i].comment + '</em>'
                     html += '<h6 class="text-muted">' + opinionArray[i].userFromName + '</h6></div>';
@@ -176,12 +179,60 @@ function loadUserOpinions() {
             document.getElementById("opinionAmount").innerText = 'Opinie: ' + ratesAmount;
             if (ratesAmount > 0) {
                 document.getElementById("ratingAvg").innerText = 'Ocena: ' + (ratesSum / ratesAmount).toFixed(1) + '/5';
-                html = '<h4 class="card-title" style="margin-bottom: 5px; margin-left: 5vw">Opinie:</h4>' + html;
+                html = '<h5 class="card-title" style="margin-bottom: 5px; margin-left: 5vw">Opinie o użytkowniku:</h5>' + html;
             }
             opinionListHTML.innerHTML = html;
         };
         request.send();
     }
+}
+
+/////////////////////////////////// Load user notices
+function loadUserNotices(idUser) {
+    let noticeArray = new Array();
+    let noticeList;
+    document.getElementById("showNoticesBtn").style.setProperty("display","none");
+    document.getElementById("showOpinionBtn").style.setProperty("display","block");
+    let request = new XMLHttpRequest();
+    request.open('GET', usersUrl + '/' + idUser, true);
+    request.onload = function () {
+        // Begin accessing JSON data here
+        noticeList = JSON.parse(this.response);
+        noticeList = noticeList.noticesByIdUser;
+        console.log(noticeList);
+        if (request.status >= 200 && request.status < 400) {
+            noticeList.forEach(notice => {
+                console.log(notice);
+                let newNotice = new Notice(notice.idNotice, notice.lookOrOffer, notice.note, notice.meetingPlace, notice.meetingDate, notice.price, notice.level, notice.timestamp, notice.userIdUser, notice.timeFrom, notice.timeTo, notice.subjectBySubjectIdSubject.name);
+                noticeArray.push(newNotice);
+            });
+        } else {
+            console.log('error');
+        }
+        const noticeListHTML = document.getElementById('showUserOpinionsOrNotices');
+        html = '<h5 class="card-title" style="margin-bottom: 5px; margin-left: 5vw">Ogłoszenia użytkownika:</h5>';
+        for (let i = noticeArray.length - 1; i >= 0; i--) {
+            let notice = noticeArray[i];
+            html += '<a href="notice.html" onclick="getNoticeId(' + notice.idNotice + ')" class="list-group-item list-group-item-action flex-column align-items-start">';
+            html += '<div class="d-flex w-100 justify-content-between">';
+            html += '<h5 class="mb-1">' + notice.subjectName + '</h5>';
+            html += '<small>dodano: ' + getDate(notice.addDate) + '</small>';
+            html += '</div>';
+
+            if (notice.note.length > 250) {
+                html += '<p class="mb-1">' + notice.note.substring(0, 250) + "..." + '</p>';
+            } else {
+                html += '<p class="mb-1">' + notice.note + '</p>';
+            }
+
+            html += '<div class="d-flex w-100 justify-content-between">';
+            html += '<h6>Termin spotkania: ' + getDate(notice.meetingDate) + '</h6>' + '<h6>' + notice.meetingPlace + '</h6>' + '<small>' + notice.price + ' zł/h</small>';
+            html += '</div>';
+            html += '</a>';
+        }
+        noticeListHTML.innerHTML = html;
+    };
+    request.send();
 }
 
 function deleteOpinion(idOpinion) {

@@ -80,11 +80,6 @@ button#submitNoticeBtn {
     /* right: 0 !important; */
 }
 
-.opinionCard {
-    margin: auto;
-    width: 95vw;
-}
-
 .opinionHeader{
     text-align: right;
     font-size: 18px;
