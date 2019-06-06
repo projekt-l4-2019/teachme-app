@@ -176,7 +176,7 @@ function loadUserOpinions(idUser) {
     let opinionArray = new Array();
     let opinionList;
 
-    if (window.location.pathname.substr(-12) === 'profile.html' || window.location.pathname.substr(-12) === 'profilemy.html') {
+    if (window.location.pathname.substr(-12) === 'profile.html' || window.location.pathname.substr(-14) === 'profilemy.html') {
         document.getElementById("showNoticesBtn").style.setProperty("display", "block");
         document.getElementById("showOpinionBtn").style.setProperty("display", "none");
     }
@@ -500,13 +500,16 @@ function storeLoggedUserInfo() {
 
 function setProfileInfo() {
     const userInfo = document.getElementById('userInfo');
-    html = '<h5>' + localStorage.getItem('loggedName') + ' ' + localStorage.getItem('loggedSurname') + '</h5>';
-    html += '<h6>' + localStorage.getItem('loggedEmail') + '</h6>';
-    userInfo.innerHTML = html;
 
-    if (window.location.pathname.substr(-16) === 'profileedit.html') {
-        document.getElementById("nameSurname").innerText = localStorage.getItem('loggedName') + ' ' + localStorage.getItem('loggedSurname');
-        $("#loggedUserAvatar").attr('src', localStorage.getItem("loggedAvatar"));
+    if(localStorage.getItem('loggedName')!='undefined'){
+        html = '<h5>' + localStorage.getItem('loggedName') + ' ' + localStorage.getItem('loggedSurname') + '</h5>';
+        html += '<h6>' + localStorage.getItem('loggedEmail') + '</h6>';
+        userInfo.innerHTML = html;
+    
+        if (window.location.pathname.substr(-16) === 'profileedit.html') {
+            document.getElementById("nameSurname").innerText = localStorage.getItem('loggedName') + ' ' + localStorage.getItem('loggedSurname');
+            $("#loggedUserAvatar").attr('src', localStorage.getItem("loggedAvatar"));
+        }
     }
 }
 
