@@ -58,7 +58,7 @@ class Notice {
 }
 
 class User {
-    constructor(idUser, login, name, surname, birthDate, avatar, phone, email, cityName, idCity, about ) {
+    constructor(idUser, login, name, surname, birthDate, avatar, phone, email, cityName, idCity, about) {
         this.idUser = idUser;
         this.login = login;
         this.name = name;
@@ -114,7 +114,10 @@ if (window.location.pathname.substr(-10) === 'index.html') {
     loadUserOpinions(getLoggedUserId());
 } else if (window.location.pathname.substr(-16) === 'profileedit.html') {
     loadVoivodeships();
+} else if (window.location.pathname.substr(-15) === 'addopinion.html') {
+    loadUserNameAvatar(getUserId());
 }
+
 
 //////////////////////////////////////////Load user profile
 function loadUserProfile(idUser) {
@@ -431,7 +434,7 @@ function loadSelectedNotice() {
         // Begin accessing JSON data here
         notice = JSON.parse(this.response);
         if (request.status >= 200 && request.status < 400) {
-            let newNotice = new Notice(notice.idNotice, notice.lookOrOffer, notice.note, notice.meetingPlace, notice.meetingDate, notice.price, notice.level, notice.timestamp, notice.userrByUserrIdUser.IdUser, notice.timeFrom, notice.timeTo, notice.subjectBySubjectIdSubject.name);
+            let newNotice = new Notice(notice.idNotice, notice.lookOrOffer, notice.note, notice.meetingPlace, notice.meetingDate, notice.price, notice.level, notice.timestamp, notice.userrByUserrIdUser.idUser, notice.timeFrom, notice.timeTo, notice.subjectBySubjectIdSubject.name);
             noticeArray.push(newNotice);
             console.log(notice);
 
@@ -488,13 +491,7 @@ function setProfileInfo() {
     html = '<h5>' + localStorage.getItem('loggedName') + ' ' + localStorage.getItem('loggedSurname') + '</h5>';
     html += '<h6>' + localStorage.getItem('loggedEmail') + '</h6>';
     userInfo.innerHTML = html;
-
-    if (window.location.pathname.substr(-16) === 'profileedit.html') {
-        document.getElementById("nameSurname").innerText = localStorage.getItem('loggedName') + ' ' + localStorage.getItem('loggedSurname');
-        $("#loggedUserAvatar").attr('src', localStorage.getItem("loggedAvatar"));
-    }
 }
-
 
 function addZero(int) {
     if (int < 10) {
@@ -693,4 +690,21 @@ function postOpinion() {
     postOpinion.onload;
     postOpinion.send(json);
     postOpinion.onreadystatechange(window.history.back());
+}
+
+function loadUserNameAvatar(idUser) {
+    let request = new XMLHttpRequest();
+    request.open('GET', usersUrl + '/' + idUser, false);
+    request.onreadystatechange = function () {
+        user = JSON.parse(this.response);
+        if (request.status >= 200 && request.status < 400) {
+            user = new User(user.idUser, user.login, user.name, user.surname, user.birthDate, user.avatar, user.phone, user.email, user.cityByCityIdCity.name, user.cityByCityIdCity.idCity, user.about);
+        } else {
+            console.log('error');
+        }
+        document.getElementById("nameSurname").innerText = user.name + ' ' + user.surname;
+        $("#loggedUserAvatar").attr('src', user.avatar);
+        console.log(user.avatar);
+    }
+    request.send();
 }
