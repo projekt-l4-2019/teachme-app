@@ -415,7 +415,13 @@ function loadNotices() {
             html += '</div>';
 
             html += '<div class="d-flex w-100 justify-content-between">';
+            let poziom='';
+            if(notice.level===1) poziom='Szkoła podstawowa';
+            if(notice.level===2) poziom='Gimnazjum';
+            if(notice.level===3) poziom='Szkoła średnia';
+            if(notice.level===4) poziom='Szkoła wyższa';
             html += '<h6 class="mb-1">' + ((notice.lookOrOffer == 1) ? 'uczeń' : 'korepetytor') + '</h6>';
+            html += '<h6>' + poziom + '</h6>';
             html += '<h6>' + getTime(notice.timeFrom) + ' - ' + getTime(notice.timeTo) + '</h6>';
             html += '</div>';
             html += '</a>';
@@ -448,6 +454,12 @@ function loadSelectedNotice() {
             html += '<h4 class="card-header">' + notice.subjectName + '</h4>';
             html += '<div class="card-body"> <p class="card-text">' + notice.note + '</p></div>';
             html += '<ul class="list-group list-group-flush">';
+            let poziom='';
+            if(notice.level===1) poziom='Szkoła podstawowa';
+            if(notice.level===2) poziom='Gimnazjum';
+            if(notice.level===3) poziom='Szkoła średnia';
+            if(notice.level===4) poziom='Szkoła wyższa';
+            html += '<li class="list-group-item">Poziom: ' + poziom + '</li>';
             html += '<li class="list-group-item">Miejsce spotkania: ' + notice.meetingPlace + '</li>';
             html += '<li class="list-group-item">Cena za godzinę: ' + notice.price + ' zł </li>';
             html += '<li class="list-group-item">Godzina: ' + getTime(notice.timeFrom) + ' - ' + getTime(notice.timeTo) + '</li>';
@@ -491,6 +503,11 @@ function setProfileInfo() {
     html = '<h5>' + localStorage.getItem('loggedName') + ' ' + localStorage.getItem('loggedSurname') + '</h5>';
     html += '<h6>' + localStorage.getItem('loggedEmail') + '</h6>';
     userInfo.innerHTML = html;
+
+    if (window.location.pathname.substr(-16) === 'profileedit.html') {
+        document.getElementById("nameSurname").innerText = localStorage.getItem('loggedName') + ' ' + localStorage.getItem('loggedSurname');
+        $("#loggedUserAvatar").attr('src', localStorage.getItem("loggedAvatar"));
+    }
 }
 
 function addZero(int) {
@@ -535,9 +552,9 @@ function postNotice() {
 
     data.idNotice = "";
     if (document.getElementById('offer').classList.contains('active')) {
-        data.lookOrOffer = "0";
-    } else {
         data.lookOrOffer = "1";
+    } else {
+        data.lookOrOffer = "0";
     }
     data.note = document.getElementById("noticeDescription").value;
     data.meetingPlace = $("#selectCity option:selected").text();
@@ -575,9 +592,9 @@ function lookFor() {
     lookForData.priceMax = document.getElementById("priceMax").value;
 
     if (document.getElementById('offer').classList.contains('active')) {
-        lookForData.offerOrLookFor = 1;
-    } else {
         lookForData.offerOrLookFor = 0;
+    } else {
+        lookForData.offerOrLookFor = 1;
     }
     if (document.getElementById('asc').classList.contains('active')) {
         lookForData.ascOrDesc = 0;
@@ -588,7 +605,7 @@ function lookFor() {
     let noticeArray = new Array();
     let noticeList;
     let request = new XMLHttpRequest();
-    request.open('GET', noticesUrl + '/find/' + lookForData.subjectName + '/' + lookForData.level + '/' + lookForData.offerOrLookFor + '/' + lookForData.city + '/' + lookForData.priceMin + '/' + lookForData.priceMax, true);
+    request.open('GET', noticesUrl + '/find/' + lookForData.subjectName + '/' + lookForData.level + '/' + lookForData.offerOrLookFor + '/' + lookForData.city + '/' + lookForData.priceMin + '/' + lookForData.priceMax + '/' + lookForData.ascOrDesc, true);
     request.onload = function () {
         noticeList = JSON.parse(this.response);
         if (request.status >= 200 && request.status < 400) {

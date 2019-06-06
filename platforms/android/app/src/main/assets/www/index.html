@@ -37,7 +37,7 @@
 
             <ul class="list-unstyled CTAs">
                 <li>
-                    <a href="login.html" class="download">Logowanie</a>
+                    <a href="https://rhubarb-cobbler-84890.herokuapp.com/login" class="download">Logowanie</a>
                 </li>
             </ul>
         </nav>
@@ -66,9 +66,9 @@
                             <div class="form-group">
                                 <label for="selectLevel">Wybierz poziom:</label>
                                 <select class="form-control" id="selectLevel">
-                                    <option value='0'>Wszystkie</option>
+                                    <option disabled="disabled" selected="selected" value="0"></option>
                                     <option value='1'>Szkoła podstawowa</option>
-                                    <option value='2'>Gimnazjum</option>s
+                                    <option value='2'>Gimnazjum</option>
                                     <option value='3'>Szkoła średnia</option>
                                     <option value='4'>Szkoła wyższa</option>
                                 </select>
@@ -77,34 +77,36 @@
                         <li class="nav-item">
                             <div class="form-group">
                                 <label class="col-form-label" for="selectVoivodeship">Województwo:</label>
-                                <select class="form-control" id="selectVoivodeship" onclick="loadCities(document.getElementById('selectVoivodeship').value)"></select>
+                                <select class="form-control" id="selectVoivodeship"
+                                    onclick="loadCities(document.getElementById('selectVoivodeship').value)"></select>
                             </div>
                         </li>
                         <li class="nav-item">
                             <div class="form-group">
                                 <label class="col-form-label" for="selectCity">Miejscowość:</label>
-                                <select class="form-control" id="selectCity" onclick="(cordova.platformId==='android') ? loadCities(document.getElementById('selectVoivodeship').value) : 0">
-                                    <option>Wszystkie</option>
+                                <select class="form-control" id="selectCity"
+                                    onclick="(cordova.platformId==='android') ? loadCities(document.getElementById('selectVoivodeship').value) : 0">
+                                    <option disabled="disabled" selected="selected" value="0"></option>
                                 </select>
                             </div>
                         </li>
                         <li>
                             <div class="form-inline">
                                 <label class="col-form-label" for="timeFrom">Cena (pomiędzy):<br></label>
-                                <input type="number" class="form-control" id="timeFrom">
-                                <input type="number" class="form-control" id="timeTo">
+                                <input type="number" class="form-control" id="priceMin">
+                                <input type="number" class="form-control" id="priceMax">
                             </div>
                         </li>
                         <li class="nav-item">
                             <div class="form-group">
                                 <label for="selectSubject">Kogo szukasz?:</label><br>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-secondary active searchMenu">
-                                        <input type="radio" name="options" id="offer" autocomplete="off" checked="">
+                                    <label class="btn btn-secondary active searchMenu" id="offer">
+                                        <input type="radio" name="options" autocomplete="off" checked="">
                                         Korepetytora
                                     </label>
-                                    <label class="btn btn-secondary searchMenu">
-                                        <input type="radio" name="options" id="lookfor" autocomplete="off">
+                                    <label class="btn btn-secondary searchMenu" id="lookfor">
+                                        <input type="radio" name="options" autocomplete="off">
                                         Ucznia
                                     </label>
                                 </div>
@@ -114,12 +116,12 @@
                             <div class="form-group">
                                 <label for="selectSubject">Cena:</label><br>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-secondary active searchMenu">
-                                        <input type="radio" name="options" id="asc" autocomplete="off" checked="">
+                                    <label class="btn btn-secondary active searchMenu" id="asc">
+                                        <input type="radio" name="options" autocomplete="off" checked="">
                                         Rosnąco
                                     </label>
-                                    <label class="btn btn-secondary searchMenu">
-                                        <input type="radio" name="options" id="desc" autocomplete="off">
+                                    <label class="btn btn-secondary searchMenu" id="desc">
+                                        <input type="radio" name="options" autocomplete="off">
                                         Malejąco
                                     </label>
                                 </div>
