@@ -367,7 +367,7 @@ function loadNotices() {
             if(notice.level===2) poziom='Gimnazjum';
             if(notice.level===3) poziom='Szkoła średnia';
             if(notice.level===4) poziom='Szkoła wyższa';
-            html += '<h6 class="mb-1">' + ((notice.lookOrOffer == 1) ? 'uczeń' : 'korepetytor') + '</h6>';
+            html += '<h6 class="mb-1">' + ((notice.lookOrOffer == 0) ? 'uczeń' : 'korepetytor') + '</h6>';
             html += '<h6>' + poziom + '</h6>';
             html += '<h6>' + getTime(notice.timeFrom) + ' - ' + getTime(notice.timeTo) + '</h6>';
             html += '</div>';
@@ -390,9 +390,9 @@ function lookFor() {
     lookForData.priceMax = document.getElementById("priceMax").value;
 
     if (document.getElementById('offer').classList.contains('active')) {
-        lookForData.offerOrLookFor = 0;
-    } else {
         lookForData.offerOrLookFor = 1;
+    } else {
+        lookForData.offerOrLookFor = 0;
     }
     if (document.getElementById('asc').classList.contains('active')) {
         lookForData.ascOrDesc = 0;
@@ -437,7 +437,7 @@ function lookFor() {
             html += '</div>';
 
             html += '<div class="d-flex w-100 justify-content-between">';
-            html += '<h6 class="mb-1">' + ((notice.lookOrOffer == 1) ? 'uczeń' : 'korepetytor') + '</h6>';
+            html += '<h6 class="mb-1">' + ((notice.lookOrOffer == 0) ? 'uczeń' : 'korepetytor') + '</h6>';
             html += '<h6>' + getTime(notice.timeFrom) + ' - ' + getTime(notice.timeTo) + '</h6>';
             html += '</div>';
             html += '</a>';
