@@ -21,7 +21,7 @@
         "material-design-icons": "^3.0.1",
         "mime": "^2.4.1",
         "pulltorefreshjs": "^0.1.16",
-        "qs": "^6.7.0",
+        "qs": "^6.7.3",
         "request": "^2.88.0",
         "web": "0.0.2",
         "website": "^0.1.1"
